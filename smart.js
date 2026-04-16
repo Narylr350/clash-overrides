@@ -264,14 +264,6 @@ function main(config) {
       url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/microsoft.list",
       interval: 86400
     },
-    "microsoft-cn": {
-      type: "http",
-      behavior: "domain",
-      format: "text",
-      path: "./ruleset/microsoft-cn.list",
-      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/microsoft-cn.list",
-      interval: 86400
-    },
     games: {
       type: "http",
       behavior: "domain",
@@ -346,7 +338,6 @@ function main(config) {
     "RULE-SET,github,GitHub",
     "RULE-SET,telegram,Telegram",
 
-    "RULE-SET,microsoft-cn,国内直连",
     "RULE-SET,microsoft,微软服务",
 
     "RULE-SET,games-cn,国内直连",

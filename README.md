@@ -61,4 +61,31 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.js
 
 ---
 
-#
+### 4. AI 使用
+
+常用 AI 已单独分组：
+
+- OpenAI
+- Claude
+- Gemini
+- Copilot
+
+一般使用：
+
+
+AIGC 或 新加坡 / 日本节点
+
+
+---
+
+## 注意
+
+- 广告拦截只对域名级广告有效
+- 部分网站异常时可关闭广告拦截排查
+- Smart 测速使用 HTTPS，避免测速失败
+
+---
+
+## License
+
+MIT

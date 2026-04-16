@@ -1,155 +1,108 @@
 function main(config) {
   const proxies = config.proxies || [];
 
-  // ===== 按地区筛节点 =====
-  const filter = (regex) =>
-    proxies
-      .map(p => p.name)
-      .filter(name => regex.test(name));
+  const pick = (re) => proxies.map(p => p.name).filter(n => re.test(n));
 
-  const HK = filter(/HK|香港|Hong/i);
-  const SG = filter(/SG|新加坡|Singapore/i);
-  const JP = filter(/JP|日本|Japan/i);
-  const KR = filter(/KR|韩国|Korea|首尔|Seoul/i);
-  const US = filter(/US|美国|USA|United States/i);
+  const HK = pick(/HK|香港|Hong/i);
+  const SG = pick(/SG|新加坡|Singapore/i);
+  const JP = pick(/JP|日本|Japan/i);
+  const KR = pick(/KR|韩国|Korea|首尔|Seoul/i);
+  const US = pick(/US|美国|USA|United States/i);
 
-  // ===== 构建代理组 =====
   config["proxy-groups"] = [
+    { name: "PROXY", type: "select", proxies: ["AUTO", "HK AUTO", "SG AUTO", "JP AUTO", "KR AUTO", "US AUTO", "DIRECT"] },
+    { name: "GLOBAL", type: "select", proxies: ["AUTO", "HK AUTO", "SG AUTO", "JP AUTO", "KR AUTO", "US AUTO", "DIRECT"] },
 
-    // 🌍 默认出口
-    {
-      name: "PROXY",
-      type: "select",
-      proxies: ["AUTO", "HK AUTO", "SG AUTO", "JP AUTO", "KR AUTO", "US AUTO", "DIRECT"]
-    },
+    { name: "AIGC", type: "select", proxies: ["SG AUTO", "JP AUTO", "US AUTO", "DIRECT"] },
+    { name: "Google", type: "select", proxies: ["SG AUTO", "JP AUTO", "HK AUTO", "US AUTO", "DIRECT"] },
+    { name: "Microsoft", type: "select", proxies: ["DIRECT", "SG AUTO", "JP AUTO", "AUTO"] },
+    { name: "Game", type: "select", proxies: ["DIRECT", "AUTO", "HK AUTO", "SG AUTO"] },
 
-    {
-      name: "GLOBAL",
-      type: "select",
-      proxies: ["AUTO", "HK AUTO", "SG AUTO", "JP AUTO", "KR AUTO", "US AUTO", "DIRECT"]
-    },
-
-    // 🤖 AI
-    {
-      name: "AIGC",
-      type: "select",
-      proxies: ["SG AUTO", "JP AUTO", "US AUTO", "DIRECT"]
-    },
-
-    // 🌐 Google
-    {
-      name: "Google",
-      type: "select",
-      proxies: ["SG AUTO", "JP AUTO", "HK AUTO", "US AUTO", "DIRECT"]
-    },
-
-    // 📢 Telegram
-    {
-      name: "Telegram",
-      type: "select",
-      proxies: ["AUTO", "SG AUTO", "HK AUTO", "JP AUTO", "KR AUTO"]
-    },
-
-    // 🪟 Microsoft
-    {
-      name: "Microsoft",
-      type: "select",
-      proxies: ["DIRECT", "SG AUTO", "JP AUTO", "AUTO"]
-    },
-
-    // 🎮 游戏
-    {
-      name: "Game",
-      type: "select",
-      proxies: ["DIRECT", "AUTO", "HK AUTO", "SG AUTO"]
-    },
-
-    // ===== Smart 地区候选池 =====
-
-    {
-      name: "AUTO",
-      type: "url-test",
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: [...HK, ...SG, ...JP, ...KR, ...US]
-    },
-
-    {
-      name: "HK AUTO",
-      type: "url-test",
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: HK
-    },
-
-    {
-      name: "SG AUTO",
-      type: "url-test",
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: SG
-    },
-
-    {
-      name: "JP AUTO",
-      type: "url-test",
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: JP
-    },
-
-    {
-      name: "KR AUTO",
-      type: "url-test",
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: KR
-    },
-
-    {
-      name: "US AUTO",
-      type: "url-test",
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: US
-    }
+    { name: "AUTO", type: "url-test", url: "http://www.gstatic.com/generate_204", interval: 300, proxies: [...HK, ...SG, ...JP, ...KR, ...US] },
+    { name: "HK AUTO", type: "url-test", url: "http://www.gstatic.com/generate_204", interval: 300, proxies: HK },
+    { name: "SG AUTO", type: "url-test", url: "http://www.gstatic.com/generate_204", interval: 300, proxies: SG },
+    { name: "JP AUTO", type: "url-test", url: "http://www.gstatic.com/generate_204", interval: 300, proxies: JP },
+    { name: "KR AUTO", type: "url-test", url: "http://www.gstatic.com/generate_204", interval: 300, proxies: KR },
+    { name: "US AUTO", type: "url-test", url: "http://www.gstatic.com/generate_204", interval: 300, proxies: US }
   ];
 
-  // ===== 规则（精简但够用）=====
+  config["rule-providers"] = {
+    ai: {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/ai.txt",
+      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/main/meta/domain/ai.list",
+      interval: 86400
+    },
+    google: {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/google.txt",
+      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/main/meta/domain/google.list",
+      interval: 86400
+    },
+    microsoft: {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/microsoft.txt",
+      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/main/meta/domain/microsoft.list",
+      interval: 86400
+    },
+    "microsoft-cn": {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/microsoft-cn.txt",
+      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/main/meta/domain/microsoft-cn.list",
+      interval: 86400
+    },
+    games: {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/games.txt",
+      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/main/meta/domain/games.list",
+      interval: 86400
+    },
+    "games-cn": {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/games-cn.txt",
+      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/main/meta/domain/games-cn.list",
+      interval: 86400
+    },
+    cn: {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/cn.txt",
+      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/main/meta/domain/cn.list",
+      interval: 86400
+    },
+    proxy: {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/proxy.txt",
+      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/main/meta/domain/proxy.list",
+      interval: 86400
+    }
+  };
+
   config.rules = [
-
-    // 🤖 AI
-    "DOMAIN-SUFFIX,openai.com,AIGC",
-    "DOMAIN-SUFFIX,chatgpt.com,AIGC",
-    "DOMAIN-SUFFIX,anthropic.com,AIGC",
-    "DOMAIN-SUFFIX,claude.ai,AIGC",
-    "DOMAIN-SUFFIX,perplexity.ai,AIGC",
-    "DOMAIN-SUFFIX,poe.com,AIGC",
-    "DOMAIN-SUFFIX,groq.com,AIGC",
-    "DOMAIN-SUFFIX,replicate.com,AIGC",
-    "DOMAIN-SUFFIX,huggingface.co,AIGC",
-    "DOMAIN-SUFFIX,stability.ai,AIGC",
-
-    // 🌐 Google
-    "DOMAIN-SUFFIX,google.com,Google",
-    "DOMAIN-SUFFIX,googleapis.com,Google",
-    "DOMAIN-SUFFIX,gstatic.com,Google",
-
-    // 📢 Telegram
-    "DOMAIN-SUFFIX,telegram.org,Telegram",
-
-    // 🪟 Microsoft
-    "DOMAIN-SUFFIX,microsoft.com,Microsoft",
-    "DOMAIN-SUFFIX,live.com,Microsoft",
-    "DOMAIN-SUFFIX,xbox.com,Microsoft",
-
-    // 🎮 游戏（Steam）
-    "DOMAIN-SUFFIX,steampowered.com,Game",
-
-    // 🇨🇳 国内直连
+    "RULE-SET,ai,AIGC",
+    "RULE-SET,google,Google",
+    "RULE-SET,microsoft-cn,DIRECT",
+    "RULE-SET,microsoft,Microsoft",
+    "RULE-SET,games-cn,DIRECT",
+    "RULE-SET,games,Game",
+    "RULE-SET,cn,DIRECT",
+    "RULE-SET,proxy,PROXY",
     "GEOIP,CN,DIRECT",
-
-    // 🌍 兜底
     "MATCH,PROXY"
   ];
 

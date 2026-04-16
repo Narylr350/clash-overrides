@@ -101,6 +101,12 @@ function main(config) {
         "DIRECT"
       ]
     },
+    {
+      name: "广告拦截",
+      type: "select",
+      icon: ICON.final,
+      proxies: ["REJECT", "DIRECT", "智能选择"]
+    },
 
     {
       name: "AIGC",
@@ -442,8 +448,8 @@ function main(config) {
     "DOMAIN-SUFFIX,huawei.com,国内直连",
 
     // ===== 广告拦截 =====
-    "RULE-SET,adblock,REJECT",
-    "RULE-SET,adblock_plus,REJECT",
+    "RULE-SET,adblock,广告拦截",
+    "RULE-SET,adblock_plus,广告拦截",
 
     // ===== GitHub 手工优先 =====
     "DOMAIN-SUFFIX,github.com,GitHub",

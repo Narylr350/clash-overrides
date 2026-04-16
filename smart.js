@@ -286,7 +286,7 @@ function main(config) {
       name: "智能选择",
       type: "url-test",
       icon: ICON.auto,
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 300,
       proxies: ALL.length ? ALL : ["DIRECT"]
     },
@@ -294,7 +294,7 @@ function main(config) {
       name: "香港自动",
       type: "url-test",
       icon: ICON.hk,
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 300,
       proxies: HK.length ? HK : ["DIRECT"]
     },
@@ -302,7 +302,7 @@ function main(config) {
       name: "新加坡自动",
       type: "url-test",
       icon: ICON.sg,
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 300,
       proxies: SG.length ? SG : ["DIRECT"]
     },
@@ -310,7 +310,7 @@ function main(config) {
       name: "日本自动",
       type: "url-test",
       icon: ICON.jp,
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 300,
       proxies: JP.length ? JP : ["DIRECT"]
     },
@@ -318,7 +318,7 @@ function main(config) {
       name: "韩国自动",
       type: "url-test",
       icon: ICON.kr,
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 300,
       proxies: KR.length ? KR : ["DIRECT"]
     },
@@ -326,7 +326,7 @@ function main(config) {
       name: "美国自动",
       type: "url-test",
       icon: ICON.us,
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 300,
       proxies: US.length ? US : ["DIRECT"]
     },
@@ -334,7 +334,7 @@ function main(config) {
       name: "台湾自动",
       type: "url-test",
       icon: ICON.tw,
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 300,
       proxies: TW.length ? TW : ["DIRECT"]
     },
@@ -342,7 +342,7 @@ function main(config) {
       name: "英国自动",
       type: "url-test",
       icon: ICON.uk,
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 300,
       proxies: UK.length ? UK : ["DIRECT"]
     },
@@ -350,7 +350,7 @@ function main(config) {
       name: "德国自动",
       type: "url-test",
       icon: ICON.de,
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 300,
       proxies: DE.length ? DE : ["DIRECT"]
     }

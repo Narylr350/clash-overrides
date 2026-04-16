@@ -322,8 +322,8 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.equal(
     getGroup(result, "漏网之鱼").icon,
-    "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Fish.png",
-    "漏网之鱼 should use a working fish icon"
+    "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/fish.svg",
+    "漏网之鱼 should use a verified fish icon"
   );
 
   assert.equal(

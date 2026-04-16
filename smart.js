@@ -7,7 +7,7 @@ const icon = (name) =>
 const ICON = {
   proxy: icon("Proxy"),
   china: icon("China"),
-  final: icon("Fish"),
+  final: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/fish.svg",
   adblock: icon("Advertising"),
   ai: icon("AI"),
   openai: icon("ChatGPT"),

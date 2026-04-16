@@ -42,7 +42,6 @@ function main(config) {
   };
 
   config["proxy-groups"] = [
-    // ===== 核心 =====
     {
       name: "默认代理",
       type: "select",
@@ -103,7 +102,6 @@ function main(config) {
       ]
     },
 
-    // ===== AI =====
     {
       name: "AIGC",
       type: "select",
@@ -194,7 +192,6 @@ function main(config) {
       ]
     },
 
-    // ===== 常用服务 =====
     {
       name: "Google",
       type: "select",
@@ -279,7 +276,6 @@ function main(config) {
       ]
     },
 
-    // ===== Smart 池 =====
     {
       name: "智能选择",
       type: "url-test",
@@ -355,6 +351,22 @@ function main(config) {
   ];
 
   config["rule-providers"] = {
+    adblock: {
+      type: "http",
+      behavior: "classical",
+      format: "text",
+      path: "./ruleset/adblock.list",
+      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.list",
+      interval: 86400
+    },
+    adblock_plus: {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/adblock_plus.list",
+      url: "https://raw.githubusercontent.com/zzzt27/clash-AdsBlock/main/oisd_small.txt",
+      interval: 86400
+    },
     ai: {
       type: "http",
       behavior: "domain",
@@ -422,6 +434,17 @@ function main(config) {
   };
 
   config.rules = [
+    // ===== 白名单（防误杀）=====
+    "DOMAIN-SUFFIX,bilibili.com,国内直连",
+    "DOMAIN-SUFFIX,baidu.com,国内直连",
+    "DOMAIN-SUFFIX,qq.com,国内直连",
+    "DOMAIN-SUFFIX,mi.com,国内直连",
+    "DOMAIN-SUFFIX,huawei.com,国内直连",
+
+    // ===== 广告拦截 =====
+    "RULE-SET,adblock,REJECT",
+    "RULE-SET,adblock_plus,REJECT",
+
     // ===== GitHub 手工优先 =====
     "DOMAIN-SUFFIX,github.com,GitHub",
     "DOMAIN-SUFFIX,githubusercontent.com,GitHub",
@@ -443,7 +466,6 @@ function main(config) {
     "DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini",
     "DOMAIN-SUFFIX,ai.google.dev,Gemini",
 
-    // 只抓 Copilot 相关
     "DOMAIN-SUFFIX,copilot.microsoft.com,Copilot",
     "DOMAIN-SUFFIX,sydney.bing.com,Copilot",
 

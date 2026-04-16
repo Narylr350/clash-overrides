@@ -7,11 +7,11 @@ const icon = (name) =>
 const ICON = {
   proxy: icon("Proxy"),
   china: icon("China"),
-  final: icon("Final"),
+  final: icon("Fish"),
   adblock: icon("Advertising"),
   ai: icon("AI"),
   openai: icon("ChatGPT"),
-  claude: icon("Anthropic"),
+  claude: icon("AI"),
   google: icon("Google"),
   microsoft: icon("Microsoft"),
   github: icon("GitHub"),
@@ -24,8 +24,8 @@ const ICON = {
   kr: icon("Korea"),
   us: icon("United_States"),
   tw: icon("Taiwan"),
-  eu: icon("Europe"),
-  asiaOther: icon("Asia"),
+  eu: icon("Global"),
+  asiaOther: icon("Auto"),
   other: icon("Proxy")
 };
 
@@ -170,6 +170,20 @@ function buildSelectGroup(name, iconUrl, proxies) {
   };
 }
 
+const DEFAULT_REGION_OPTIONS = [
+  "智能选择",
+  "香港自动",
+  "新加坡自动",
+  "日本自动",
+  "韩国自动",
+  "美国自动",
+  "台湾自动",
+  "欧洲自动",
+  "亚洲其他自动",
+  "其他自动",
+  "DIRECT"
+];
+
 function main(config) {
   config = config || {};
   const proxies = Array.isArray(config.proxies) ? config.proxies : [];
@@ -180,124 +194,141 @@ function main(config) {
 
   const AI_REGION_ORDER = [
     "默认代理",
+    "智能选择",
     "新加坡自动",
     "日本自动",
     "美国自动",
-    "欧洲自动",
     "香港自动",
     "韩国自动",
     "台湾自动",
+    "欧洲自动",
     "亚洲其他自动",
     "其他自动",
-    "智能选择"
+    "DIRECT"
+  ];
+
+  const OPENAI_REGION_ORDER = [
+    "AIGC",
+    "默认代理",
+    "智能选择",
+    "新加坡自动",
+    "日本自动",
+    "美国自动",
+    "香港自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动",
+    "DIRECT"
+  ];
+
+  const COPILOT_REGION_ORDER = [
+    "AIGC",
+    "默认代理",
+    "DIRECT",
+    "智能选择",
+    "美国自动",
+    "日本自动",
+    "新加坡自动",
+    "香港自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动"
+  ];
+
+  const GITHUB_REGION_ORDER = [
+    "默认代理",
+    "智能选择",
+    "美国自动",
+    "日本自动",
+    "新加坡自动",
+    "香港自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动",
+    "DIRECT"
+  ];
+
+  const GOOGLE_REGION_ORDER = [
+    "默认代理",
+    "智能选择",
+    "新加坡自动",
+    "日本自动",
+    "美国自动",
+    "香港自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动",
+    "DIRECT"
+  ];
+
+  const TELEGRAM_REGION_ORDER = [
+    "默认代理",
+    "智能选择",
+    "新加坡自动",
+    "香港自动",
+    "日本自动",
+    "韩国自动",
+    "台湾自动",
+    "美国自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动",
+    "DIRECT"
+  ];
+
+  const MICROSOFT_REGION_ORDER = [
+    "DIRECT",
+    "默认代理",
+    "智能选择",
+    "美国自动",
+    "日本自动",
+    "新加坡自动",
+    "香港自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动"
+  ];
+
+  const GAME_REGION_ORDER = [
+    "DIRECT",
+    "默认代理",
+    "智能选择",
+    "香港自动",
+    "新加坡自动",
+    "日本自动",
+    "韩国自动",
+    "台湾自动",
+    "美国自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动"
   ];
 
   config["proxy-groups"] = [
-    buildSelectGroup("默认代理", ICON.proxy, [
-      "智能选择",
-      "香港自动",
-      "新加坡自动",
-      "日本自动",
-      "韩国自动",
-      "美国自动",
-      "台湾自动",
-      "欧洲自动",
-      "亚洲其他自动",
-      "其他自动",
-      "DIRECT"
-    ]),
+    buildSelectGroup("默认代理", ICON.proxy, DEFAULT_REGION_OPTIONS),
     buildSelectGroup("国内直连", ICON.china, ["DIRECT", "默认代理"]),
-    buildSelectGroup("漏网之鱼", ICON.final, ["默认代理", "智能选择", "DIRECT"]),
+    buildSelectGroup("漏网之鱼", ICON.final, ["默认代理", ...DEFAULT_REGION_OPTIONS]),
     buildSelectGroup("广告拦截", ICON.adblock, ["REJECT", "DIRECT", "默认代理"]),
     buildSelectGroup("AIGC", ICON.ai, AI_REGION_ORDER),
-    buildSelectGroup("OpenAI", ICON.openai, [
-      "AIGC",
-      "默认代理",
-      "新加坡自动",
-      "日本自动",
-      "美国自动",
-      "欧洲自动",
-      "智能选择"
-    ]),
-    buildSelectGroup("Claude", ICON.claude, [
-      "AIGC",
-      "默认代理",
-      "新加坡自动",
-      "日本自动",
-      "美国自动",
-      "欧洲自动",
-      "智能选择"
-    ]),
-    buildSelectGroup("Gemini", ICON.google, [
-      "AIGC",
-      "默认代理",
-      "新加坡自动",
-      "日本自动",
-      "美国自动",
-      "欧洲自动",
-      "智能选择"
-    ]),
-    buildSelectGroup("Copilot", ICON.microsoft, [
-      "AIGC",
-      "默认代理",
-      "DIRECT",
-      "美国自动",
-      "日本自动",
-      "新加坡自动",
-      "智能选择"
-    ]),
-    buildSelectGroup("GitHub", ICON.github, [
-      "默认代理",
-      "美国自动",
-      "日本自动",
-      "新加坡自动",
-      "欧洲自动",
-      "智能选择",
-      "DIRECT"
-    ]),
-    buildSelectGroup("Google", ICON.google, [
-      "默认代理",
-      "新加坡自动",
-      "日本自动",
-      "美国自动",
-      "香港自动",
-      "欧洲自动",
-      "智能选择",
-      "DIRECT"
-    ]),
-    buildSelectGroup("微软服务", ICON.microsoft, [
-      "DIRECT",
-      "默认代理",
-      "美国自动",
-      "日本自动",
-      "新加坡自动",
-      "欧洲自动",
-      "智能选择"
-    ]),
-    buildSelectGroup("Telegram", ICON.telegram, [
-      "默认代理",
-      "新加坡自动",
-      "香港自动",
-      "日本自动",
-      "韩国自动",
-      "台湾自动",
-      "欧洲自动",
-      "智能选择",
-      "DIRECT"
-    ]),
-    buildSelectGroup("游戏服务", ICON.game, [
-      "DIRECT",
-      "默认代理",
-      "香港自动",
-      "新加坡自动",
-      "日本自动",
-      "韩国自动",
-      "台湾自动",
-      "美国自动",
-      "亚洲其他自动",
-      "其他自动",
-      "智能选择"
-    ]),
+    buildSelectGroup("OpenAI", ICON.openai, OPENAI_REGION_ORDER),
+    buildSelectGroup("Claude", ICON.claude, OPENAI_REGION_ORDER),
+    buildSelectGroup("Gemini", ICON.google, OPENAI_REGION_ORDER),
+    buildSelectGroup("Copilot", ICON.microsoft, COPILOT_REGION_ORDER),
+    buildSelectGroup("GitHub", ICON.github, GITHUB_REGION_ORDER),
+    buildSelectGroup("Google", ICON.google, GOOGLE_REGION_ORDER),
+    buildSelectGroup("微软服务", ICON.microsoft, MICROSOFT_REGION_ORDER),
+    buildSelectGroup("Telegram", ICON.telegram, TELEGRAM_REGION_ORDER),
+    buildSelectGroup("游戏服务", ICON.game, GAME_REGION_ORDER),
     buildUrlTestGroup("智能选择", ICON.auto, nodes.all),
     ...regionGroups
   ];

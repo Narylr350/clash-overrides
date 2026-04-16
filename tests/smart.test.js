@@ -64,8 +64,21 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.deepEqual(
     getGroup(result, "漏网之鱼").proxies,
-    ["默认代理", "智能选择", "DIRECT"],
-    "漏网之鱼 should follow 默认代理 first"
+    [
+      "默认代理",
+      "智能选择",
+      "香港自动",
+      "新加坡自动",
+      "日本自动",
+      "韩国自动",
+      "美国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "漏网之鱼 should keep full manual options while following 默认代理 first"
   );
 
   assert.deepEqual(
@@ -94,48 +107,194 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     getGroup(result, "AIGC").proxies,
     [
       "默认代理",
+      "智能选择",
       "新加坡自动",
       "日本自动",
       "美国自动",
-      "欧洲自动",
       "香港自动",
       "韩国自动",
       "台湾自动",
+      "欧洲自动",
       "亚洲其他自动",
       "其他自动",
-      "智能选择"
+      "DIRECT"
     ],
-    "AIGC should attach to 默认代理 before AI-specific lanes"
+    "AIGC should follow 默认代理 first but still expose full manual options"
   );
 
   assert.deepEqual(
     getGroup(result, "OpenAI").proxies,
-    ["AIGC", "默认代理", "新加坡自动", "日本自动", "美国自动", "欧洲自动", "智能选择"],
-    "OpenAI should include 默认代理 after AIGC"
+    [
+      "AIGC",
+      "默认代理",
+      "智能选择",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "OpenAI should keep full manual options after AIGC and 默认代理"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "Claude").proxies,
+    [
+      "AIGC",
+      "默认代理",
+      "智能选择",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "Claude should keep full manual options after AIGC and 默认代理"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "Gemini").proxies,
+    [
+      "AIGC",
+      "默认代理",
+      "智能选择",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "Gemini should keep full manual options after AIGC and 默认代理"
   );
 
   assert.deepEqual(
     getGroup(result, "Copilot").proxies,
-    ["AIGC", "默认代理", "DIRECT", "美国自动", "日本自动", "新加坡自动", "智能选择"],
-    "Copilot should keep DIRECT as a special case but still inherit 默认代理"
+    [
+      "AIGC",
+      "默认代理",
+      "DIRECT",
+      "智能选择",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动"
+    ],
+    "Copilot should keep DIRECT as a special case but still expose full manual options"
   );
 
   assert.deepEqual(
     getGroup(result, "GitHub").proxies,
-    ["默认代理", "美国自动", "日本自动", "新加坡自动", "欧洲自动", "智能选择", "DIRECT"],
-    "GitHub should follow 默认代理 before service-specific lanes"
+    [
+      "默认代理",
+      "智能选择",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "GitHub should follow 默认代理 first and keep manual region options"
   );
 
   assert.deepEqual(
     getGroup(result, "Google").proxies,
-    ["默认代理", "新加坡自动", "日本自动", "美国自动", "香港自动", "欧洲自动", "智能选择", "DIRECT"],
-    "Google should follow 默认代理 before service-specific lanes"
+    [
+      "默认代理",
+      "智能选择",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "Google should follow 默认代理 first and keep manual region options"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "Telegram").proxies,
+    [
+      "默认代理",
+      "智能选择",
+      "新加坡自动",
+      "香港自动",
+      "日本自动",
+      "韩国自动",
+      "台湾自动",
+      "美国自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "Telegram should follow 默认代理 first and keep manual region options"
   );
 
   assert.deepEqual(
     getGroup(result, "微软服务").proxies,
-    ["DIRECT", "默认代理", "美国自动", "日本自动", "新加坡自动", "欧洲自动", "智能选择"],
-    "Microsoft should stay direct-first but inherit 默认代理 second"
+    [
+      "DIRECT",
+      "默认代理",
+      "智能选择",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动"
+    ],
+    "Microsoft should stay direct-first but keep full manual options"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "游戏服务").proxies,
+    [
+      "DIRECT",
+      "默认代理",
+      "智能选择",
+      "香港自动",
+      "新加坡自动",
+      "日本自动",
+      "韩国自动",
+      "台湾自动",
+      "美国自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动"
+    ],
+    "Game should keep direct-first but retain full manual options"
   );
 }
 
@@ -154,6 +313,30 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.ok(providers["games-cn"], "should keep games-cn provider");
   assert.ok(providers.cn, "should keep cn provider");
   assert.equal(providers.adblock_plus, undefined, "should remove duplicate adblock_plus provider");
+
+  assert.equal(
+    getGroup(result, "Claude").icon,
+    "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/AI.png",
+    "Claude should fall back to a working icon instead of a missing Anthropic icon"
+  );
+
+  assert.equal(
+    getGroup(result, "漏网之鱼").icon,
+    "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Fish.png",
+    "漏网之鱼 should use a working fish icon"
+  );
+
+  assert.equal(
+    getGroup(result, "欧洲自动").icon,
+    "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png",
+    "Europe should use a working fallback icon"
+  );
+
+  assert.equal(
+    getGroup(result, "亚洲其他自动").icon,
+    "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png",
+    "Asia-other should use a working fallback icon"
+  );
 
   assert.ok(
     rules.indexOf("DOMAIN-SUFFIX,claude.ai,Claude") < rules.indexOf("RULE-SET,ai,AIGC"),

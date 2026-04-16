@@ -8,8 +8,10 @@ const ICON = {
   proxy: icon("Proxy"),
   china: icon("China"),
   final: icon("Final"),
+  adblock: icon("Advertising"),
   ai: icon("AI"),
   openai: icon("ChatGPT"),
+  claude: icon("Anthropic"),
   google: icon("Google"),
   microsoft: icon("Microsoft"),
   github: icon("GitHub"),
@@ -22,8 +24,9 @@ const ICON = {
   kr: icon("Korea"),
   us: icon("United_States"),
   tw: icon("Taiwan"),
-  eu: icon("Global"),
-  asiaOther: icon("Auto")
+  eu: icon("Europe"),
+  asiaOther: icon("Asia"),
+  other: icon("Proxy")
 };
 
 const REGION_DEFS = [
@@ -97,6 +100,12 @@ const REGION_DEFS = [
       /India/i,
       /印度/i
     ]
+  },
+  {
+    key: "other",
+    group: "其他自动",
+    icon: ICON.other,
+    patterns: []
   }
 ];
 
@@ -112,13 +121,14 @@ function collectNodeBuckets(proxies) {
   const all = uniq(proxies.map((proxy) => proxy.name).filter(Boolean));
   const buckets = {};
   const classified = new Set();
+  const classifiedDefs = REGION_DEFS.filter((def) => def.patterns.length);
 
   for (const def of REGION_DEFS) {
     buckets[def.key] = [];
   }
 
   for (const name of all) {
-    for (const def of REGION_DEFS) {
+    for (const def of classifiedDefs) {
       if (matchesAny(name, def.patterns)) {
         buckets[def.key].push(name);
         classified.add(name);
@@ -127,9 +137,11 @@ function collectNodeBuckets(proxies) {
     }
   }
 
+  buckets.other = all.filter((name) => !classified.has(name));
+
   return {
     all,
-    unclassified: all.filter((name) => !classified.has(name)),
+    unclassified: buckets.other,
     ...buckets
   };
 }
@@ -167,24 +179,17 @@ function main(config) {
   );
 
   const AI_REGION_ORDER = [
+    "默认代理",
     "新加坡自动",
     "日本自动",
     "美国自动",
+    "欧洲自动",
     "香港自动",
     "韩国自动",
     "台湾自动",
-    "欧洲自动",
     "亚洲其他自动",
+    "其他自动",
     "智能选择"
-  ];
-
-  const WORKFLOW_REGION_ORDER = [
-    "智能选择",
-    "美国自动",
-    "日本自动",
-    "新加坡自动",
-    "欧洲自动",
-    "DIRECT"
   ];
 
   config["proxy-groups"] = [
@@ -193,34 +198,30 @@ function main(config) {
       "香港自动",
       "新加坡自动",
       "日本自动",
+      "韩国自动",
       "美国自动",
+      "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "其他自动",
       "DIRECT"
     ]),
     buildSelectGroup("国内直连", ICON.china, ["DIRECT", "默认代理"]),
-    buildSelectGroup("漏网之鱼", ICON.final, [
-      "智能选择",
-      "香港自动",
-      "新加坡自动",
-      "日本自动",
-      "美国自动",
-      "欧洲自动",
-      "亚洲其他自动",
-      "DIRECT"
-    ]),
-    buildSelectGroup("广告拦截", ICON.final, ["REJECT", "DIRECT", "默认代理"]),
+    buildSelectGroup("漏网之鱼", ICON.final, ["默认代理", "智能选择", "DIRECT"]),
+    buildSelectGroup("广告拦截", ICON.adblock, ["REJECT", "DIRECT", "默认代理"]),
     buildSelectGroup("AIGC", ICON.ai, AI_REGION_ORDER),
     buildSelectGroup("OpenAI", ICON.openai, [
       "AIGC",
+      "默认代理",
       "新加坡自动",
       "日本自动",
       "美国自动",
       "欧洲自动",
       "智能选择"
     ]),
-    buildSelectGroup("Claude", ICON.ai, [
+    buildSelectGroup("Claude", ICON.claude, [
       "AIGC",
+      "默认代理",
       "新加坡自动",
       "日本自动",
       "美国自动",
@@ -229,6 +230,7 @@ function main(config) {
     ]),
     buildSelectGroup("Gemini", ICON.google, [
       "AIGC",
+      "默认代理",
       "新加坡自动",
       "日本自动",
       "美国自动",
@@ -237,14 +239,24 @@ function main(config) {
     ]),
     buildSelectGroup("Copilot", ICON.microsoft, [
       "AIGC",
+      "默认代理",
       "DIRECT",
       "美国自动",
       "日本自动",
       "新加坡自动",
       "智能选择"
     ]),
-    buildSelectGroup("GitHub", ICON.github, WORKFLOW_REGION_ORDER),
+    buildSelectGroup("GitHub", ICON.github, [
+      "默认代理",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "欧洲自动",
+      "智能选择",
+      "DIRECT"
+    ]),
     buildSelectGroup("Google", ICON.google, [
+      "默认代理",
       "新加坡自动",
       "日本自动",
       "美国自动",
@@ -255,13 +267,15 @@ function main(config) {
     ]),
     buildSelectGroup("微软服务", ICON.microsoft, [
       "DIRECT",
-      "智能选择",
+      "默认代理",
       "美国自动",
       "日本自动",
       "新加坡自动",
-      "欧洲自动"
+      "欧洲自动",
+      "智能选择"
     ]),
     buildSelectGroup("Telegram", ICON.telegram, [
+      "默认代理",
       "新加坡自动",
       "香港自动",
       "日本自动",
@@ -273,6 +287,7 @@ function main(config) {
     ]),
     buildSelectGroup("游戏服务", ICON.game, [
       "DIRECT",
+      "默认代理",
       "香港自动",
       "新加坡自动",
       "日本自动",
@@ -280,6 +295,7 @@ function main(config) {
       "台湾自动",
       "美国自动",
       "亚洲其他自动",
+      "其他自动",
       "智能选择"
     ]),
     buildUrlTestGroup("智能选择", ICON.auto, nodes.all),

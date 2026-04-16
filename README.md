@@ -14,3 +14,51 @@
 ## 使用方法
 
 在支持 Script 覆写的客户端中填入：
+
+
+https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.js
+
+
+适用客户端：
+
+- Clash Party
+- Clash Verge
+- OpenClash（Meta 模式）
+- Mihomo 内核客户端
+
+---
+
+## 基本说明
+
+### 1. 默认代理
+
+一般保持：
+
+
+默认代理 → 智能选择
+
+
+---
+
+### 2. 广告拦截
+
+在代理组中切换：
+
+- `REJECT`：开启去广告
+- `DIRECT`：关闭去广告
+
+---
+
+### 3. 微软服务
+
+默认：
+
+
+微软服务 → DIRECT
+
+
+如果遇到异常可以手动切换节点。
+
+---
+
+#

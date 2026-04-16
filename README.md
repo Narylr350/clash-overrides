@@ -1,23 +1,14 @@
 # Clash Smart Overrides
 
-一个基于 Script 的 Clash 覆写规则，用来优化分流和自动选择节点。
+一个面向个人使用、默认省心的 Clash Script 覆写规则。
 
-特点：
-
-- 自动分流（AI / Google / GitHub / Microsoft / 游戏）
-- Smart 自动测速选择节点
-- 广告拦截（可手动开关）
-- 常见国家节点自动归类（HK / SG / JP / US 等）
-
----
+它会把原始订阅整理成更清晰的服务型分组，并让 `智能选择` 覆盖所有节点，避免未识别节点被浪费。
 
 ## 使用方法
 
 在支持 Script 覆写的客户端中填入：
 
-
 https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.js
-
 
 适用客户端：
 
@@ -26,65 +17,45 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.js
 - OpenClash（Meta 模式）
 - Mihomo 内核客户端
 
----
+## 分组结构
 
-## 基本说明
+### 日常常用入口
 
-### 1. 默认代理
+- `默认代理`
+- `AIGC`
+- `GitHub`
+- `Google`
+- `微软服务`
+- `Telegram`
+- `游戏服务`
+- `广告拦截`
+- `漏网之鱼`
 
-一般保持：
+### 支撑型自动组
 
+- `智能选择`：覆盖所有节点
+- `香港自动`
+- `新加坡自动`
+- `日本自动`
+- `韩国自动`
+- `美国自动`
+- `台湾自动`
+- `欧洲自动`
+- `亚洲其他自动`
 
-默认代理 → 智能选择
+## 默认建议
 
+- 日常代理：`默认代理 -> 智能选择`
+- AI 服务：先调 `AIGC`
+- GitHub / Google：默认保持脚本分流
+- 微软服务：默认 `DIRECT`
+- 网站异常：先把 `广告拦截` 切到 `DIRECT`
 
----
+## 说明
 
-### 2. 广告拦截
-
-在代理组中切换：
-
-- `REJECT`：开启去广告
-- `DIRECT`：关闭去广告
-
----
-
-### 3. 微软服务
-
-默认：
-
-
-微软服务 → DIRECT
-
-
-如果遇到异常可以手动切换节点。
-
----
-
-### 4. AI 使用
-
-常用 AI 已单独分组：
-
-- OpenAI
-- Claude
-- Gemini
-- Copilot
-
-一般使用：
-
-
-AIGC 或 新加坡 / 日本节点
-
-
----
-
-## 注意
-
-- 广告拦截只对域名级广告有效
-- 部分网站异常时可关闭广告拦截排查
-- Smart 测速使用 HTTPS，避免测速失败
-
----
+- `智能选择` 会包含所有节点，包括未识别地区的节点
+- AI 服务使用统一候选逻辑，`OpenAI / Claude / Gemini / Copilot` 只做少量专用偏置
+- 该脚本是单文件个人覆写脚本，不做复杂的原配置增量合并
 
 ## License
 

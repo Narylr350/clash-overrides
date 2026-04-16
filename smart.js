@@ -1,359 +1,289 @@
-function main(config) {
-  const proxies = config.proxies || [];
+const TEST_URL = "https://www.gstatic.com/generate_204";
+const TEST_INTERVAL = 300;
 
-  const pick = (re) => proxies.map(p => p.name).filter(n => re.test(n));
-  const uniq = (arr) => [...new Set(arr)].filter(Boolean);
+const icon = (name) =>
+  `https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/${name}.png`;
 
-  const HK = pick(/HK|香港|Hong/i);
-  const SG = pick(/SG|新加坡|Singapore/i);
-  const JP = pick(/JP|日本|Japan/i);
-  const KR = pick(/KR|韩国|Korea|首尔|Seoul/i);
-  const US = pick(/US|美国|USA|United States/i);
-  const TW = pick(/TW|台湾|Taiwan/i);
-  const UK = pick(/UK|英国|London|GB/i);
-  const DE = pick(/DE|德国|Germany/i);
+const ICON = {
+  proxy: icon("Proxy"),
+  china: icon("China"),
+  final: icon("Final"),
+  ai: icon("AI"),
+  openai: icon("ChatGPT"),
+  google: icon("Google"),
+  microsoft: icon("Microsoft"),
+  github: icon("GitHub"),
+  telegram: icon("Telegram"),
+  game: icon("Game"),
+  auto: icon("Auto"),
+  hk: icon("Hong_Kong"),
+  sg: icon("Singapore"),
+  jp: icon("Japan"),
+  kr: icon("Korea"),
+  us: icon("United_States"),
+  tw: icon("Taiwan"),
+  eu: icon("Global"),
+  asiaOther: icon("Auto")
+};
 
-  const ALL = uniq([...HK, ...SG, ...JP, ...KR, ...US, ...TW, ...UK, ...DE]);
+const REGION_DEFS = [
+  {
+    key: "hk",
+    group: "香港自动",
+    icon: ICON.hk,
+    patterns: [/\bHK\b/i, /香港/i, /Hong(?:\s*Kong)?/i]
+  },
+  {
+    key: "sg",
+    group: "新加坡自动",
+    icon: ICON.sg,
+    patterns: [/\bSG\b/i, /新加坡/i, /Singapore/i]
+  },
+  {
+    key: "jp",
+    group: "日本自动",
+    icon: ICON.jp,
+    patterns: [/\bJP\b/i, /日本/i, /Japan/i]
+  },
+  {
+    key: "kr",
+    group: "韩国自动",
+    icon: ICON.kr,
+    patterns: [/\bKR\b/i, /韩国/i, /Korea/i, /首尔/i, /Seoul/i]
+  },
+  {
+    key: "us",
+    group: "美国自动",
+    icon: ICON.us,
+    patterns: [/\bUS\b/i, /美国/i, /USA/i, /United States/i]
+  },
+  {
+    key: "tw",
+    group: "台湾自动",
+    icon: ICON.tw,
+    patterns: [/\bTW\b/i, /台湾/i, /Taiwan/i]
+  },
+  {
+    key: "eu",
+    group: "欧洲自动",
+    icon: ICON.eu,
+    patterns: [
+      /\b(?:UK|GB|DE|FR|NL|EU)\b/i,
+      /英国/i,
+      /London/i,
+      /德国/i,
+      /Germany/i,
+      /France/i,
+      /Netherlands/i,
+      /Europe/i
+    ]
+  },
+  {
+    key: "asiaOther",
+    group: "亚洲其他自动",
+    icon: ICON.asiaOther,
+    patterns: [
+      /\b(?:MY|TH|VN|ID|PH|IN)\b/i,
+      /Malaysia/i,
+      /马来/i,
+      /Thailand/i,
+      /泰国/i,
+      /Vietnam/i,
+      /越南/i,
+      /Indonesia/i,
+      /印尼/i,
+      /Philippines/i,
+      /菲律宾/i,
+      /India/i,
+      /印度/i
+    ]
+  }
+];
 
-  const icon = (n) =>
-    `https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/${n}.png`;
+function uniq(arr) {
+  return [...new Set(arr)].filter(Boolean);
+}
 
-  const ICON = {
-    proxy: icon("Proxy"),
-    global: icon("Global"),
-    china: icon("China"),
-    final: icon("Final"),
-    ai: icon("AI"),
-    openai: icon("ChatGPT"),
-    google: icon("Google"),
-    microsoft: icon("Microsoft"),
-    github: icon("GitHub"),
-    telegram: icon("Telegram"),
-    game: icon("Game"),
-    auto: icon("Auto"),
-    hk: icon("Hong_Kong"),
-    sg: icon("Singapore"),
-    jp: icon("Japan"),
-    kr: icon("Korea"),
-    us: icon("United_States"),
-    tw: icon("Taiwan"),
-    uk: icon("United_Kingdom"),
-    de: icon("Germany")
+function matchesAny(name, patterns) {
+  return patterns.some((pattern) => pattern.test(name));
+}
+
+function collectNodeBuckets(proxies) {
+  const all = uniq(proxies.map((proxy) => proxy.name).filter(Boolean));
+  const buckets = {};
+  const classified = new Set();
+
+  for (const def of REGION_DEFS) {
+    buckets[def.key] = [];
+  }
+
+  for (const name of all) {
+    for (const def of REGION_DEFS) {
+      if (matchesAny(name, def.patterns)) {
+        buckets[def.key].push(name);
+        classified.add(name);
+        break;
+      }
+    }
+  }
+
+  return {
+    all,
+    unclassified: all.filter((name) => !classified.has(name)),
+    ...buckets
   };
+}
+
+function withFallback(nodes) {
+  return nodes.length ? nodes : ["DIRECT"];
+}
+
+function buildUrlTestGroup(name, iconUrl, nodes) {
+  return {
+    name,
+    type: "url-test",
+    icon: iconUrl,
+    url: TEST_URL,
+    interval: TEST_INTERVAL,
+    proxies: withFallback(nodes)
+  };
+}
+
+function buildSelectGroup(name, iconUrl, proxies) {
+  return {
+    name,
+    type: "select",
+    icon: iconUrl,
+    proxies
+  };
+}
+
+function main(config) {
+  config = config || {};
+  const proxies = Array.isArray(config.proxies) ? config.proxies : [];
+  const nodes = collectNodeBuckets(proxies);
+  const regionGroups = REGION_DEFS.map((def) =>
+    buildUrlTestGroup(def.group, def.icon, nodes[def.key] || [])
+  );
+
+  const AI_REGION_ORDER = [
+    "新加坡自动",
+    "日本自动",
+    "美国自动",
+    "香港自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "智能选择"
+  ];
+
+  const WORKFLOW_REGION_ORDER = [
+    "智能选择",
+    "美国自动",
+    "日本自动",
+    "新加坡自动",
+    "欧洲自动",
+    "DIRECT"
+  ];
 
   config["proxy-groups"] = [
-    {
-      name: "默认代理",
-      type: "select",
-      icon: ICON.proxy,
-      proxies: [
-        "智能选择",
-        "漏网之鱼",
-        "香港自动",
-        "新加坡自动",
-        "日本自动",
-        "韩国自动",
-        "美国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "全局代理",
-      type: "select",
-      icon: ICON.global,
-      proxies: [
-        "智能选择",
-        "漏网之鱼",
-        "香港自动",
-        "新加坡自动",
-        "日本自动",
-        "韩国自动",
-        "美国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "国内直连",
-      type: "select",
-      icon: ICON.china,
-      proxies: ["DIRECT", "智能选择", "默认代理"]
-    },
-    {
-      name: "漏网之鱼",
-      type: "select",
-      icon: ICON.final,
-      proxies: [
-        "智能选择",
-        "香港自动",
-        "新加坡自动",
-        "日本自动",
-        "韩国自动",
-        "美国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "广告拦截",
-      type: "select",
-      icon: ICON.final,
-      proxies: ["REJECT", "DIRECT", "智能选择"]
-    },
-
-    {
-      name: "AIGC",
-      type: "select",
-      icon: ICON.ai,
-      proxies: [
-        "新加坡自动",
-        "日本自动",
-        "美国自动",
-        "香港自动",
-        "韩国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "智能选择",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "OpenAI",
-      type: "select",
-      icon: ICON.openai,
-      proxies: [
-        "AIGC",
-        "新加坡自动",
-        "日本自动",
-        "美国自动",
-        "香港自动",
-        "韩国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "智能选择",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "Claude",
-      type: "select",
-      icon: ICON.ai,
-      proxies: [
-        "AIGC",
-        "新加坡自动",
-        "日本自动",
-        "美国自动",
-        "香港自动",
-        "韩国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "智能选择",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "Gemini",
-      type: "select",
-      icon: ICON.google,
-      proxies: [
-        "AIGC",
-        "新加坡自动",
-        "日本自动",
-        "美国自动",
-        "香港自动",
-        "韩国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "智能选择",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "Copilot",
-      type: "select",
-      icon: ICON.microsoft,
-      proxies: [
-        "AIGC",
-        "DIRECT",
-        "新加坡自动",
-        "日本自动",
-        "美国自动",
-        "香港自动",
-        "韩国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "智能选择"
-      ]
-    },
-
-    {
-      name: "Google",
-      type: "select",
-      icon: ICON.google,
-      proxies: [
-        "新加坡自动",
-        "日本自动",
-        "香港自动",
-        "美国自动",
-        "韩国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "智能选择",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "微软服务",
-      type: "select",
-      icon: ICON.microsoft,
-      proxies: [
-        "DIRECT",
-        "智能选择",
-        "新加坡自动",
-        "日本自动",
-        "美国自动",
-        "香港自动",
-        "韩国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动"
-      ]
-    },
-    {
-      name: "GitHub",
-      type: "select",
-      icon: ICON.github,
-      proxies: [
-        "智能选择",
-        "美国自动",
-        "日本自动",
-        "新加坡自动",
-        "香港自动",
-        "韩国自动",
-        "台湾自动",
-        "英国自动",
-        "德国自动",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "Telegram",
-      type: "select",
-      icon: ICON.telegram,
-      proxies: [
-        "智能选择",
-        "新加坡自动",
-        "香港自动",
-        "日本自动",
-        "韩国自动",
-        "台湾自动",
-        "美国自动",
-        "英国自动",
-        "德国自动",
-        "DIRECT"
-      ]
-    },
-    {
-      name: "游戏服务",
-      type: "select",
-      icon: ICON.game,
-      proxies: [
-        "DIRECT",
-        "智能选择",
-        "香港自动",
-        "新加坡自动",
-        "日本自动",
-        "韩国自动",
-        "台湾自动",
-        "美国自动"
-      ]
-    },
-
-    {
-      name: "智能选择",
-      type: "url-test",
-      icon: ICON.auto,
-      url: "https://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: ALL.length ? ALL : ["DIRECT"]
-    },
-    {
-      name: "香港自动",
-      type: "url-test",
-      icon: ICON.hk,
-      url: "https://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: HK.length ? HK : ["DIRECT"]
-    },
-    {
-      name: "新加坡自动",
-      type: "url-test",
-      icon: ICON.sg,
-      url: "https://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: SG.length ? SG : ["DIRECT"]
-    },
-    {
-      name: "日本自动",
-      type: "url-test",
-      icon: ICON.jp,
-      url: "https://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: JP.length ? JP : ["DIRECT"]
-    },
-    {
-      name: "韩国自动",
-      type: "url-test",
-      icon: ICON.kr,
-      url: "https://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: KR.length ? KR : ["DIRECT"]
-    },
-    {
-      name: "美国自动",
-      type: "url-test",
-      icon: ICON.us,
-      url: "https://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: US.length ? US : ["DIRECT"]
-    },
-    {
-      name: "台湾自动",
-      type: "url-test",
-      icon: ICON.tw,
-      url: "https://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: TW.length ? TW : ["DIRECT"]
-    },
-    {
-      name: "英国自动",
-      type: "url-test",
-      icon: ICON.uk,
-      url: "https://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: UK.length ? UK : ["DIRECT"]
-    },
-    {
-      name: "德国自动",
-      type: "url-test",
-      icon: ICON.de,
-      url: "https://www.gstatic.com/generate_204",
-      interval: 300,
-      proxies: DE.length ? DE : ["DIRECT"]
-    }
+    buildSelectGroup("默认代理", ICON.proxy, [
+      "智能选择",
+      "香港自动",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "DIRECT"
+    ]),
+    buildSelectGroup("国内直连", ICON.china, ["DIRECT", "默认代理"]),
+    buildSelectGroup("漏网之鱼", ICON.final, [
+      "智能选择",
+      "香港自动",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "DIRECT"
+    ]),
+    buildSelectGroup("广告拦截", ICON.final, ["REJECT", "DIRECT", "默认代理"]),
+    buildSelectGroup("AIGC", ICON.ai, AI_REGION_ORDER),
+    buildSelectGroup("OpenAI", ICON.openai, [
+      "AIGC",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "欧洲自动",
+      "智能选择"
+    ]),
+    buildSelectGroup("Claude", ICON.ai, [
+      "AIGC",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "欧洲自动",
+      "智能选择"
+    ]),
+    buildSelectGroup("Gemini", ICON.google, [
+      "AIGC",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "欧洲自动",
+      "智能选择"
+    ]),
+    buildSelectGroup("Copilot", ICON.microsoft, [
+      "AIGC",
+      "DIRECT",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "智能选择"
+    ]),
+    buildSelectGroup("GitHub", ICON.github, WORKFLOW_REGION_ORDER),
+    buildSelectGroup("Google", ICON.google, [
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "香港自动",
+      "欧洲自动",
+      "智能选择",
+      "DIRECT"
+    ]),
+    buildSelectGroup("微软服务", ICON.microsoft, [
+      "DIRECT",
+      "智能选择",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "欧洲自动"
+    ]),
+    buildSelectGroup("Telegram", ICON.telegram, [
+      "新加坡自动",
+      "香港自动",
+      "日本自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "智能选择",
+      "DIRECT"
+    ]),
+    buildSelectGroup("游戏服务", ICON.game, [
+      "DIRECT",
+      "香港自动",
+      "新加坡自动",
+      "日本自动",
+      "韩国自动",
+      "台湾自动",
+      "美国自动",
+      "亚洲其他自动",
+      "智能选择"
+    ]),
+    buildUrlTestGroup("智能选择", ICON.auto, nodes.all),
+    ...regionGroups
   ];
 
   config["rule-providers"] = {
@@ -363,14 +293,6 @@ function main(config) {
       format: "text",
       path: "./ruleset/adblock.list",
       url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.list",
-      interval: 86400
-    },
-    adblock_plus: {
-      type: "http",
-      behavior: "domain",
-      format: "text",
-      path: "./ruleset/adblock_plus.list",
-      url: "https://raw.githubusercontent.com/zzzt27/clash-AdsBlock/main/oisd_small.txt",
       interval: 86400
     },
     ai: {
@@ -440,25 +362,20 @@ function main(config) {
   };
 
   config.rules = [
-    // ===== 白名单（防误杀）=====
     "DOMAIN-SUFFIX,bilibili.com,国内直连",
     "DOMAIN-SUFFIX,baidu.com,国内直连",
     "DOMAIN-SUFFIX,qq.com,国内直连",
     "DOMAIN-SUFFIX,mi.com,国内直连",
     "DOMAIN-SUFFIX,huawei.com,国内直连",
 
-    // ===== 广告拦截 =====
     "RULE-SET,adblock,广告拦截",
-    "RULE-SET,adblock_plus,广告拦截",
 
-    // ===== GitHub 手工优先 =====
     "DOMAIN-SUFFIX,github.com,GitHub",
     "DOMAIN-SUFFIX,githubusercontent.com,GitHub",
     "DOMAIN-SUFFIX,raw.githubusercontent.com,GitHub",
     "DOMAIN-SUFFIX,githubassets.com,GitHub",
     "DOMAIN-SUFFIX,github.io,GitHub",
 
-    // ===== 核心 AI =====
     "DOMAIN-SUFFIX,openai.com,OpenAI",
     "DOMAIN-SUFFIX,chatgpt.com,OpenAI",
     "DOMAIN-SUFFIX,oaistatic.com,OpenAI",
@@ -475,22 +392,21 @@ function main(config) {
     "DOMAIN-SUFFIX,copilot.microsoft.com,Copilot",
     "DOMAIN-SUFFIX,sydney.bing.com,Copilot",
 
-    // ===== 规则集 =====
     "RULE-SET,ai,AIGC",
     "RULE-SET,google,Google",
     "RULE-SET,github,GitHub",
     "RULE-SET,telegram,Telegram",
-
     "RULE-SET,microsoft,微软服务",
-
     "RULE-SET,games-cn,国内直连",
     "RULE-SET,games,游戏服务",
-
     "RULE-SET,cn,国内直连",
     "GEOIP,CN,国内直连",
-
     "MATCH,漏网之鱼"
   ];
 
   return config;
+}
+
+if (typeof module !== "undefined") {
+  module.exports = { main };
 }

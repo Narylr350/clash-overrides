@@ -96,6 +96,9 @@ function main(config) {
         "日本自动",
         "韩国自动",
         "美国自动",
+        "台湾自动",
+        "英国自动",
+        "德国自动",
         "DIRECT"
       ]
     },
@@ -105,31 +108,90 @@ function main(config) {
       name: "AIGC",
       type: "select",
       icon: ICON.ai,
-      proxies: ["新加坡自动", "日本自动", "美国自动", "DIRECT"]
+      proxies: [
+        "新加坡自动",
+        "日本自动",
+        "美国自动",
+        "香港自动",
+        "韩国自动",
+        "台湾自动",
+        "英国自动",
+        "德国自动",
+        "智能选择",
+        "DIRECT"
+      ]
     },
     {
       name: "OpenAI",
       type: "select",
       icon: ICON.openai,
-      proxies: ["AIGC", "新加坡自动", "日本自动", "美国自动", "DIRECT"]
+      proxies: [
+        "AIGC",
+        "新加坡自动",
+        "日本自动",
+        "美国自动",
+        "香港自动",
+        "韩国自动",
+        "台湾自动",
+        "英国自动",
+        "德国自动",
+        "智能选择",
+        "DIRECT"
+      ]
     },
     {
       name: "Claude",
       type: "select",
       icon: ICON.ai,
-      proxies: ["AIGC", "新加坡自动", "日本自动", "美国自动", "DIRECT"]
+      proxies: [
+        "AIGC",
+        "新加坡自动",
+        "日本自动",
+        "美国自动",
+        "香港自动",
+        "韩国自动",
+        "台湾自动",
+        "英国自动",
+        "德国自动",
+        "智能选择",
+        "DIRECT"
+      ]
     },
     {
       name: "Gemini",
       type: "select",
       icon: ICON.google,
-      proxies: ["AIGC", "新加坡自动", "日本自动", "美国自动", "DIRECT"]
+      proxies: [
+        "AIGC",
+        "新加坡自动",
+        "日本自动",
+        "美国自动",
+        "香港自动",
+        "韩国自动",
+        "台湾自动",
+        "英国自动",
+        "德国自动",
+        "智能选择",
+        "DIRECT"
+      ]
     },
     {
       name: "Copilot",
       type: "select",
       icon: ICON.microsoft,
-      proxies: ["AIGC", "DIRECT", "新加坡自动", "日本自动", "智能选择"]
+      proxies: [
+        "AIGC",
+        "DIRECT",
+        "新加坡自动",
+        "日本自动",
+        "美国自动",
+        "香港自动",
+        "韩国自动",
+        "台湾自动",
+        "英国自动",
+        "德国自动",
+        "智能选择"
+      ]
     },
 
     // ===== 常用服务 =====
@@ -137,31 +199,84 @@ function main(config) {
       name: "Google",
       type: "select",
       icon: ICON.google,
-      proxies: ["新加坡自动", "日本自动", "香港自动", "美国自动", "DIRECT"]
+      proxies: [
+        "新加坡自动",
+        "日本自动",
+        "香港自动",
+        "美国自动",
+        "韩国自动",
+        "台湾自动",
+        "英国自动",
+        "德国自动",
+        "智能选择",
+        "DIRECT"
+      ]
     },
     {
       name: "微软服务",
       type: "select",
       icon: ICON.microsoft,
-      proxies: ["DIRECT", "智能选择", "新加坡自动", "日本自动"]
+      proxies: [
+        "DIRECT",
+        "智能选择",
+        "新加坡自动",
+        "日本自动",
+        "美国自动",
+        "香港自动",
+        "韩国自动",
+        "台湾自动",
+        "英国自动",
+        "德国自动"
+      ]
     },
     {
       name: "GitHub",
       type: "select",
       icon: ICON.github,
-      proxies: ["智能选择", "美国自动", "日本自动", "新加坡自动", "DIRECT"]
+      proxies: [
+        "智能选择",
+        "美国自动",
+        "日本自动",
+        "新加坡自动",
+        "香港自动",
+        "韩国自动",
+        "台湾自动",
+        "英国自动",
+        "德国自动",
+        "DIRECT"
+      ]
     },
     {
       name: "Telegram",
       type: "select",
       icon: ICON.telegram,
-      proxies: ["智能选择", "新加坡自动", "香港自动", "日本自动", "韩国自动"]
+      proxies: [
+        "智能选择",
+        "新加坡自动",
+        "香港自动",
+        "日本自动",
+        "韩国自动",
+        "台湾自动",
+        "美国自动",
+        "英国自动",
+        "德国自动",
+        "DIRECT"
+      ]
     },
     {
       name: "游戏服务",
       type: "select",
       icon: ICON.game,
-      proxies: ["DIRECT", "智能选择", "香港自动", "新加坡自动"]
+      proxies: [
+        "DIRECT",
+        "智能选择",
+        "香港自动",
+        "新加坡自动",
+        "日本自动",
+        "韩国自动",
+        "台湾自动",
+        "美国自动"
+      ]
     },
 
     // ===== Smart 池 =====
@@ -307,7 +422,7 @@ function main(config) {
   };
 
   config.rules = [
-    // ===== GitHub 手工优先，确保 raw 不掉到漏网之鱼 =====
+    // ===== GitHub 手工优先 =====
     "DOMAIN-SUFFIX,github.com,GitHub",
     "DOMAIN-SUFFIX,githubusercontent.com,GitHub",
     "DOMAIN-SUFFIX,raw.githubusercontent.com,GitHub",
@@ -328,7 +443,7 @@ function main(config) {
     "DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini",
     "DOMAIN-SUFFIX,ai.google.dev,Gemini",
 
-    // 只抓 Copilot 相关，不整站抓 bing.com
+    // 只抓 Copilot 相关
     "DOMAIN-SUFFIX,copilot.microsoft.com,Copilot",
     "DOMAIN-SUFFIX,sydney.bing.com,Copilot",
 

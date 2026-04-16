@@ -11,9 +11,11 @@ const ICON = {
   adblock: icon("Advertising"),
   ai: icon("AI"),
   openai: icon("ChatGPT"),
-  claude: icon("AI"),
+  claude: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/robot.svg",
   google: icon("Google"),
+  gemini: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/gem.svg",
   microsoft: icon("Microsoft"),
+  copilot: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/compass-drafting.svg",
   github: icon("GitHub"),
   telegram: icon("Telegram"),
   game: icon("Game"),
@@ -25,8 +27,8 @@ const ICON = {
   us: icon("United_States"),
   tw: icon("Taiwan"),
   eu: icon("Global"),
-  asiaOther: icon("Auto"),
-  other: icon("Proxy")
+  asiaOther: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-asia.svg",
+  other: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/shuffle.svg"
 };
 
 const REGION_DEFS = [
@@ -322,8 +324,8 @@ function main(config) {
     buildSelectGroup("AIGC", ICON.ai, AI_REGION_ORDER),
     buildSelectGroup("OpenAI", ICON.openai, OPENAI_REGION_ORDER),
     buildSelectGroup("Claude", ICON.claude, OPENAI_REGION_ORDER),
-    buildSelectGroup("Gemini", ICON.google, OPENAI_REGION_ORDER),
-    buildSelectGroup("Copilot", ICON.microsoft, COPILOT_REGION_ORDER),
+    buildSelectGroup("Gemini", ICON.gemini, OPENAI_REGION_ORDER),
+    buildSelectGroup("Copilot", ICON.copilot, COPILOT_REGION_ORDER),
     buildSelectGroup("GitHub", ICON.github, GITHUB_REGION_ORDER),
     buildSelectGroup("Google", ICON.google, GOOGLE_REGION_ORDER),
     buildSelectGroup("微软服务", ICON.microsoft, MICROSOFT_REGION_ORDER),

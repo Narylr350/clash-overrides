@@ -316,8 +316,20 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.equal(
     getGroup(result, "Claude").icon,
-    "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/AI.png",
-    "Claude should fall back to a working icon instead of a missing Anthropic icon"
+    "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/robot.svg",
+    "Claude should use a distinct verified icon"
+  );
+
+  assert.equal(
+    getGroup(result, "Gemini").icon,
+    "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/gem.svg",
+    "Gemini should use a distinct verified icon"
+  );
+
+  assert.equal(
+    getGroup(result, "Copilot").icon,
+    "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/compass-drafting.svg",
+    "Copilot should use a distinct verified icon"
   );
 
   assert.equal(
@@ -334,8 +346,14 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.equal(
     getGroup(result, "亚洲其他自动").icon,
-    "https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png",
-    "Asia-other should use a working fallback icon"
+    "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-asia.svg",
+    "Asia-other should use a distinct verified icon"
+  );
+
+  assert.equal(
+    getGroup(result, "其他自动").icon,
+    "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/shuffle.svg",
+    "Other-auto should use a distinct verified icon"
   );
 
   assert.ok(

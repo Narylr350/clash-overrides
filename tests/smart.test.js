@@ -296,6 +296,82 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     ],
     "Game should keep direct-first but retain full manual options"
   );
+
+  assert.deepEqual(
+    getGroup(result, "TikTok").proxies,
+    [
+      "默认代理",
+      "智能选择",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "TikTok should prioritize stable overseas regions while keeping manual options"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "YouTube").proxies,
+    [
+      "默认代理",
+      "智能选择",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "YouTube should prioritize content-heavy overseas regions while keeping manual options"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "Pixiv").proxies,
+    [
+      "默认代理",
+      "智能选择",
+      "日本自动",
+      "新加坡自动",
+      "香港自动",
+      "美国自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "Pixiv should bias Japan first while keeping manual options"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "X").proxies,
+    [
+      "默认代理",
+      "智能选择",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "X should keep a general overseas priority order with manual options"
+  );
 }
 
 {
@@ -312,6 +388,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.ok(providers.games, "should keep games provider");
   assert.ok(providers["games-cn"], "should keep games-cn provider");
   assert.ok(providers.cn, "should keep cn provider");
+  assert.ok(providers.tiktok, "should keep tiktok provider");
+  assert.ok(providers.youtube, "should keep youtube provider");
+  assert.ok(providers.pixiv, "should keep pixiv provider");
+  assert.ok(providers.x, "should keep x provider");
   assert.equal(providers.adblock_plus, undefined, "should remove duplicate adblock_plus provider");
 
   assert.equal(
@@ -357,12 +437,94 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.ok(
-    rules.indexOf("DOMAIN-SUFFIX,claude.ai,Claude") < rules.indexOf("RULE-SET,ai,AIGC"),
+    rules.includes("DOMAIN-SUFFIX,ab.chatgpt.com,OpenAI"),
+    "OpenAI should explicitly cover ab.chatgpt.com for Android startup"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,ws.chatgpt.com,OpenAI"),
+    "OpenAI should explicitly cover ws.chatgpt.com for Android startup"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,android.chat.openai.com,OpenAI"),
+    "OpenAI should explicitly cover android.chat.openai.com for Android startup"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,api.revenuecat.com,OpenAI"),
+    "OpenAI should explicitly cover api.revenuecat.com for Android startup"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,prodregistryv2.org,OpenAI"),
+    "OpenAI should explicitly cover prodregistryv2.org for Android startup"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,datadog.pool.ntp.org,OpenAI"),
+    "OpenAI should explicitly cover datadog.pool.ntp.org for Android startup"
+  );
+
+  assert.ok(
+    rules.includes("PROCESS-NAME,com.openai.chatgpt,OpenAI"),
+    "OpenAI should explicitly cover the ChatGPT Android package"
+  );
+
+  assert.ok(
+    rules.indexOf("PROCESS-NAME,com.openai.chatgpt,OpenAI") < rules.indexOf("RULE-SET,ai,AIGC"),
+    "ChatGPT Android process rule should stay ahead of generic AI rules"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,tiktokv.com,TikTok"),
+    "TikTok should explicitly cover tiktokv.com"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,youtube.com,YouTube"),
+    "YouTube should explicitly cover youtube.com"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,pixiv.net,Pixiv"),
+    "Pixiv should explicitly cover pixiv.net"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,x.com,X"),
+    "X should explicitly cover x.com"
+  );
+
+  assert.ok(
+    rules.indexOf("DOMAIN-SUFFIX,tiktokv.com,TikTok") < rules.indexOf("RULE-SET,tiktok,TikTok"),
+    "explicit TikTok domains should stay ahead of TikTok ruleset"
+  );
+
+  assert.ok(
+    rules.indexOf("DOMAIN-SUFFIX,youtube.com,YouTube") < rules.indexOf("RULE-SET,youtube,YouTube"),
+    "explicit YouTube domains should stay ahead of YouTube ruleset"
+  );
+
+  assert.ok(
+    rules.indexOf("DOMAIN-SUFFIX,pixiv.net,Pixiv") < rules.indexOf("RULE-SET,pixiv,Pixiv"),
+    "explicit Pixiv domains should stay ahead of Pixiv ruleset"
+  );
+
+  assert.ok(
+    rules.indexOf("DOMAIN-SUFFIX,x.com,X") < rules.indexOf("RULE-SET,x,X"),
+    "explicit X domains should stay ahead of X ruleset"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,claude.ai,Claude") &&
+      rules.indexOf("DOMAIN-SUFFIX,claude.ai,Claude") < rules.indexOf("RULE-SET,ai,AIGC"),
     "explicit Claude domains should stay ahead of generic AI rules"
   );
 
   assert.ok(
-    rules.indexOf("DOMAIN-SUFFIX,github.com,GitHub") < rules.indexOf("RULE-SET,github,GitHub"),
+    rules.includes("DOMAIN-SUFFIX,github.com,GitHub") &&
+      rules.indexOf("DOMAIN-SUFFIX,github.com,GitHub") < rules.indexOf("RULE-SET,github,GitHub"),
     "explicit GitHub domains should stay ahead of GitHub ruleset"
   );
 

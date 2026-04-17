@@ -17,6 +17,10 @@ const ICON = {
   microsoft: icon("Microsoft"),
   copilot: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/compass-drafting.svg",
   github: icon("GitHub"),
+  tiktok: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/tiktok.svg",
+  youtube: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/youtube.svg",
+  pixiv: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/pixiv.svg",
+  x: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/x-twitter.svg",
   telegram: icon("Telegram"),
   game: icon("Game"),
   auto: icon("Auto"),
@@ -271,6 +275,66 @@ function main(config) {
     "DIRECT"
   ];
 
+  const TIKTOK_REGION_ORDER = [
+    "默认代理",
+    "智能选择",
+    "美国自动",
+    "日本自动",
+    "新加坡自动",
+    "香港自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动",
+    "DIRECT"
+  ];
+
+  const YOUTUBE_REGION_ORDER = [
+    "默认代理",
+    "智能选择",
+    "美国自动",
+    "日本自动",
+    "新加坡自动",
+    "香港自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动",
+    "DIRECT"
+  ];
+
+  const PIXIV_REGION_ORDER = [
+    "默认代理",
+    "智能选择",
+    "日本自动",
+    "新加坡自动",
+    "香港自动",
+    "美国自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动",
+    "DIRECT"
+  ];
+
+  const X_REGION_ORDER = [
+    "默认代理",
+    "智能选择",
+    "美国自动",
+    "日本自动",
+    "新加坡自动",
+    "香港自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    "其他自动",
+    "DIRECT"
+  ];
+
   const TELEGRAM_REGION_ORDER = [
     "默认代理",
     "智能选择",
@@ -327,6 +391,10 @@ function main(config) {
     buildSelectGroup("Gemini", ICON.gemini, OPENAI_REGION_ORDER),
     buildSelectGroup("Copilot", ICON.copilot, COPILOT_REGION_ORDER),
     buildSelectGroup("GitHub", ICON.github, GITHUB_REGION_ORDER),
+    buildSelectGroup("TikTok", ICON.tiktok, TIKTOK_REGION_ORDER),
+    buildSelectGroup("YouTube", ICON.youtube, YOUTUBE_REGION_ORDER),
+    buildSelectGroup("Pixiv", ICON.pixiv, PIXIV_REGION_ORDER),
+    buildSelectGroup("X", ICON.x, X_REGION_ORDER),
     buildSelectGroup("Google", ICON.google, GOOGLE_REGION_ORDER),
     buildSelectGroup("微软服务", ICON.microsoft, MICROSOFT_REGION_ORDER),
     buildSelectGroup("Telegram", ICON.telegram, TELEGRAM_REGION_ORDER),
@@ -400,6 +468,38 @@ function main(config) {
       url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.list",
       interval: 86400
     },
+    tiktok: {
+      type: "http",
+      behavior: "classical",
+      format: "text",
+      path: "./ruleset/tiktok.list",
+      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.list",
+      interval: 86400
+    },
+    youtube: {
+      type: "http",
+      behavior: "classical",
+      format: "text",
+      path: "./ruleset/youtube.list",
+      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.list",
+      interval: 86400
+    },
+    pixiv: {
+      type: "http",
+      behavior: "classical",
+      format: "text",
+      path: "./ruleset/pixiv.list",
+      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Pixiv/Pixiv.list",
+      interval: 86400
+    },
+    x: {
+      type: "http",
+      behavior: "classical",
+      format: "text",
+      path: "./ruleset/x.list",
+      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.list",
+      interval: 86400
+    },
     telegram: {
       type: "http",
       behavior: "classical",
@@ -427,8 +527,15 @@ function main(config) {
 
     "DOMAIN-SUFFIX,openai.com,OpenAI",
     "DOMAIN-SUFFIX,chatgpt.com,OpenAI",
+    "DOMAIN-SUFFIX,ab.chatgpt.com,OpenAI",
+    "DOMAIN-SUFFIX,ws.chatgpt.com,OpenAI",
+    "DOMAIN-SUFFIX,android.chat.openai.com,OpenAI",
     "DOMAIN-SUFFIX,oaistatic.com,OpenAI",
     "DOMAIN-SUFFIX,oaiusercontent.com,OpenAI",
+    "DOMAIN-SUFFIX,api.revenuecat.com,OpenAI",
+    "DOMAIN-SUFFIX,prodregistryv2.org,OpenAI",
+    "DOMAIN-SUFFIX,datadog.pool.ntp.org,OpenAI",
+    "PROCESS-NAME,com.openai.chatgpt,OpenAI",
 
     "DOMAIN-SUFFIX,anthropic.com,Claude",
     "DOMAIN-SUFFIX,claude.ai,Claude",
@@ -441,9 +548,26 @@ function main(config) {
     "DOMAIN-SUFFIX,copilot.microsoft.com,Copilot",
     "DOMAIN-SUFFIX,sydney.bing.com,Copilot",
 
+    "DOMAIN-SUFFIX,tiktokv.com,TikTok",
+    "DOMAIN-SUFFIX,tiktokcdn.com,TikTok",
+    "DOMAIN-SUFFIX,tiktok.com,TikTok",
+    "DOMAIN-SUFFIX,youtube.com,YouTube",
+    "DOMAIN-SUFFIX,youtu.be,YouTube",
+    "DOMAIN-SUFFIX,googlevideo.com,YouTube",
+    "DOMAIN-SUFFIX,ytimg.com,YouTube",
+    "DOMAIN-SUFFIX,pixiv.net,Pixiv",
+    "DOMAIN-SUFFIX,pximg.net,Pixiv",
+    "DOMAIN-SUFFIX,x.com,X",
+    "DOMAIN-SUFFIX,twimg.com,X",
+    "DOMAIN-SUFFIX,twitter.com,X",
+
     "RULE-SET,ai,AIGC",
     "RULE-SET,google,Google",
     "RULE-SET,github,GitHub",
+    "RULE-SET,tiktok,TikTok",
+    "RULE-SET,youtube,YouTube",
+    "RULE-SET,pixiv,Pixiv",
+    "RULE-SET,x,X",
     "RULE-SET,telegram,Telegram",
     "RULE-SET,microsoft,微软服务",
     "RULE-SET,games-cn,国内直连",

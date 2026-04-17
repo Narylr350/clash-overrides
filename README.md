@@ -6,20 +6,29 @@
 
 ## 使用方法
 
+### Script Override 版本（推荐，能力完整）
+
 在支持 Script Override / Script 覆写的客户端中填入：
 
 https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.js
 
+### YAML 覆写版本（给 YAML-only 客户端）
+
+在只读取 YAML、不能执行 `function main(config)` 的客户端中使用：
+
+https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
+
 适用客户端：
 
-- Clash Party
-- Clash Verge
-- OpenClash（Meta 模式）
+- Clash Party（`smart.js`）
+- Clash Verge（`smart.js`）
+- OpenClash（Meta 模式，可优先尝试 `smart.js`；只吃 YAML 的场景改用 `smart.yaml`）
 - Mihomo 内核客户端
+- ClashMi（`smart.yaml`）
 
-不适用客户端：
+不适用场景：
 
-- ClashMi 这类只读取 YAML 配置、不会执行 `function main(config)` Script Override 的客户端
+- 把 `smart.js` 当普通 YAML 直接导入的客户端
 
 这个仓库提供的是 **JS 覆写脚本**，不是普通 YAML 配置。
 如果客户端会把 `smart.js` 当 YAML 直接读取，就会出现类似 `yaml: line 8: mapping values are not allowed in this context` 的报错，不能直接导入。
@@ -74,6 +83,8 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.js
 - `TikTok / YouTube / Pixiv / X` 作为内容/推荐敏感服务提供独立入口，便于按地区单独调优
 - `TikTok` 同时也是地区和环境检测都更敏感的服务，建议单独观察表现
 - `Pixiv` 默认更偏日本地区顺序
+- `smart.yaml` 不是 JS Script Override 的逐行翻译版，而是用 Mihomo 原生 `include-all` / `filter` / `url-test` 能力尽量逼近 `smart.js` 的使用体验
+- `smart.js` 仍然是能力最完整的主版本；`smart.yaml` 的目标是给 YAML-only 客户端一个尽量接近的替代入口
 - 该脚本是单文件个人覆写脚本，不做复杂的原配置增量合并
 
 ## 常见坑

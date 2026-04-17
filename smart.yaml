@@ -1,0 +1,556 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: true
+
+proxy-groups:
+  - name: 默认代理
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png
+    proxies:
+      - 智能选择
+      - 香港自动
+      - 新加坡自动
+      - 日本自动
+      - 韩国自动
+      - 美国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: 国内直连
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China.png
+    proxies:
+      - DIRECT
+      - 默认代理
+
+  - name: 漏网之鱼
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/fish.svg
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 香港自动
+      - 新加坡自动
+      - 日本自动
+      - 韩国自动
+      - 美国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: 广告拦截
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Advertising.png
+    proxies:
+      - REJECT
+      - DIRECT
+      - 默认代理
+
+  - name: AIGC
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/AI.png
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 新加坡自动
+      - 日本自动
+      - 美国自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: OpenAI
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png
+    proxies:
+      - AIGC
+      - 默认代理
+      - 智能选择
+      - 新加坡自动
+      - 日本自动
+      - 美国自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: Claude
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/robot.svg
+    proxies:
+      - AIGC
+      - 默认代理
+      - 智能选择
+      - 新加坡自动
+      - 日本自动
+      - 美国自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: Gemini
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/gem.svg
+    proxies:
+      - AIGC
+      - 默认代理
+      - 智能选择
+      - 新加坡自动
+      - 日本自动
+      - 美国自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: Copilot
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/compass-drafting.svg
+    proxies:
+      - AIGC
+      - 默认代理
+      - DIRECT
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+
+  - name: GitHub
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/GitHub.png
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: TikTok
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/tiktok.svg
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: YouTube
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/youtube.svg
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: Pixiv
+    type: select
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/pixiv.svg
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 美国自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: X
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/x-twitter.svg
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: Google
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Google.png
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 新加坡自动
+      - 日本自动
+      - 美国自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: 微软服务
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Microsoft.png
+    proxies:
+      - DIRECT
+      - 默认代理
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+
+  - name: Telegram
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Telegram.png
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 新加坡自动
+      - 香港自动
+      - 日本自动
+      - 韩国自动
+      - 台湾自动
+      - 美国自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+      - DIRECT
+
+  - name: 游戏服务
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Game.png
+    proxies:
+      - DIRECT
+      - 默认代理
+      - 智能选择
+      - 香港自动
+      - 新加坡自动
+      - 日本自动
+      - 韩国自动
+      - 台湾自动
+      - 美国自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 其他自动
+
+  - name: 智能选择
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png
+    include-all: true
+    exclude-type: direct
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: 香港自动
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
+    include-all: true
+    exclude-type: direct
+    filter: '(?i)(^|[\s._-])(港|hk|hong\s*kong)([\s._-]|$)'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: 新加坡自动
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png
+    include-all: true
+    exclude-type: direct
+    filter: '(?i)(^|[\s._-])(新|sg|singapore)([\s._-]|$)'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: 日本自动
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png
+    include-all: true
+    exclude-type: direct
+    filter: '(?i)(^|[\s._-])(日|jp|japan)([\s._-]|$)'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: 韩国自动
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Korea.png
+    include-all: true
+    exclude-type: direct
+    filter: '(?i)(^|[\s._-])(韩|kr|korea|seoul|首尔)([\s._-]|$)'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: 美国自动
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png
+    include-all: true
+    exclude-type: direct
+    filter: '(?i)(^|[\s._-])(美|us|usa|united\s*states)([\s._-]|$)'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: 台湾自动
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Taiwan.png
+    include-all: true
+    exclude-type: direct
+    filter: '(?i)(^|[\s._-])(台|tw|taiwan)([\s._-]|$)'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: 欧洲自动
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png
+    include-all: true
+    exclude-type: direct
+    filter: '(?i)(^|[\s._-])(uk|gb|de|fr|nl|eu|london|germany|france|netherlands|europe|英国|德国)([\s._-]|$)'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: 亚洲其他自动
+    type: url-test
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-asia.svg
+    include-all: true
+    exclude-type: direct
+    filter: '(?i)(^|[\s._-])(my|th|vn|id|ph|in|malaysia|thailand|vietnam|indonesia|philippines|india|马来|泰国|越南|印尼|菲律宾|印度)([\s._-]|$)'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: 其他自动
+    type: url-test
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/shuffle.svg
+    include-all: true
+    exclude-type: direct
+    exclude-filter: '(?i)(^|[\s._-])(港|hk|hong\s*kong|新|sg|singapore|日|jp|japan|韩|kr|korea|seoul|首尔|美|us|usa|united\s*states|台|tw|taiwan|uk|gb|de|fr|nl|eu|london|germany|france|netherlands|europe|英国|德国|my|th|vn|id|ph|in|malaysia|thailand|vietnam|indonesia|philippines|india|马来|泰国|越南|印尼|菲律宾|印度)([\s._-]|$)'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+
+rule-providers:
+  adblock:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/adblock.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.list
+    interval: 86400
+
+  ai:
+    type: http
+    behavior: domain
+    format: text
+    path: ./ruleset/ai.list
+    url: https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/ai.list
+    interval: 86400
+
+  google:
+    type: http
+    behavior: domain
+    format: text
+    path: ./ruleset/google.list
+    url: https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/google.list
+    interval: 86400
+
+  microsoft:
+    type: http
+    behavior: domain
+    format: text
+    path: ./ruleset/microsoft.list
+    url: https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/microsoft.list
+    interval: 86400
+
+  games:
+    type: http
+    behavior: domain
+    format: text
+    path: ./ruleset/games.list
+    url: https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/games.list
+    interval: 86400
+
+  games-cn:
+    type: http
+    behavior: domain
+    format: text
+    path: ./ruleset/games-cn.list
+    url: https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/games-cn.list
+    interval: 86400
+
+  cn:
+    type: http
+    behavior: domain
+    format: text
+    path: ./ruleset/cn.list
+    url: https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/cn.list
+    interval: 86400
+
+  github:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/github.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.list
+    interval: 86400
+
+  tiktok:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/tiktok.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.list
+    interval: 86400
+
+  youtube:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/youtube.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.list
+    interval: 86400
+
+  pixiv:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/pixiv.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Pixiv/Pixiv.list
+    interval: 86400
+
+  x:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/x.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.list
+    interval: 86400
+
+  telegram:
+    type: http
+    behavior: classical
+    format: text
+    path: ./ruleset/telegram.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list
+    interval: 86400
+
+rules:
+  - DOMAIN-SUFFIX,bilibili.com,国内直连
+  - DOMAIN-SUFFIX,baidu.com,国内直连
+  - DOMAIN-SUFFIX,qq.com,国内直连
+  - DOMAIN-SUFFIX,mi.com,国内直连
+  - DOMAIN-SUFFIX,huawei.com,国内直连
+
+  - RULE-SET,adblock,广告拦截
+
+  - DOMAIN-SUFFIX,github.com,GitHub
+  - DOMAIN-SUFFIX,githubusercontent.com,GitHub
+  - DOMAIN-SUFFIX,raw.githubusercontent.com,GitHub
+  - DOMAIN-SUFFIX,githubassets.com,GitHub
+  - DOMAIN-SUFFIX,github.io,GitHub
+
+  - DOMAIN-SUFFIX,openai.com,OpenAI
+  - DOMAIN-SUFFIX,chatgpt.com,OpenAI
+  - DOMAIN-SUFFIX,ab.chatgpt.com,OpenAI
+  - DOMAIN-SUFFIX,ws.chatgpt.com,OpenAI
+  - DOMAIN-SUFFIX,android.chat.openai.com,OpenAI
+  - DOMAIN-SUFFIX,oaistatic.com,OpenAI
+  - DOMAIN-SUFFIX,oaiusercontent.com,OpenAI
+  - DOMAIN-SUFFIX,api.revenuecat.com,OpenAI
+  - DOMAIN-SUFFIX,prodregistryv2.org,OpenAI
+  - DOMAIN-SUFFIX,datadog.pool.ntp.org,OpenAI
+  - PROCESS-NAME,com.openai.chatgpt,OpenAI
+
+  - DOMAIN-SUFFIX,anthropic.com,Claude
+  - DOMAIN-SUFFIX,claude.ai,Claude
+  - DOMAIN-SUFFIX,claudeusercontent.com,Claude
+
+  - DOMAIN-SUFFIX,gemini.google.com,Gemini
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini
+  - DOMAIN-SUFFIX,ai.google.dev,Gemini
+
+  - DOMAIN-SUFFIX,copilot.microsoft.com,Copilot
+  - DOMAIN-SUFFIX,sydney.bing.com,Copilot
+
+  - DOMAIN-SUFFIX,tiktokv.com,TikTok
+  - DOMAIN-SUFFIX,tiktokcdn.com,TikTok
+  - DOMAIN-SUFFIX,tiktok.com,TikTok
+  - DOMAIN-SUFFIX,youtube.com,YouTube
+  - DOMAIN-SUFFIX,youtu.be,YouTube
+  - DOMAIN-SUFFIX,googlevideo.com,YouTube
+  - DOMAIN-SUFFIX,ytimg.com,YouTube
+  - DOMAIN-SUFFIX,pixiv.net,Pixiv
+  - DOMAIN-SUFFIX,pximg.net,Pixiv
+  - DOMAIN-SUFFIX,x.com,X
+  - DOMAIN-SUFFIX,twimg.com,X
+  - DOMAIN-SUFFIX,twitter.com,X
+
+  - RULE-SET,ai,AIGC
+  - RULE-SET,google,Google
+  - RULE-SET,github,GitHub
+  - RULE-SET,tiktok,TikTok
+  - RULE-SET,youtube,YouTube
+  - RULE-SET,pixiv,Pixiv
+  - RULE-SET,x,X
+  - RULE-SET,telegram,Telegram
+  - RULE-SET,microsoft,微软服务
+  - RULE-SET,games-cn,国内直连
+  - RULE-SET,games,游戏服务
+  - RULE-SET,cn,国内直连
+  - GEOIP,CN,国内直连
+  - MATCH,漏网之鱼

@@ -409,7 +409,7 @@ function main(config) {
       behavior: "classical",
       format: "text",
       path: "./ruleset/adblock.list",
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/adblock.list",
       interval: 86400
     },
     ai: {
@@ -417,7 +417,7 @@ function main(config) {
       behavior: "domain",
       format: "text",
       path: "./ruleset/ai.list",
-      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/ai.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/ai.list",
       interval: 86400
     },
     google: {
@@ -425,7 +425,7 @@ function main(config) {
       behavior: "domain",
       format: "text",
       path: "./ruleset/google.list",
-      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/google.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/google.list",
       interval: 86400
     },
     microsoft: {
@@ -433,7 +433,7 @@ function main(config) {
       behavior: "domain",
       format: "text",
       path: "./ruleset/microsoft.list",
-      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/microsoft.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/microsoft.list",
       interval: 86400
     },
     games: {
@@ -441,7 +441,7 @@ function main(config) {
       behavior: "domain",
       format: "text",
       path: "./ruleset/games.list",
-      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/games.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/games.list",
       interval: 86400
     },
     "games-cn": {
@@ -449,7 +449,7 @@ function main(config) {
       behavior: "domain",
       format: "text",
       path: "./ruleset/games-cn.list",
-      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/games-cn.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/games-cn.list",
       interval: 86400
     },
     cn: {
@@ -457,7 +457,7 @@ function main(config) {
       behavior: "domain",
       format: "text",
       path: "./ruleset/cn.list",
-      url: "https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/meta/domain/cn.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/cn.list",
       interval: 86400
     },
     github: {
@@ -465,7 +465,7 @@ function main(config) {
       behavior: "classical",
       format: "text",
       path: "./ruleset/github.list",
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/github.list",
       interval: 86400
     },
     tiktok: {
@@ -473,7 +473,7 @@ function main(config) {
       behavior: "classical",
       format: "text",
       path: "./ruleset/tiktok.list",
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/tiktok.list",
       interval: 86400
     },
     youtube: {
@@ -481,7 +481,7 @@ function main(config) {
       behavior: "classical",
       format: "text",
       path: "./ruleset/youtube.list",
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/youtube.list",
       interval: 86400
     },
     pixiv: {
@@ -489,7 +489,7 @@ function main(config) {
       behavior: "classical",
       format: "text",
       path: "./ruleset/pixiv.list",
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Pixiv/Pixiv.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/pixiv.list",
       interval: 86400
     },
     x: {
@@ -497,7 +497,7 @@ function main(config) {
       behavior: "classical",
       format: "text",
       path: "./ruleset/x.list",
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/x.list",
       interval: 86400
     },
     telegram: {
@@ -505,7 +505,7 @@ function main(config) {
       behavior: "classical",
       format: "text",
       path: "./ruleset/telegram.list",
-      url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/telegram.list",
       interval: 86400
     }
   };

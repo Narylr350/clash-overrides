@@ -1,0 +1,50 @@
+name: Sync upstream rules
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs daily at 05:35 Asia/Shanghai.
+    - cron: "35 21 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Sync upstream rule providers
+        run: node scripts/sync-rules.mjs
+
+      - name: Run tests
+        run: |
+          node tests/smart.test.js
+          node tests/smart-yaml.test.js
+          node tests/sync-rules.test.js
+          node tests/mirror-urls.test.js
+          node tests/sync-geodata.test.js
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: chore/sync-upstream-rules
+          delete-branch: true
+          commit-message: "chore: sync upstream rules"
+          title: "chore: sync upstream rules"
+          body: |
+            Automated upstream rule snapshot update.
+
+            This PR was created by the scheduled rule sync workflow after
+            downloading the `rule-providers` listed in `smart.yaml`.
+          add-paths: |
+            ruleset/*.list

@@ -85,7 +85,19 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 - `Pixiv` 默认更偏日本地区顺序
 - `smart.yaml` 不是 JS Script Override 的逐行翻译版，而是用 Mihomo 原生 `include-all` / `filter` / `url-test` 能力尽量逼近 `smart.js` 的使用体验
 - `smart.js` 仍然是能力最完整的主版本；`smart.yaml` 的目标是给 YAML-only 客户端一个尽量接近的替代入口
+- `ruleset/` 保存 `smart.yaml` 里 `rule-providers` 的上游规则快照，客户端规则集合 URL 指向本仓库的快照地址
+- `ruleset/sources.json` 保存真正的上游来源，GitHub Actions 会定时运行 `scripts/sync-rules.mjs`，发现快照变化时创建同步 PR，由人工确认后合并
+- GeoIP / GeoSite / MMDB / ASN 外部数据库通过 `geodata-latest` Release 镜像，由 `scripts/sync-geodata.mjs` 定时更新 Release 资产
 - 该脚本是单文件个人覆写脚本，不做复杂的原配置增量合并
+
+## 外部资源镜像地址
+
+客户端的外部资源可以改成这些地址：
+
+- GeoIP 数据库：`https://github.com/Narylr350/clash-overrides/releases/download/geodata-latest/geoip-lite.dat`
+- GeoSite 数据库：`https://github.com/Narylr350/clash-overrides/releases/download/geodata-latest/geosite.dat`
+- MMDB 数据库：`https://github.com/Narylr350/clash-overrides/releases/download/geodata-latest/geoip.metadb`
+- ASN 数据库：`https://github.com/Narylr350/clash-overrides/releases/download/geodata-latest/GeoLite2-ASN.mmdb`
 
 ## 常见坑
 

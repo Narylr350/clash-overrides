@@ -55,6 +55,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 
 - `智能选择`：覆盖所有节点
 - `香港自动`
+- `澳门自动`
 - `新加坡自动`
 - `日本自动`
 - `韩国自动`

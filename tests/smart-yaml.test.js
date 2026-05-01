@@ -27,6 +27,7 @@ function getListValues(block, key) {
 }
 
 assert.ok(getGroupBlock("智能选择"), "智能选择 should exist");
+assert.ok(getGroupBlock("澳门自动"), "澳门自动 should exist");
 assert.ok(getGroupBlock("欧洲自动"), "欧洲自动 should exist");
 assert.ok(getGroupBlock("亚洲其他自动"), "亚洲其他自动 should exist");
 assert.ok(getGroupBlock("北美自动"), "北美自动 should exist");
@@ -44,6 +45,9 @@ assert.match(
   /united\\s\*kingdom/,
   "其他自动 should exclude full United Kingdom node names"
 );
+assert.match(getGroupBlock("澳门自动"), /macau/, "澳门自动 should match Macau");
+assert.match(getGroupBlock("澳门自动"), /澳门/, "澳门自动 should match simplified Chinese Macau");
+assert.match(getGroupBlock("其他自动"), /macau/, "其他自动 should exclude Macau nodes");
 assert.match(getGroupBlock("北美自动"), /canada/, "北美自动 should match Canada");
 assert.match(getGroupBlock("北美自动"), /mexico/, "北美自动 should match Mexico");
 assert.match(getGroupBlock("南美自动"), /brazil/, "南美自动 should match Brazil");
@@ -57,6 +61,7 @@ assert.match(getGroupBlock("其他自动"), /australia/, "其他自动 should ex
 assert.deepEqual(getListValues(getGroupBlock("默认代理"), "proxies"), [
   "智能选择",
   "香港自动",
+  "澳门自动",
   "新加坡自动",
   "日本自动",
   "韩国自动",

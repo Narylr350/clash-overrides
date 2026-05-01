@@ -8,6 +8,12 @@
       "keywords": ["hk", "hong kong", "香港", "港"]
     },
     {
+      "key": "mo",
+      "name": "澳门自动",
+      "icon": "hk",
+      "keywords": ["mo", "macau", "macao", "澳门", "澳門", "澳"]
+    },
+    {
       "key": "sg",
       "name": "新加坡自动",
       "icon": "sg",

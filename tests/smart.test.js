@@ -26,6 +26,8 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   const result = main(
     makeConfig([
       "HK-01",
+      "澳门 01",
+      "Macau 02",
       "SG-01",
       "JP-01",
       "KR-01",
@@ -45,6 +47,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.ok(getGroup(result, "欧洲自动"), "should expose 欧洲自动");
+  assert.ok(getGroup(result, "澳门自动"), "should expose 澳门自动");
   assert.ok(getGroup(result, "亚洲其他自动"), "should expose 亚洲其他自动");
   assert.ok(getGroup(result, "北美自动"), "should expose 北美自动");
   assert.ok(getGroup(result, "南美自动"), "should expose 南美自动");
@@ -60,6 +63,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     [
       "智能选择",
       "香港自动",
+      "澳门自动",
       "新加坡自动",
       "日本自动",
       "韩国自动",
@@ -83,6 +87,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "默认代理",
       "智能选择",
       "香港自动",
+      "澳门自动",
       "新加坡自动",
       "日本自动",
       "韩国自动",
@@ -110,6 +115,12 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     getGroup(result, "欧洲自动").proxies,
     ["DE-01", "United Kingdom 01", "United Kingdom 02"],
     "欧洲自动 should collect full United Kingdom node names"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "澳门自动").proxies,
+    ["澳门 01", "Macau 02"],
+    "澳门自动 should collect Macau nodes before the other fallback group"
   );
 
   assert.deepEqual(
@@ -161,6 +172,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "美国自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -185,6 +197,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "美国自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -209,6 +222,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "美国自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -233,6 +247,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "美国自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -258,6 +273,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "新加坡自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -280,6 +296,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "新加坡自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -303,6 +320,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "美国自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -324,6 +342,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "智能选择",
       "新加坡自动",
       "香港自动",
+      "澳门自动",
       "日本自动",
       "韩国自动",
       "台湾自动",
@@ -350,6 +369,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "新加坡自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -370,6 +390,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "默认代理",
       "智能选择",
       "香港自动",
+      "澳门自动",
       "新加坡自动",
       "日本自动",
       "韩国自动",
@@ -395,6 +416,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "新加坡自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -418,6 +440,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "新加坡自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",
@@ -440,6 +463,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "新加坡自动",
       "香港自动",
+      "澳门自动",
       "美国自动",
       "韩国自动",
       "台湾自动",
@@ -464,6 +488,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "日本自动",
       "新加坡自动",
       "香港自动",
+      "澳门自动",
       "韩国自动",
       "台湾自动",
       "欧洲自动",

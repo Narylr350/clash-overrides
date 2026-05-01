@@ -32,6 +32,13 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "US-01",
       "TW-01",
       "DE-01",
+      "United Kingdom 01",
+      "United Kingdom 02",
+      "Canada 01",
+      "Mexico 01",
+      "Brazil 01",
+      "South Africa 01",
+      "Australia 01",
       "MY-01",
       "Plain-Relay"
     ])
@@ -39,6 +46,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.ok(getGroup(result, "欧洲自动"), "should expose 欧洲自动");
   assert.ok(getGroup(result, "亚洲其他自动"), "should expose 亚洲其他自动");
+  assert.ok(getGroup(result, "北美自动"), "should expose 北美自动");
+  assert.ok(getGroup(result, "南美自动"), "should expose 南美自动");
+  assert.ok(getGroup(result, "非洲自动"), "should expose 非洲自动");
+  assert.ok(getGroup(result, "大洋洲自动"), "should expose 大洋洲自动");
   assert.ok(getGroup(result, "其他自动"), "should expose 其他自动");
   assert.equal(getGroup(result, "英国自动"), undefined, "should remove 英国自动");
   assert.equal(getGroup(result, "德国自动"), undefined, "should remove 德国自动");
@@ -56,6 +67,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -75,6 +90,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -85,6 +104,36 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     getGroup(result, "其他自动").proxies,
     ["Plain-Relay"],
     "其他自动 should collect leftover unclassified nodes"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "欧洲自动").proxies,
+    ["DE-01", "United Kingdom 01", "United Kingdom 02"],
+    "欧洲自动 should collect full United Kingdom node names"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "北美自动").proxies,
+    ["Canada 01", "Mexico 01"],
+    "北美自动 should collect low-frequency North America nodes after dedicated US nodes"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "南美自动").proxies,
+    ["Brazil 01"],
+    "南美自动 should collect low-frequency South America nodes"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "非洲自动").proxies,
+    ["South Africa 01"],
+    "非洲自动 should collect low-frequency Africa nodes"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "大洋洲自动").proxies,
+    ["Australia 01"],
+    "大洋洲自动 should collect low-frequency Oceania nodes"
   );
 }
 
@@ -116,6 +165,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -136,6 +189,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -156,6 +213,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -176,6 +237,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -197,6 +262,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动"
     ],
     "Copilot should keep DIRECT as a special case but still expose full manual options"
@@ -215,6 +284,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -234,6 +307,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -253,6 +330,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "美国自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -273,6 +354,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动"
     ],
     "Microsoft should stay direct-first but keep full manual options"
@@ -292,6 +377,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "美国自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动"
     ],
     "Game should keep direct-first but retain full manual options"
@@ -310,6 +399,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -329,6 +422,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -348,6 +445,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],
@@ -367,6 +468,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "台湾自动",
       "欧洲自动",
       "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
       "其他自动",
       "DIRECT"
     ],

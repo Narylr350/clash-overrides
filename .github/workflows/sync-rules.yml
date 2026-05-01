@@ -30,6 +30,7 @@ jobs:
         run: |
           node tests/smart.test.js
           node tests/smart-yaml.test.js
+          node tests/build-regions.test.js
           node tests/sync-rules.test.js
           node tests/mirror-urls.test.js
           node tests/sync-geodata.test.js

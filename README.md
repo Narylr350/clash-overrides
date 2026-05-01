@@ -62,6 +62,10 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 - `台湾自动`
 - `欧洲自动`
 - `亚洲其他自动`
+- `北美自动`
+- `南美自动`
+- `非洲自动`
+- `大洋洲自动`
 - `其他自动`
 
 ## 默认建议
@@ -85,6 +89,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 - `Pixiv` 默认更偏日本地区顺序
 - `smart.yaml` 不是 JS Script Override 的逐行翻译版，而是用 Mihomo 原生 `include-all` / `filter` / `url-test` 能力尽量逼近 `smart.js` 的使用体验
 - `smart.js` 仍然是能力最完整的主版本；`smart.yaml` 的目标是给 YAML-only 客户端一个尽量接近的替代入口
+- 地区节点名关键词维护在 `regions.json`；修改后运行 `node scripts/build-regions.mjs` 生成 `smart.js` / `smart.yaml` 的地区匹配块
 - `ruleset/` 保存 `smart.yaml` 里 `rule-providers` 的上游规则快照，客户端规则集合 URL 指向本仓库的快照地址
 - `ruleset/sources.json` 保存真正的上游来源，GitHub Actions 会定时运行 `scripts/sync-rules.mjs`，发现快照变化时创建同步 PR，由人工确认后合并
 - GeoIP / GeoSite / MMDB / ASN 外部数据库通过 `geodata-latest` Release 镜像，由 `scripts/sync-geodata.mjs` 定时更新 Release 资产

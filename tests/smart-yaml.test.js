@@ -29,7 +29,30 @@ function getListValues(block, key) {
 assert.ok(getGroupBlock("智能选择"), "智能选择 should exist");
 assert.ok(getGroupBlock("欧洲自动"), "欧洲自动 should exist");
 assert.ok(getGroupBlock("亚洲其他自动"), "亚洲其他自动 should exist");
+assert.ok(getGroupBlock("北美自动"), "北美自动 should exist");
+assert.ok(getGroupBlock("南美自动"), "南美自动 should exist");
+assert.ok(getGroupBlock("非洲自动"), "非洲自动 should exist");
+assert.ok(getGroupBlock("大洋洲自动"), "大洋洲自动 should exist");
 assert.ok(getGroupBlock("其他自动"), "其他自动 should exist");
+assert.match(
+  getGroupBlock("欧洲自动"),
+  /united\\s\*kingdom/,
+  "欧洲自动 should match full United Kingdom node names"
+);
+assert.match(
+  getGroupBlock("其他自动"),
+  /united\\s\*kingdom/,
+  "其他自动 should exclude full United Kingdom node names"
+);
+assert.match(getGroupBlock("北美自动"), /canada/, "北美自动 should match Canada");
+assert.match(getGroupBlock("北美自动"), /mexico/, "北美自动 should match Mexico");
+assert.match(getGroupBlock("南美自动"), /brazil/, "南美自动 should match Brazil");
+assert.match(getGroupBlock("非洲自动"), /south\\s\*africa/, "非洲自动 should match South Africa");
+assert.match(getGroupBlock("大洋洲自动"), /australia/, "大洋洲自动 should match Australia");
+assert.match(getGroupBlock("其他自动"), /canada/, "其他自动 should exclude North America nodes");
+assert.match(getGroupBlock("其他自动"), /brazil/, "其他自动 should exclude South America nodes");
+assert.match(getGroupBlock("其他自动"), /south\\s\*africa/, "其他自动 should exclude Africa nodes");
+assert.match(getGroupBlock("其他自动"), /australia/, "其他自动 should exclude Oceania nodes");
 
 assert.deepEqual(getListValues(getGroupBlock("默认代理"), "proxies"), [
   "智能选择",
@@ -41,6 +64,10 @@ assert.deepEqual(getListValues(getGroupBlock("默认代理"), "proxies"), [
   "台湾自动",
   "欧洲自动",
   "亚洲其他自动",
+  "北美自动",
+  "南美自动",
+  "非洲自动",
+  "大洋洲自动",
   "其他自动",
   "DIRECT"
 ]);

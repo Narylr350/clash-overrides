@@ -32,6 +32,10 @@ const ICON = {
   tw: icon("Taiwan"),
   eu: icon("Global"),
   asiaOther: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-asia.svg",
+  northAmerica: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-americas.svg",
+  southAmerica: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-americas.svg",
+  africa: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-africa.svg",
+  oceania: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-oceania.svg",
   other: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/shuffle.svg"
 };
 
@@ -40,51 +44,63 @@ const REGION_DEFS = [
     key: "hk",
     group: "香港自动",
     icon: ICON.hk,
-    patterns: [/\bHK\b/i, /香港/i, /Hong(?:\s*Kong)?/i]
+    patterns: [
+      /(^|[\s._-])(?:hk|hong\s*kong)(?=$|[\s._-]|\d)/i,
+      /香港|港/i
+    ]
   },
   {
     key: "sg",
     group: "新加坡自动",
     icon: ICON.sg,
-    patterns: [/\bSG\b/i, /新加坡/i, /Singapore/i]
+    patterns: [
+      /(^|[\s._-])(?:sg|singapore)(?=$|[\s._-]|\d)/i,
+      /新加坡|新/i
+    ]
   },
   {
     key: "jp",
     group: "日本自动",
     icon: ICON.jp,
-    patterns: [/\bJP\b/i, /日本/i, /Japan/i]
+    patterns: [
+      /(^|[\s._-])(?:jp|japan|tokyo|osaka)(?=$|[\s._-]|\d)/i,
+      /日本|日/i
+    ]
   },
   {
     key: "kr",
     group: "韩国自动",
     icon: ICON.kr,
-    patterns: [/\bKR\b/i, /韩国/i, /Korea/i, /首尔/i, /Seoul/i]
+    patterns: [
+      /(^|[\s._-])(?:kr|korea|south\s*korea|seoul)(?=$|[\s._-]|\d)/i,
+      /韩国|韩|首尔/i
+    ]
   },
   {
     key: "us",
     group: "美国自动",
     icon: ICON.us,
-    patterns: [/\bUS\b/i, /美国/i, /USA/i, /United States/i]
+    patterns: [
+      /(^|[\s._-])(?:us|usa|united\s*states|america|los\s*angeles|new\s*york)(?=$|[\s._-]|\d)/i,
+      /美国|美/i
+    ]
   },
   {
     key: "tw",
     group: "台湾自动",
     icon: ICON.tw,
-    patterns: [/\bTW\b/i, /台湾/i, /Taiwan/i]
+    patterns: [
+      /(^|[\s._-])(?:tw|taiwan|taipei)(?=$|[\s._-]|\d)/i,
+      /台湾|台/i
+    ]
   },
   {
     key: "eu",
     group: "欧洲自动",
     icon: ICON.eu,
     patterns: [
-      /\b(?:UK|GB|DE|FR|NL|EU)\b/i,
-      /英国/i,
-      /London/i,
-      /德国/i,
-      /Germany/i,
-      /France/i,
-      /Netherlands/i,
-      /Europe/i
+      /(^|[\s._-])(?:eu|europe|uk|gb|united\s*kingdom|england|london|de|germany|deutschland|fr|france|nl|netherlands|it|italy|es|spain|ch|switzerland|se|sweden|pl|poland|ie|ireland|pt|portugal|at|austria|be|belgium|fi|finland|no|norway|dk|denmark|cz|czech|czechia|gr|greece|hu|hungary|ro|romania|ua|ukraine|tr|turkey|turkiye|türkiye)(?=$|[\s._-]|\d)/i,
+      /英国|德国|法国|荷兰|意大利|西班牙|瑞士|瑞典|波兰|爱尔兰|葡萄牙|奥地利|比利时|芬兰|挪威|丹麦|捷克|希腊|匈牙利|罗马尼亚|乌克兰|土耳其|欧洲/i
     ]
   },
   {
@@ -92,19 +108,44 @@ const REGION_DEFS = [
     group: "亚洲其他自动",
     icon: ICON.asiaOther,
     patterns: [
-      /\b(?:MY|TH|VN|ID|PH|IN)\b/i,
-      /Malaysia/i,
-      /马来/i,
-      /Thailand/i,
-      /泰国/i,
-      /Vietnam/i,
-      /越南/i,
-      /Indonesia/i,
-      /印尼/i,
-      /Philippines/i,
-      /菲律宾/i,
-      /India/i,
-      /印度/i
+      /(^|[\s._-])(?:my|malaysia|th|thailand|vn|vietnam|id|indonesia|ph|philippines|in|india|kh|cambodia|la|laos|mm|myanmar|bd|bangladesh|pk|pakistan|np|nepal|lk|sri\s*lanka|ae|uae|united\s*arab\s*emirates|sa|saudi\s*arabia|il|israel|qa|qatar)(?=$|[\s._-]|\d)/i,
+      /马来|泰国|越南|印尼|印度尼西亚|菲律宾|印度|柬埔寨|老挝|缅甸|孟加拉|巴基斯坦|尼泊尔|斯里兰卡|阿联酋|沙特|以色列|卡塔尔|亚洲/i
+    ]
+  },
+  {
+    key: "northAmerica",
+    group: "北美自动",
+    icon: ICON.northAmerica,
+    patterns: [
+      /(^|[\s._-])(?:ca|canada|toronto|vancouver|montreal|mx|mexico|gl|greenland)(?=$|[\s._-]|\d)/i,
+      /加拿大|墨西哥|格陵兰|北美/i
+    ]
+  },
+  {
+    key: "southAmerica",
+    group: "南美自动",
+    icon: ICON.southAmerica,
+    patterns: [
+      /(^|[\s._-])(?:ar|argentina|br|brazil|cl|chile|co|colombia|pe|peru|uy|uruguay|ve|venezuela|bo|bolivia|ec|ecuador|py|paraguay|south\s*america)(?=$|[\s._-]|\d)/i,
+      /阿根廷|巴西|智利|哥伦比亚|秘鲁|乌拉圭|委内瑞拉|玻利维亚|厄瓜多尔|巴拉圭|南美/i
+    ]
+  },
+  {
+    key: "africa",
+    group: "非洲自动",
+    icon: ICON.africa,
+    patterns: [
+      /(^|[\s._-])(?:za|south\s*africa|eg|egypt|ng|nigeria|ke|kenya|ma|morocco|dz|algeria|tn|tunisia|gh|ghana|africa)(?=$|[\s._-]|\d)/i,
+      /南非|埃及|尼日利亚|肯尼亚|摩洛哥|阿尔及利亚|突尼斯|加纳|非洲/i
+    ]
+  },
+  {
+    key: "oceania",
+    group: "大洋洲自动",
+    icon: ICON.oceania,
+    patterns: [
+      /(^|[\s._-])(?:au|australia|sydney|melbourne|nz|new\s*zealand|oceania)(?=$|[\s._-]|\d)/i,
+      /澳洲|澳大利亚|新西兰|大洋洲/i
     ]
   },
   {
@@ -176,6 +217,13 @@ function buildSelectGroup(name, iconUrl, proxies) {
   };
 }
 
+const LOW_FREQUENCY_REGION_OPTIONS = [
+  "北美自动",
+  "南美自动",
+  "非洲自动",
+  "大洋洲自动"
+];
+
 const DEFAULT_REGION_OPTIONS = [
   "智能选择",
   "香港自动",
@@ -186,6 +234,7 @@ const DEFAULT_REGION_OPTIONS = [
   "台湾自动",
   "欧洲自动",
   "亚洲其他自动",
+  ...LOW_FREQUENCY_REGION_OPTIONS,
   "其他自动",
   "DIRECT"
 ];
@@ -209,6 +258,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
     "DIRECT"
   ];
@@ -225,6 +275,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
     "DIRECT"
   ];
@@ -242,6 +293,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动"
   ];
 
@@ -256,6 +308,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
     "DIRECT"
   ];
@@ -271,6 +324,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
     "DIRECT"
   ];
@@ -286,6 +340,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
     "DIRECT"
   ];
@@ -301,6 +356,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
     "DIRECT"
   ];
@@ -316,6 +372,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
     "DIRECT"
   ];
@@ -331,6 +388,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
     "DIRECT"
   ];
@@ -346,6 +404,7 @@ function main(config) {
     "美国自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
     "DIRECT"
   ];
@@ -362,6 +421,7 @@ function main(config) {
     "台湾自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动"
   ];
 
@@ -377,6 +437,7 @@ function main(config) {
     "美国自动",
     "欧洲自动",
     "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动"
   ];
 

@@ -61,6 +61,13 @@ function buildJsPatterns(keywords) {
   return patterns;
 }
 
+function buildJsPatternBlock(name, keywords) {
+  const patterns = buildJsPatterns(keywords)
+    .map((pattern) => `  ${pattern}`)
+    .join(",\n");
+  return [`const ${name} = [`, patterns, "];"].join("\n");
+}
+
 function buildYamlFilter(keywords) {
   const { tokenKeywords, looseKeywords } = splitKeywords(keywords);
   const parts = [];
@@ -108,7 +115,7 @@ function buildOtherDef(other) {
   ].join("\n");
 }
 
-function buildYamlGroup(region) {
+function buildYamlGroup(region, source) {
   return [
     `  - name: ${region.name}`,
     "    type: url-test",
@@ -116,13 +123,30 @@ function buildYamlGroup(region) {
     "    include-all: true",
     "    exclude-type: direct",
     `    filter: '${buildYamlFilter(region.keywords)}'`,
+    `    exclude-filter: '${buildYamlFilter(source.subscriptionInfoKeywords)}'`,
+    "    url: https://www.gstatic.com/generate_204",
+    "    interval: 300"
+  ].join("\n");
+}
+
+function buildYamlSmartGroup(source) {
+  return [
+    "  - name: 智能选择",
+    "    type: url-test",
+    "    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png",
+    "    include-all: true",
+    "    exclude-type: direct",
+    `    exclude-filter: '${buildYamlFilter(source.subscriptionInfoKeywords)}'`,
     "    url: https://www.gstatic.com/generate_204",
     "    interval: 300"
   ].join("\n");
 }
 
 function buildYamlOtherGroup(source) {
-  const allKeywords = source.regions.flatMap((region) => region.keywords);
+  const allKeywords = [
+    ...source.regions.flatMap((region) => region.keywords),
+    ...source.subscriptionInfoKeywords
+  ];
   return [
     `  - name: ${source.other.name}`,
     "    type: url-test",
@@ -145,6 +169,12 @@ function extractSmartJsRegionBlock(content) {
   return match[0];
 }
 
+function extractSmartJsSubscriptionInfoBlock(content) {
+  const match = content.match(/const SUBSCRIPTION_INFO_PATTERNS = \[[\s\S]*?\n\];(?=\n\nconst REGION_DEFS)/);
+  if (!match) throw new Error("Could not find SUBSCRIPTION_INFO_PATTERNS block in smart.js");
+  return match[0];
+}
+
 function extractLowFrequencyBlock(content) {
   const match = content.match(/const LOW_FREQUENCY_REGION_OPTIONS = \[[\s\S]*?\n\];/);
   if (!match) throw new Error("Could not find LOW_FREQUENCY_REGION_OPTIONS block in smart.js");
@@ -157,11 +187,20 @@ function extractSmartYamlRegionBlock(content) {
   return match[0];
 }
 
+function extractSmartYamlSmartGroup(content) {
+  const match = content.match(/  - name: 智能选择[\s\S]*?    interval: 300(?=\n\n  - name: 香港自动)/);
+  if (!match) throw new Error("Could not find 智能选择 proxy-group block in smart.yaml");
+  return match[0];
+}
+
 export async function loadRegionSource(rootDir = process.cwd()) {
   const sourcePath = path.join(rootDir, "regions.json");
   const source = JSON.parse(await fs.readFile(sourcePath, "utf8"));
   if (!Array.isArray(source.regions) || !source.regions.length) {
     throw new Error("regions.json must define a non-empty regions array");
+  }
+  if (!Array.isArray(source.subscriptionInfoKeywords) || !source.subscriptionInfoKeywords.length) {
+    throw new Error("regions.json must define a non-empty subscriptionInfoKeywords array");
   }
   if (!source.other?.name || !source.other?.icon || !source.other?.key) {
     throw new Error("regions.json must define other group metadata");
@@ -170,6 +209,10 @@ export async function loadRegionSource(rootDir = process.cwd()) {
 }
 
 export function buildGeneratedRegionContent(source) {
+  const subscriptionInfoJs = buildJsPatternBlock(
+    "SUBSCRIPTION_INFO_PATTERNS",
+    source.subscriptionInfoKeywords
+  );
   const js = [
     "const REGION_DEFS = [",
     [...source.regions.map(buildRegionDef), buildOtherDef(source.other)].join(",\n"),
@@ -183,11 +226,17 @@ export function buildGeneratedRegionContent(source) {
   ].join("\n");
 
   const yaml = [
-    ...source.regions.map(buildYamlGroup),
+    ...source.regions.map((region) => buildYamlGroup(region, source)),
     buildYamlOtherGroup(source)
   ].join("\n\n");
 
-  return { js, lowFrequencyJs, yaml };
+  return {
+    subscriptionInfoJs,
+    js,
+    lowFrequencyJs,
+    yamlSmart: buildYamlSmartGroup(source),
+    yaml
+  };
 }
 
 export async function checkGeneratedFiles(rootDir = process.cwd()) {
@@ -200,11 +249,17 @@ export async function checkGeneratedFiles(rootDir = process.cwd()) {
   if (extractSmartJsRegionBlock(smartJs) !== generated.js) {
     mismatches.push("smart.js REGION_DEFS");
   }
+  if (extractSmartJsSubscriptionInfoBlock(smartJs) !== generated.subscriptionInfoJs) {
+    mismatches.push("smart.js SUBSCRIPTION_INFO_PATTERNS");
+  }
   if (extractLowFrequencyBlock(smartJs) !== generated.lowFrequencyJs) {
     mismatches.push("smart.js LOW_FREQUENCY_REGION_OPTIONS");
   }
   if (extractSmartYamlRegionBlock(smartYaml) !== generated.yaml) {
     mismatches.push("smart.yaml region proxy-groups");
+  }
+  if (extractSmartYamlSmartGroup(smartYaml) !== generated.yamlSmart) {
+    mismatches.push("smart.yaml 智能选择 proxy-group");
   }
 
   return mismatches;
@@ -219,9 +274,11 @@ async function writeGeneratedFiles(rootDir) {
   let smartYaml = normalizeNewlines(await fs.readFile(smartYamlPath, "utf8"));
 
   smartJs = smartJs
+    .replace(extractSmartJsSubscriptionInfoBlock(smartJs), generated.subscriptionInfoJs)
     .replace(extractSmartJsRegionBlock(smartJs), generated.js)
     .replace(extractLowFrequencyBlock(smartJs), generated.lowFrequencyJs);
   smartYaml = smartYaml.replace(extractSmartYamlRegionBlock(smartYaml), generated.yaml);
+  smartYaml = smartYaml.replace(extractSmartYamlSmartGroup(smartYaml), generated.yamlSmart);
 
   await fs.writeFile(smartJsPath, `${smartJs.trimEnd()}\n`, "utf8");
   await fs.writeFile(smartYamlPath, `${smartYaml.trimEnd()}\n`, "utf8");

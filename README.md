@@ -2,7 +2,7 @@
 
 一个面向个人使用、默认省心的 Clash Script 覆写规则。
 
-它会把原始订阅整理成更清晰的服务型分组，并让 `智能选择` 覆盖所有节点，避免未识别节点被浪费。
+它会把原始订阅整理成更清晰的服务型分组，并让 `智能选择` 覆盖所有真实节点，避免未识别节点被浪费。
 
 ## 使用方法
 
@@ -53,7 +53,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 
 ### 支撑型自动组
 
-- `智能选择`：覆盖所有节点
+- `智能选择`：覆盖所有真实节点，并排除订阅说明项
 - `香港自动`
 - `澳门自动`
 - `新加坡自动`
@@ -82,7 +82,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 
 ## 说明
 
-- `智能选择` 会包含所有节点，包括未归类节点
+- `智能选择` 会包含所有真实节点，包括未归类节点；订阅源里的流量、到期、官网、更新订阅等说明项会被排除
 - `其他自动` 用来承接没有归入任何已知地区/区域的剩余节点
 - AI 服务使用统一候选逻辑，`OpenAI / Claude / Gemini / Copilot` 只做少量专用偏置
 - `TikTok / YouTube / Pixiv / X` 作为内容/推荐敏感服务提供独立入口，便于按地区单独调优
@@ -90,7 +90,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 - `Pixiv` 默认更偏日本地区顺序
 - `smart.yaml` 不是 JS Script Override 的逐行翻译版，而是用 Mihomo 原生 `include-all` / `filter` / `url-test` 能力尽量逼近 `smart.js` 的使用体验
 - `smart.js` 仍然是能力最完整的主版本；`smart.yaml` 的目标是给 YAML-only 客户端一个尽量接近的替代入口
-- 地区节点名关键词维护在 `regions.json`；修改后运行 `node scripts/build-regions.mjs` 生成 `smart.js` / `smart.yaml` 的地区匹配块
+- 地区节点名关键词和订阅说明排除关键词维护在 `regions.json`；修改后运行 `node scripts/build-regions.mjs` 生成 `smart.js` / `smart.yaml` 的匹配块
 - `ruleset/` 保存 `smart.yaml` 里 `rule-providers` 的上游规则快照，客户端规则集合 URL 指向本仓库的快照地址
 - `ruleset/sources.json` 保存真正的上游来源，GitHub Actions 会定时运行 `scripts/sync-rules.mjs`，发现快照变化时创建同步 PR，由人工确认后合并
 - GeoIP / GeoSite / MMDB / ASN 外部数据库通过 `geodata-latest` Release 镜像，由 `scripts/sync-geodata.mjs` 定时更新 Release 资产

@@ -36,6 +36,11 @@ assert.ok(getGroupBlock("非洲自动"), "非洲自动 should exist");
 assert.ok(getGroupBlock("大洋洲自动"), "大洋洲自动 should exist");
 assert.ok(getGroupBlock("其他自动"), "其他自动 should exist");
 assert.match(
+  getGroupBlock("智能选择"),
+  /exclude-filter: '.+剩余流量.+更新订阅/,
+  "智能选择 should exclude subscription metadata nodes"
+);
+assert.match(
   getGroupBlock("欧洲自动"),
   /united\\s\*kingdom/,
   "欧洲自动 should match full United Kingdom node names"

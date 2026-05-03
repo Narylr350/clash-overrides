@@ -18,7 +18,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.deepEqual(
     getGroup(result, "智能选择").proxies,
     ["HK-01", "US-01", "Plain-Relay"],
-    "智能选择 should include every node, including unclassified names"
+    "智能选择 should include every real node, including unclassified names"
   );
 }
 
@@ -34,6 +34,9 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "KR-01",
       "US-01",
       "TW-01",
+      "剩余流量: 65.36 GB",
+      "套餐到期: 2026-12-31",
+      "官网: example.com",
       "DE-01",
       "United Kingdom 01",
       "United Kingdom 02",
@@ -44,6 +47,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "Australia 01",
       "澳大利亚",
       "尼日利亚",
+      "剩余流量: 766.7 GB",
       "MY-01",
       "Plain-Relay"
     ])
@@ -110,9 +114,26 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.deepEqual(
     getGroup(result, "其他自动").proxies,
-    ["若节点不通请更新订阅", "Plain-Relay"],
+    ["Plain-Relay"],
     "其他自动 should collect leftover unclassified nodes"
   );
+
+  for (const subscriptionInfoName of [
+    "若节点不通请更新订阅",
+    "剩余流量: 65.36 GB",
+    "套餐到期: 2026-12-31",
+    "官网: example.com",
+    "剩余流量: 766.7 GB"
+  ]) {
+    assert.ok(
+      !getGroup(result, "智能选择").proxies.includes(subscriptionInfoName),
+      `智能选择 should exclude subscription metadata node ${subscriptionInfoName}`
+    );
+    assert.ok(
+      !getGroup(result, "其他自动").proxies.includes(subscriptionInfoName),
+      `其他自动 should exclude subscription metadata node ${subscriptionInfoName}`
+    );
+  }
 
   assert.ok(
     !getGroup(result, "新加坡自动").proxies.includes("若节点不通请更新订阅"),
@@ -123,6 +144,11 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     getGroup(result, "欧洲自动").proxies,
     ["DE-01", "United Kingdom 01", "United Kingdom 02"],
     "欧洲自动 should collect full United Kingdom node names"
+  );
+
+  assert.ok(
+    !getGroup(result, "欧洲自动").proxies.includes("剩余流量: 65.36 GB"),
+    "欧洲自动 should not match traffic quota labels by the ambiguous GB unit"
   );
 
   assert.deepEqual(

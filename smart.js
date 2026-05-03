@@ -39,6 +39,11 @@ const ICON = {
   other: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/shuffle.svg"
 };
 
+const SUBSCRIPTION_INFO_PATTERNS = [
+  /(^|[\s._-])(?:traffic|quota|expire|expires|expired|expiration|reset|subscription|sub\s*info|homepage|website|official\s*site|update\s*subscription)(?=$|[\s._-]|\d)/i,
+  /剩余流量|流量|套餐|到期|过期|有效期|重置|官网|网址|主页|更新订阅|刷新订阅|订阅信息|订阅链接/i
+];
+
 const REGION_DEFS = [
   {
     key: "hk",
@@ -108,7 +113,7 @@ const REGION_DEFS = [
     group: "欧洲自动",
     icon: ICON.eu,
     patterns: [
-      /(^|[\s._-])(?:eu|europe|uk|gb|united\s*kingdom|england|london|de|germany|deutschland|fr|france|nl|netherlands|it|italy|es|spain|ch|switzerland|se|sweden|pl|poland|ie|ireland|pt|portugal|at|austria|be|belgium|fi|finland|no|norway|dk|denmark|cz|czech|czechia|gr|greece|hu|hungary|ro|romania|ua|ukraine|tr|turkey|turkiye|türkiye)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._-])(?:eu|europe|uk|united\s*kingdom|england|london|de|germany|deutschland|fr|france|nl|netherlands|it|italy|es|spain|ch|switzerland|se|sweden|pl|poland|ie|ireland|pt|portugal|at|austria|be|belgium|fi|finland|no|norway|dk|denmark|cz|czech|czechia|gr|greece|hu|hungary|ro|romania|ua|ukraine|tr|turkey|turkiye|türkiye)(?=$|[\s._-]|\d)/i,
       /英国|德国|法国|荷兰|意大利|西班牙|瑞士|瑞典|波兰|爱尔兰|葡萄牙|奥地利|比利时|芬兰|挪威|丹麦|捷克|希腊|匈牙利|罗马尼亚|乌克兰|土耳其|欧洲/i
     ]
   },
@@ -173,8 +178,14 @@ function matchesAny(name, patterns) {
   return patterns.some((pattern) => pattern.test(name));
 }
 
+function isSubscriptionInfoNode(name) {
+  return matchesAny(name, SUBSCRIPTION_INFO_PATTERNS);
+}
+
 function collectNodeBuckets(proxies) {
-  const all = uniq(proxies.map((proxy) => proxy.name).filter(Boolean));
+  const all = uniq(proxies.map((proxy) => proxy.name).filter(Boolean)).filter(
+    (name) => !isSubscriptionInfoNode(name)
+  );
   const buckets = {};
   const classified = new Set();
   const classifiedDefs = REGION_DEFS.filter((def) => def.patterns.length);

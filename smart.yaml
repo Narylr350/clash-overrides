@@ -375,7 +375,7 @@ proxy-groups:
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
     include-all: true
     exclude-type: direct
-    filter: '(?i)(?:(^|[\s._-])(?:hk|hong\s*kong)(?=$|[\s._-]|\d)|(?:香港|港))'
+    filter: '(?i)(?:(^|[\s._-])(?:hk|hong\s*kong)(?=$|[\s._-]|\d)|(?:香港))'
     url: https://www.gstatic.com/generate_204
     interval: 300
 
@@ -384,7 +384,7 @@ proxy-groups:
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
     include-all: true
     exclude-type: direct
-    filter: '(?i)(?:(^|[\s._-])(?:mo|macau|macao)(?=$|[\s._-]|\d)|(?:澳门|澳門|澳))'
+    filter: '(?i)(?:(^|[\s._-])(?:mo|macau|macao)(?=$|[\s._-]|\d)|(?:澳门|澳門))'
     url: https://www.gstatic.com/generate_204
     interval: 300
 
@@ -393,7 +393,7 @@ proxy-groups:
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png
     include-all: true
     exclude-type: direct
-    filter: '(?i)(?:(^|[\s._-])(?:sg|singapore)(?=$|[\s._-]|\d)|(?:新加坡|新))'
+    filter: '(?i)(?:(^|[\s._-])(?:sg|singapore)(?=$|[\s._-]|\d)|(?:新加坡))'
     url: https://www.gstatic.com/generate_204
     interval: 300
 
@@ -402,7 +402,7 @@ proxy-groups:
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png
     include-all: true
     exclude-type: direct
-    filter: '(?i)(?:(^|[\s._-])(?:jp|japan|tokyo|osaka)(?=$|[\s._-]|\d)|(?:日本|日))'
+    filter: '(?i)(?:(^|[\s._-])(?:jp|japan|tokyo|osaka)(?=$|[\s._-]|\d)|(?:日本))'
     url: https://www.gstatic.com/generate_204
     interval: 300
 
@@ -411,7 +411,7 @@ proxy-groups:
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Korea.png
     include-all: true
     exclude-type: direct
-    filter: '(?i)(?:(^|[\s._-])(?:kr|korea|south\s*korea|seoul)(?=$|[\s._-]|\d)|(?:韩国|韩|首尔))'
+    filter: '(?i)(?:(^|[\s._-])(?:kr|korea|south\s*korea|seoul)(?=$|[\s._-]|\d)|(?:韩国|首尔))'
     url: https://www.gstatic.com/generate_204
     interval: 300
 
@@ -420,7 +420,7 @@ proxy-groups:
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png
     include-all: true
     exclude-type: direct
-    filter: '(?i)(?:(^|[\s._-])(?:us|usa|united\s*states|america|los\s*angeles|new\s*york)(?=$|[\s._-]|\d)|(?:美国|美))'
+    filter: '(?i)(?:(^|[\s._-])(?:us|usa|united\s*states|america|los\s*angeles|new\s*york)(?=$|[\s._-]|\d)|(?:美国))'
     url: https://www.gstatic.com/generate_204
     interval: 300
 
@@ -429,7 +429,7 @@ proxy-groups:
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Taiwan.png
     include-all: true
     exclude-type: direct
-    filter: '(?i)(?:(^|[\s._-])(?:tw|taiwan|taipei)(?=$|[\s._-]|\d)|(?:台湾|台))'
+    filter: '(?i)(?:(^|[\s._-])(?:tw|taiwan|taipei)(?=$|[\s._-]|\d)|(?:台湾))'
     url: https://www.gstatic.com/generate_204
     interval: 300
 
@@ -492,7 +492,7 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/shuffle.svg
     include-all: true
     exclude-type: direct
-    exclude-filter: '(?i)(?:(^|[\s._-])(?:hk|hong\s*kong|mo|macau|macao|sg|singapore|jp|japan|tokyo|osaka|kr|korea|south\s*korea|seoul|us|usa|united\s*states|america|los\s*angeles|new\s*york|tw|taiwan|taipei|eu|europe|uk|gb|united\s*kingdom|england|london|de|germany|deutschland|fr|france|nl|netherlands|it|italy|es|spain|ch|switzerland|se|sweden|pl|poland|ie|ireland|pt|portugal|at|austria|be|belgium|fi|finland|no|norway|dk|denmark|cz|czech|czechia|gr|greece|hu|hungary|ro|romania|ua|ukraine|tr|turkey|turkiye|türkiye|my|malaysia|th|thailand|vn|vietnam|id|indonesia|ph|philippines|in|india|kh|cambodia|la|laos|mm|myanmar|bd|bangladesh|pk|pakistan|np|nepal|lk|sri\s*lanka|ae|uae|united\s*arab\s*emirates|sa|saudi\s*arabia|il|israel|qa|qatar|ca|canada|toronto|vancouver|montreal|mx|mexico|gl|greenland|ar|argentina|br|brazil|cl|chile|co|colombia|pe|peru|uy|uruguay|ve|venezuela|bo|bolivia|ec|ecuador|py|paraguay|south\s*america|za|south\s*africa|eg|egypt|ng|nigeria|ke|kenya|ma|morocco|dz|algeria|tn|tunisia|gh|ghana|africa|au|australia|sydney|melbourne|nz|new\s*zealand|oceania)(?=$|[\s._-]|\d)|(?:香港|港|澳门|澳門|澳|新加坡|新|日本|日|韩国|韩|首尔|美国|美|台湾|台|英国|德国|法国|荷兰|意大利|西班牙|瑞士|瑞典|波兰|爱尔兰|葡萄牙|奥地利|比利时|芬兰|挪威|丹麦|捷克|希腊|匈牙利|罗马尼亚|乌克兰|土耳其|欧洲|马来|泰国|越南|印尼|印度尼西亚|菲律宾|印度|柬埔寨|老挝|缅甸|孟加拉|巴基斯坦|尼泊尔|斯里兰卡|阿联酋|沙特|以色列|卡塔尔|亚洲|加拿大|墨西哥|格陵兰|北美|阿根廷|巴西|智利|哥伦比亚|秘鲁|乌拉圭|委内瑞拉|玻利维亚|厄瓜多尔|巴拉圭|南美|南非|埃及|尼日利亚|肯尼亚|摩洛哥|阿尔及利亚|突尼斯|加纳|非洲|澳洲|澳大利亚|新西兰|大洋洲))'
+    exclude-filter: '(?i)(?:(^|[\s._-])(?:hk|hong\s*kong|mo|macau|macao|sg|singapore|jp|japan|tokyo|osaka|kr|korea|south\s*korea|seoul|us|usa|united\s*states|america|los\s*angeles|new\s*york|tw|taiwan|taipei|eu|europe|uk|gb|united\s*kingdom|england|london|de|germany|deutschland|fr|france|nl|netherlands|it|italy|es|spain|ch|switzerland|se|sweden|pl|poland|ie|ireland|pt|portugal|at|austria|be|belgium|fi|finland|no|norway|dk|denmark|cz|czech|czechia|gr|greece|hu|hungary|ro|romania|ua|ukraine|tr|turkey|turkiye|türkiye|my|malaysia|th|thailand|vn|vietnam|id|indonesia|ph|philippines|in|india|kh|cambodia|la|laos|mm|myanmar|bd|bangladesh|pk|pakistan|np|nepal|lk|sri\s*lanka|ae|uae|united\s*arab\s*emirates|sa|saudi\s*arabia|il|israel|qa|qatar|ca|canada|toronto|vancouver|montreal|mx|mexico|gl|greenland|ar|argentina|br|brazil|cl|chile|co|colombia|pe|peru|uy|uruguay|ve|venezuela|bo|bolivia|ec|ecuador|py|paraguay|south\s*america|za|south\s*africa|eg|egypt|ng|nigeria|ke|kenya|ma|morocco|dz|algeria|tn|tunisia|gh|ghana|africa|au|australia|sydney|melbourne|nz|new\s*zealand|oceania)(?=$|[\s._-]|\d)|(?:香港|澳门|澳門|新加坡|日本|韩国|首尔|美国|台湾|英国|德国|法国|荷兰|意大利|西班牙|瑞士|瑞典|波兰|爱尔兰|葡萄牙|奥地利|比利时|芬兰|挪威|丹麦|捷克|希腊|匈牙利|罗马尼亚|乌克兰|土耳其|欧洲|马来|泰国|越南|印尼|印度尼西亚|菲律宾|印度|柬埔寨|老挝|缅甸|孟加拉|巴基斯坦|尼泊尔|斯里兰卡|阿联酋|沙特|以色列|卡塔尔|亚洲|加拿大|墨西哥|格陵兰|北美|阿根廷|巴西|智利|哥伦比亚|秘鲁|乌拉圭|委内瑞拉|玻利维亚|厄瓜多尔|巴拉圭|南美|南非|埃及|尼日利亚|肯尼亚|摩洛哥|阿尔及利亚|突尼斯|加纳|非洲|澳洲|澳大利亚|新西兰|大洋洲))'
     url: https://www.gstatic.com/generate_204
     interval: 300
 

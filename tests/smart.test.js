@@ -29,6 +29,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "澳门 01",
       "Macau 02",
       "SG-01",
+      "若节点不通请更新订阅",
       "JP-01",
       "KR-01",
       "US-01",
@@ -41,6 +42,8 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "Brazil 01",
       "South Africa 01",
       "Australia 01",
+      "澳大利亚",
+      "尼日利亚",
       "MY-01",
       "Plain-Relay"
     ])
@@ -107,8 +110,13 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.deepEqual(
     getGroup(result, "其他自动").proxies,
-    ["Plain-Relay"],
+    ["若节点不通请更新订阅", "Plain-Relay"],
     "其他自动 should collect leftover unclassified nodes"
+  );
+
+  assert.ok(
+    !getGroup(result, "新加坡自动").proxies.includes("若节点不通请更新订阅"),
+    "新加坡自动 should not match unrelated Chinese text by the ambiguous single-character 新"
   );
 
   assert.deepEqual(
@@ -137,14 +145,24 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.deepEqual(
     getGroup(result, "非洲自动").proxies,
-    ["South Africa 01"],
+    ["South Africa 01", "尼日利亚"],
     "非洲自动 should collect low-frequency Africa nodes"
   );
 
   assert.deepEqual(
     getGroup(result, "大洋洲自动").proxies,
-    ["Australia 01"],
+    ["Australia 01", "澳大利亚"],
     "大洋洲自动 should collect low-frequency Oceania nodes"
+  );
+
+  assert.ok(
+    !getGroup(result, "澳门自动").proxies.includes("澳大利亚"),
+    "澳门自动 should not match Australia by the ambiguous single-character 澳"
+  );
+
+  assert.ok(
+    !getGroup(result, "日本自动").proxies.includes("尼日利亚"),
+    "日本自动 should not match Nigeria by the ambiguous single-character 日"
   );
 }
 

@@ -15,6 +15,14 @@ const path = require("node:path");
     source.regions.find((region) => region.name === "北美自动")?.keywords.includes("canada"),
     "region source should keep Canada in the maintainable keyword list"
   );
+  for (const region of source.regions) {
+    const ambiguousKeywords = region.keywords.filter((keyword) => /^[\u3400-\u9fff]$/.test(keyword));
+    assert.deepEqual(
+      ambiguousKeywords,
+      [],
+      `${region.name} should not use ambiguous single-character Chinese keywords`
+    );
+  }
 
   const generated = builder.buildGeneratedRegionContent(source);
   assert.match(generated.js, /const REGION_DEFS = \[/);

@@ -46,7 +46,7 @@ const REGION_DEFS = [
     icon: ICON.hk,
     patterns: [
       /(^|[\s._-])(?:hk|hong\s*kong)(?=$|[\s._-]|\d)/i,
-      /香港|港/i
+      /香港/i
     ]
   },
   {
@@ -55,7 +55,7 @@ const REGION_DEFS = [
     icon: ICON.hk,
     patterns: [
       /(^|[\s._-])(?:mo|macau|macao)(?=$|[\s._-]|\d)/i,
-      /澳门|澳門|澳/i
+      /澳门|澳門/i
     ]
   },
   {
@@ -64,7 +64,7 @@ const REGION_DEFS = [
     icon: ICON.sg,
     patterns: [
       /(^|[\s._-])(?:sg|singapore)(?=$|[\s._-]|\d)/i,
-      /新加坡|新/i
+      /新加坡/i
     ]
   },
   {
@@ -73,7 +73,7 @@ const REGION_DEFS = [
     icon: ICON.jp,
     patterns: [
       /(^|[\s._-])(?:jp|japan|tokyo|osaka)(?=$|[\s._-]|\d)/i,
-      /日本|日/i
+      /日本/i
     ]
   },
   {
@@ -82,7 +82,7 @@ const REGION_DEFS = [
     icon: ICON.kr,
     patterns: [
       /(^|[\s._-])(?:kr|korea|south\s*korea|seoul)(?=$|[\s._-]|\d)/i,
-      /韩国|韩|首尔/i
+      /韩国|首尔/i
     ]
   },
   {
@@ -91,7 +91,7 @@ const REGION_DEFS = [
     icon: ICON.us,
     patterns: [
       /(^|[\s._-])(?:us|usa|united\s*states|america|los\s*angeles|new\s*york)(?=$|[\s._-]|\d)/i,
-      /美国|美/i
+      /美国/i
     ]
   },
   {
@@ -100,7 +100,7 @@ const REGION_DEFS = [
     icon: ICON.tw,
     patterns: [
       /(^|[\s._-])(?:tw|taiwan|taipei)(?=$|[\s._-]|\d)/i,
-      /台湾|台/i
+      /台湾/i
     ]
   },
   {

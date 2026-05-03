@@ -5,43 +5,43 @@
       "key": "hk",
       "name": "香港自动",
       "icon": "hk",
-      "keywords": ["hk", "hong kong", "香港", "港"]
+      "keywords": ["hk", "hong kong", "香港"]
     },
     {
       "key": "mo",
       "name": "澳门自动",
       "icon": "hk",
-      "keywords": ["mo", "macau", "macao", "澳门", "澳門", "澳"]
+      "keywords": ["mo", "macau", "macao", "澳门", "澳門"]
     },
     {
       "key": "sg",
       "name": "新加坡自动",
       "icon": "sg",
-      "keywords": ["sg", "singapore", "新加坡", "新"]
+      "keywords": ["sg", "singapore", "新加坡"]
     },
     {
       "key": "jp",
       "name": "日本自动",
       "icon": "jp",
-      "keywords": ["jp", "japan", "tokyo", "osaka", "日本", "日"]
+      "keywords": ["jp", "japan", "tokyo", "osaka", "日本"]
     },
     {
       "key": "kr",
       "name": "韩国自动",
       "icon": "kr",
-      "keywords": ["kr", "korea", "south korea", "seoul", "韩国", "韩", "首尔"]
+      "keywords": ["kr", "korea", "south korea", "seoul", "韩国", "首尔"]
     },
     {
       "key": "us",
       "name": "美国自动",
       "icon": "us",
-      "keywords": ["us", "usa", "united states", "america", "los angeles", "new york", "美国", "美"]
+      "keywords": ["us", "usa", "united states", "america", "los angeles", "new york", "美国"]
     },
     {
       "key": "tw",
       "name": "台湾自动",
       "icon": "tw",
-      "keywords": ["tw", "taiwan", "taipei", "台湾", "台"]
+      "keywords": ["tw", "taiwan", "taipei", "台湾"]
     },
     {
       "key": "eu",

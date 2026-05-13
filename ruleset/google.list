@@ -1,4 +1,11 @@
+download.qatp1.net
 google-ohttp-relay-safebrowsing.fastly-edge.com
+monitoring.qpdp1.net
+qagpublic.qatp1.net
+qgadmin.qcpp1.net
+qualysapi.qatp1.net
+qualysguard.qpdp1.net
+scanservice1.qcpp1.net
 +.0emm.com
 +.1e100.net
 +.1ucrs.com
@@ -196,7 +203,6 @@ google-ohttp-relay-safebrowsing.fastly-edge.com
 +.doubleclick.cn
 +.doubleclick.com
 +.doubleclick.net
-+.download.qatp1.net
 +.episodic.com
 +.fastlane.ci
 +.fastlane.tools
@@ -572,7 +578,6 @@ google-ohttp-relay-safebrowsing.fastly-edge.com
 +.meet.new
 +.mfg-inspector.com
 +.mobileview.page
-+.monitoring.qpdp1.net
 +.moodstocks.com
 +.near.by
 +.nest.com
@@ -614,12 +619,8 @@ google-ohttp-relay-safebrowsing.fastly-edge.com
 +.projectbaseline.com
 +.pub.dev
 +.publishproxy.com
-+.qagpublic.qatp1.net
-+.qgadmin.qcpp1.net
 +.qiao-cn.com
 +.qpx.googleflights.net
-+.qualysapi.qatp1.net
-+.qualysguard.qpdp1.net
 +.questvisual.com
 +.quickoffice.com
 +.quiksee.com
@@ -631,7 +632,6 @@ google-ohttp-relay-safebrowsing.fastly-edge.com
 +.run.app
 +.savethedate.foo
 +.saynow.com
-+.scanservice1.qcpp1.net
 +.schema.org
 +.schemer.com
 +.screenwisetrends.com

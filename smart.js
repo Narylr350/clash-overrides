@@ -15,6 +15,7 @@ const ICON = {
   google: icon("Google"),
   gemini: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/gem.svg",
   microsoft: icon("Microsoft"),
+  apple: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/apple.svg",
   copilot: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/compass-drafting.svg",
   github: icon("GitHub"),
   tiktok: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/tiktok.svg",
@@ -457,6 +458,23 @@ function main(config) {
     "其他自动"
   ];
 
+  const APPLE_REGION_ORDER = [
+    "DIRECT",
+    "默认代理",
+    "智能选择",
+    "美国自动",
+    "日本自动",
+    "新加坡自动",
+    "香港自动",
+    "澳门自动",
+    "韩国自动",
+    "台湾自动",
+    "欧洲自动",
+    "亚洲其他自动",
+    ...LOW_FREQUENCY_REGION_OPTIONS,
+    "其他自动"
+  ];
+
   const GAME_REGION_ORDER = [
     "DIRECT",
     "默认代理",
@@ -485,6 +503,7 @@ function main(config) {
     buildSelectGroup("Gemini", ICON.gemini, OPENAI_REGION_ORDER),
     buildSelectGroup("Copilot", ICON.copilot, COPILOT_REGION_ORDER),
     buildSelectGroup("GitHub", ICON.github, GITHUB_REGION_ORDER),
+    buildSelectGroup("Apple", ICON.apple, APPLE_REGION_ORDER),
     buildSelectGroup("TikTok", ICON.tiktok, TIKTOK_REGION_ORDER),
     buildSelectGroup("YouTube", ICON.youtube, YOUTUBE_REGION_ORDER),
     buildSelectGroup("Pixiv", ICON.pixiv, PIXIV_REGION_ORDER),
@@ -562,6 +581,14 @@ function main(config) {
       url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/github.list",
       interval: 86400
     },
+    apple: {
+      type: "http",
+      behavior: "classical",
+      format: "text",
+      path: "./ruleset/apple.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/apple.list",
+      interval: 86400
+    },
     tiktok: {
       type: "http",
       behavior: "classical",
@@ -619,6 +646,11 @@ function main(config) {
     "DOMAIN-SUFFIX,githubassets.com,GitHub",
     "DOMAIN-SUFFIX,github.io,GitHub",
 
+    "DOMAIN-SUFFIX,apple.com,Apple",
+    "DOMAIN-SUFFIX,icloud.com,Apple",
+    "DOMAIN-SUFFIX,mzstatic.com,Apple",
+    "DOMAIN-SUFFIX,apple-dns.net,Apple",
+
     "DOMAIN-SUFFIX,openai.com,OpenAI",
     "DOMAIN-SUFFIX,chatgpt.com,OpenAI",
     "DOMAIN-SUFFIX,ab.chatgpt.com,OpenAI",
@@ -658,6 +690,7 @@ function main(config) {
     "RULE-SET,ai,AIGC",
     "RULE-SET,google,Google",
     "RULE-SET,github,GitHub",
+    "RULE-SET,apple,Apple",
     "RULE-SET,tiktok,TikTok",
     "RULE-SET,youtube,YouTube",
     "RULE-SET,pixiv,Pixiv",

@@ -5,7 +5,7 @@ const path = require("node:path");
 const yamlPath = path.join(__dirname, "..", "smart.yaml");
 assert.ok(fs.existsSync(yamlPath), "smart.yaml should exist");
 
-const content = fs.readFileSync(yamlPath, "utf8");
+const content = fs.readFileSync(yamlPath, "utf8").replace(/\r\n/g, "\n");
 
 function getGroupBlock(name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -86,6 +86,7 @@ assert.ok(/adblock:\n/.test(content), "adblock provider should exist");
 assert.ok(/ai:\n/.test(content), "ai provider should exist");
 assert.ok(/google:\n/.test(content), "google provider should exist");
 assert.ok(/microsoft:\n/.test(content), "microsoft provider should exist");
+assert.ok(/apple:\n/.test(content), "apple provider should exist");
 assert.ok(/github:\n/.test(content), "github provider should exist");
 assert.ok(/telegram:\n/.test(content), "telegram provider should exist");
 assert.ok(/games:\n/.test(content), "games provider should exist");
@@ -112,6 +113,8 @@ assert.ok(rules.includes("DOMAIN-SUFFIX,tiktokv.com,TikTok"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,youtube.com,YouTube"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,pixiv.net,Pixiv"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,x.com,X"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,apple.com,Apple"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,icloud.com,Apple"));
 
 assert.ok(
   rules.indexOf("PROCESS-NAME,com.openai.chatgpt,OpenAI") < rules.indexOf("RULE-SET,ai,AIGC"),
@@ -136,6 +139,10 @@ assert.ok(
 assert.ok(
   rules.indexOf("DOMAIN-SUFFIX,github.com,GitHub") < rules.indexOf("RULE-SET,github,GitHub"),
   "explicit GitHub rules should be ahead of its ruleset"
+);
+assert.ok(
+  rules.indexOf("DOMAIN-SUFFIX,apple.com,Apple") < rules.indexOf("RULE-SET,apple,Apple"),
+  "explicit Apple rules should be ahead of its ruleset"
 );
 assert.ok(rules.trimEnd().endsWith("- MATCH,漏网之鱼"), "last rule should be 漏网之鱼");
 

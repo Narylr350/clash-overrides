@@ -18,13 +18,19 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.js
 
 https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 
+### ClashMi iOS 版本
+
+ClashMi iOS 的 VPN 扩展内存和启动前网络访问更受限，建议使用不依赖远程 `rule-providers` 的专用 YAML：
+
+https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
+
 适用客户端：
 
 - Clash Party（`smart.js`）
 - Clash Verge（`smart.js`）
 - OpenClash（Meta 模式，可优先尝试 `smart.js`；只吃 YAML 的场景改用 `smart.yaml`）
 - Mihomo 内核客户端
-- ClashMi（`smart.yaml`）
+- ClashMi iOS（`clashmi.yaml`）
 
 不适用场景：
 
@@ -40,6 +46,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 - `默认代理`
 - `AIGC`
 - `GitHub`
+- `Apple`
 - `TikTok`
 - `YouTube`
 - `Pixiv`
@@ -76,7 +83,8 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 - AI 服务：先调 `AIGC`
 - `TikTok` / `YouTube` / `Pixiv` / `X` 提供独立入口，默认仍跟随 `默认代理`
 - `漏网之鱼` 默认跟随 `默认代理`
-- GitHub / Google：默认保持脚本分流
+- GitHub / Apple / Google：默认保持脚本分流
+- Apple：默认 `DIRECT` 优先，仍可手动切到代理地区
 - 微软服务：默认 `DIRECT`
 - 网站异常：先把 `广告拦截` 切到 `DIRECT`
 
@@ -89,8 +97,10 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/smart.yaml
 - `TikTok` 同时也是地区和环境检测都更敏感的服务，建议单独观察表现
 - `Pixiv` 默认更偏日本地区顺序
 - `smart.yaml` 不是 JS Script Override 的逐行翻译版，而是用 Mihomo 原生 `include-all` / `filter` / `url-test` 能力尽量逼近 `smart.js` 的使用体验
+- `clashmi.yaml` 是 ClashMi iOS 专用轻量版本，不使用远程 `rule-providers` / `RULE-SET` / `PROCESS-NAME`，以降低 VPN 扩展启动失败风险
 - `smart.js` 仍然是能力最完整的主版本；`smart.yaml` 的目标是给 YAML-only 客户端一个尽量接近的替代入口
 - 地区节点名关键词和订阅说明排除关键词维护在 `regions.json`；修改后运行 `node scripts/build-regions.mjs` 生成 `smart.js` / `smart.yaml` 的匹配块
+- `clashmi.yaml` 由 `smart.yaml` 生成；修改 `smart.yaml` 后运行 `node scripts/build-clashmi-yaml.mjs`
 - `ruleset/` 保存 `smart.yaml` 里 `rule-providers` 的上游规则快照，客户端规则集合 URL 指向本仓库的快照地址
 - `ruleset/sources.json` 保存真正的上游来源，GitHub Actions 会定时运行 `scripts/sync-rules.mjs`，发现快照变化时创建同步 PR，由人工确认后合并
 - GeoIP / GeoSite / MMDB / ASN 外部数据库通过 `geodata-latest` Release 镜像，由 `scripts/sync-geodata.mjs` 定时更新 Release 资产

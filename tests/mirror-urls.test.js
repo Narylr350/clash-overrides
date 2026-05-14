@@ -15,6 +15,7 @@ const expectedProviders = [
   "games-cn",
   "cn",
   "github",
+  "apple",
   "tiktok",
   "youtube",
   "pixiv",

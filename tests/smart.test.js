@@ -356,6 +356,30 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.deepEqual(
+    getGroup(result, "Apple").proxies,
+    [
+      "DIRECT",
+      "默认代理",
+      "智能选择",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "香港自动",
+      "澳门自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
+      "其他自动"
+    ],
+    "Apple should stay direct-first but keep full manual options"
+  );
+
+  assert.deepEqual(
     getGroup(result, "Google").proxies,
     [
       "默认代理",
@@ -558,6 +582,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.ok(providers.google, "should keep google provider");
   assert.ok(providers.microsoft, "should keep microsoft provider");
   assert.ok(providers.github, "should keep github provider");
+  assert.ok(providers.apple, "should keep apple provider");
   assert.ok(providers.telegram, "should keep telegram provider");
   assert.ok(providers.games, "should keep games provider");
   assert.ok(providers["games-cn"], "should keep games-cn provider");
@@ -671,6 +696,16 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.ok(
+    rules.includes("DOMAIN-SUFFIX,apple.com,Apple"),
+    "Apple should explicitly cover apple.com"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,icloud.com,Apple"),
+    "Apple should explicitly cover icloud.com"
+  );
+
+  assert.ok(
     rules.indexOf("DOMAIN-SUFFIX,tiktokv.com,TikTok") < rules.indexOf("RULE-SET,tiktok,TikTok"),
     "explicit TikTok domains should stay ahead of TikTok ruleset"
   );
@@ -700,6 +735,12 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     rules.includes("DOMAIN-SUFFIX,github.com,GitHub") &&
       rules.indexOf("DOMAIN-SUFFIX,github.com,GitHub") < rules.indexOf("RULE-SET,github,GitHub"),
     "explicit GitHub domains should stay ahead of GitHub ruleset"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,apple.com,Apple") &&
+      rules.indexOf("DOMAIN-SUFFIX,apple.com,Apple") < rules.indexOf("RULE-SET,apple,Apple"),
+    "explicit Apple domains should stay ahead of Apple ruleset"
   );
 
   assert.equal(rules[rules.length - 1], "MATCH,漏网之鱼", "last rule should stay as 漏网之鱼");

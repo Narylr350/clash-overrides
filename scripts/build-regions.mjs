@@ -18,8 +18,8 @@ const ICON_URLS = {
   other: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/shuffle.svg"
 };
 
-const TOKEN_BOUNDARY_PREFIX = "(^|[\\s._-])";
-const TOKEN_BOUNDARY_SUFFIX = "(?=$|[\\s._-]|\\d)";
+const TOKEN_BOUNDARY_PREFIX = "(^|[\\s._\\-\\[\\]\\(\\)【】])";
+const TOKEN_BOUNDARY_SUFFIX = "(?=$|[\\s._\\-\\[\\]\\(\\)【】]|\\d)";
 
 function unique(values) {
   return [...new Set(values.filter(Boolean))];

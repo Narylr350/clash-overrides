@@ -34,6 +34,13 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "KR-01",
       "US-01",
       "TW-01",
+      "[HK]HongKong01-GPT优化",
+      "[SG]Singapore01",
+      "[JP]Tokyo01",
+      "[US]Los Angeles01-GPT优化",
+      "[TW]TaiPei01-GPT优化",
+      "[RU]俄罗斯-Moscow",
+      "[MK]马其顿-Macedonia",
       "剩余流量: 65.36 GB",
       "套餐到期: 2026-12-31",
       "官网: example.com",
@@ -142,8 +149,14 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.deepEqual(
     getGroup(result, "欧洲自动").proxies,
-    ["DE-01", "United Kingdom 01", "United Kingdom 02"],
-    "欧洲自动 should collect full United Kingdom node names"
+    ["[RU]俄罗斯-Moscow", "[MK]马其顿-Macedonia", "DE-01", "United Kingdom 01", "United Kingdom 02"],
+    "欧洲自动 should collect full United Kingdom and bracketed Europe node names"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "香港自动").proxies,
+    ["HK-01", "[HK]HongKong01-GPT优化"],
+    "香港自动 should collect bracketed HK/HongKong node names"
   );
 
   assert.ok(
@@ -155,6 +168,30 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     getGroup(result, "澳门自动").proxies,
     ["澳门 01", "Macau 02"],
     "澳门自动 should collect Macau nodes before the other fallback group"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "新加坡自动").proxies,
+    ["SG-01", "[SG]Singapore01"],
+    "新加坡自动 should collect bracketed SG/Singapore node names"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "日本自动").proxies,
+    ["JP-01", "[JP]Tokyo01"],
+    "日本自动 should collect bracketed JP/Tokyo node names"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "美国自动").proxies,
+    ["US-01", "[US]Los Angeles01-GPT优化"],
+    "美国自动 should collect bracketed US/Los Angeles node names"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "台湾自动").proxies,
+    ["TW-01", "[TW]TaiPei01-GPT优化"],
+    "台湾自动 should collect bracketed TW/Taipei node names"
   );
 
   assert.deepEqual(

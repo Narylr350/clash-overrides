@@ -41,7 +41,7 @@ const ICON = {
 };
 
 const SUBSCRIPTION_INFO_PATTERNS = [
-  /(^|[\s._-])(?:traffic|quota|expire|expires|expired|expiration|reset|subscription|sub\s*info|homepage|website|official\s*site|update\s*subscription)(?=$|[\s._-]|\d)/i,
+  /(^|[\s._\-\[\]\(\)【】])(?:traffic|quota|expire|expires|expired|expiration|reset|subscription|sub\s*info|homepage|website|official\s*site|update\s*subscription)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
   /剩余流量|流量|套餐|到期|过期|有效期|重置|官网|网址|主页|更新订阅|刷新订阅|订阅信息|订阅链接/i
 ];
 
@@ -51,7 +51,7 @@ const REGION_DEFS = [
     group: "香港自动",
     icon: ICON.hk,
     patterns: [
-      /(^|[\s._-])(?:hk|hong\s*kong)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:hk|hong\s*kong)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /香港/i
     ]
   },
@@ -60,7 +60,7 @@ const REGION_DEFS = [
     group: "澳门自动",
     icon: ICON.hk,
     patterns: [
-      /(^|[\s._-])(?:mo|macau|macao)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:mo|macau|macao)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /澳门|澳門/i
     ]
   },
@@ -69,7 +69,7 @@ const REGION_DEFS = [
     group: "新加坡自动",
     icon: ICON.sg,
     patterns: [
-      /(^|[\s._-])(?:sg|singapore)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:sg|singapore)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /新加坡/i
     ]
   },
@@ -78,7 +78,7 @@ const REGION_DEFS = [
     group: "日本自动",
     icon: ICON.jp,
     patterns: [
-      /(^|[\s._-])(?:jp|japan|tokyo|osaka)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:jp|japan|tokyo|osaka)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /日本/i
     ]
   },
@@ -87,7 +87,7 @@ const REGION_DEFS = [
     group: "韩国自动",
     icon: ICON.kr,
     patterns: [
-      /(^|[\s._-])(?:kr|korea|south\s*korea|seoul)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:kr|korea|south\s*korea|seoul)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /韩国|首尔/i
     ]
   },
@@ -96,7 +96,7 @@ const REGION_DEFS = [
     group: "美国自动",
     icon: ICON.us,
     patterns: [
-      /(^|[\s._-])(?:us|usa|united\s*states|america|los\s*angeles|new\s*york)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:us|usa|united\s*states|america|los\s*angeles|new\s*york)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /美国/i
     ]
   },
@@ -105,7 +105,7 @@ const REGION_DEFS = [
     group: "台湾自动",
     icon: ICON.tw,
     patterns: [
-      /(^|[\s._-])(?:tw|taiwan|taipei)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:tw|taiwan|taipei)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /台湾/i
     ]
   },
@@ -114,8 +114,8 @@ const REGION_DEFS = [
     group: "欧洲自动",
     icon: ICON.eu,
     patterns: [
-      /(^|[\s._-])(?:eu|europe|uk|united\s*kingdom|england|london|de|germany|deutschland|fr|france|nl|netherlands|it|italy|es|spain|ch|switzerland|se|sweden|pl|poland|ie|ireland|pt|portugal|at|austria|be|belgium|fi|finland|no|norway|dk|denmark|cz|czech|czechia|gr|greece|hu|hungary|ro|romania|ua|ukraine|tr|turkey|turkiye|türkiye)(?=$|[\s._-]|\d)/i,
-      /英国|德国|法国|荷兰|意大利|西班牙|瑞士|瑞典|波兰|爱尔兰|葡萄牙|奥地利|比利时|芬兰|挪威|丹麦|捷克|希腊|匈牙利|罗马尼亚|乌克兰|土耳其|欧洲/i
+      /(^|[\s._\-\[\]\(\)【】])(?:eu|europe|uk|united\s*kingdom|england|london|de|germany|deutschland|fr|france|nl|netherlands|it|italy|es|spain|ch|switzerland|se|sweden|pl|poland|ie|ireland|pt|portugal|at|austria|be|belgium|fi|finland|no|norway|dk|denmark|cz|czech|czechia|gr|greece|hu|hungary|ro|romania|ua|ukraine|ru|russia|moscow|mk|macedonia|north\s*macedonia|tr|turkey|turkiye|türkiye)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
+      /英国|德国|法国|荷兰|意大利|西班牙|瑞士|瑞典|波兰|爱尔兰|葡萄牙|奥地利|比利时|芬兰|挪威|丹麦|捷克|希腊|匈牙利|罗马尼亚|乌克兰|俄罗斯|莫斯科|马其顿|北马其顿|土耳其|欧洲/i
     ]
   },
   {
@@ -123,7 +123,7 @@ const REGION_DEFS = [
     group: "亚洲其他自动",
     icon: ICON.asiaOther,
     patterns: [
-      /(^|[\s._-])(?:my|malaysia|th|thailand|vn|vietnam|id|indonesia|ph|philippines|in|india|kh|cambodia|la|laos|mm|myanmar|bd|bangladesh|pk|pakistan|np|nepal|lk|sri\s*lanka|ae|uae|united\s*arab\s*emirates|sa|saudi\s*arabia|il|israel|qa|qatar)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:my|malaysia|th|thailand|vn|vietnam|id|indonesia|ph|philippines|in|india|kh|cambodia|la|laos|mm|myanmar|bd|bangladesh|pk|pakistan|np|nepal|lk|sri\s*lanka|ae|uae|united\s*arab\s*emirates|sa|saudi\s*arabia|il|israel|qa|qatar)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /马来|泰国|越南|印尼|印度尼西亚|菲律宾|印度|柬埔寨|老挝|缅甸|孟加拉|巴基斯坦|尼泊尔|斯里兰卡|阿联酋|沙特|以色列|卡塔尔|亚洲/i
     ]
   },
@@ -132,7 +132,7 @@ const REGION_DEFS = [
     group: "北美自动",
     icon: ICON.northAmerica,
     patterns: [
-      /(^|[\s._-])(?:ca|canada|toronto|vancouver|montreal|mx|mexico|gl|greenland)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:ca|canada|toronto|vancouver|montreal|mx|mexico|gl|greenland)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /加拿大|墨西哥|格陵兰|北美/i
     ]
   },
@@ -141,7 +141,7 @@ const REGION_DEFS = [
     group: "南美自动",
     icon: ICON.southAmerica,
     patterns: [
-      /(^|[\s._-])(?:ar|argentina|br|brazil|cl|chile|co|colombia|pe|peru|uy|uruguay|ve|venezuela|bo|bolivia|ec|ecuador|py|paraguay|south\s*america)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:ar|argentina|br|brazil|cl|chile|co|colombia|pe|peru|uy|uruguay|ve|venezuela|bo|bolivia|ec|ecuador|py|paraguay|south\s*america)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /阿根廷|巴西|智利|哥伦比亚|秘鲁|乌拉圭|委内瑞拉|玻利维亚|厄瓜多尔|巴拉圭|南美/i
     ]
   },
@@ -150,7 +150,7 @@ const REGION_DEFS = [
     group: "非洲自动",
     icon: ICON.africa,
     patterns: [
-      /(^|[\s._-])(?:za|south\s*africa|eg|egypt|ng|nigeria|ke|kenya|ma|morocco|dz|algeria|tn|tunisia|gh|ghana|africa)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:za|south\s*africa|eg|egypt|ng|nigeria|ke|kenya|ma|morocco|dz|algeria|tn|tunisia|gh|ghana|africa)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /南非|埃及|尼日利亚|肯尼亚|摩洛哥|阿尔及利亚|突尼斯|加纳|非洲/i
     ]
   },
@@ -159,7 +159,7 @@ const REGION_DEFS = [
     group: "大洋洲自动",
     icon: ICON.oceania,
     patterns: [
-      /(^|[\s._-])(?:au|australia|sydney|melbourne|nz|new\s*zealand|oceania)(?=$|[\s._-]|\d)/i,
+      /(^|[\s._\-\[\]\(\)【】])(?:au|australia|sydney|melbourne|nz|new\s*zealand|oceania)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
       /澳洲|澳大利亚|新西兰|大洋洲/i
     ]
   },

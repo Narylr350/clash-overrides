@@ -12,6 +12,14 @@ const path = require("node:path");
     "region source should keep United Kingdom in the maintainable keyword list"
   );
   assert.ok(
+    source.regions.find((region) => region.name === "欧洲自动")?.keywords.includes("russia"),
+    "region source should keep Russia in the maintainable keyword list"
+  );
+  assert.ok(
+    source.regions.find((region) => region.name === "欧洲自动")?.keywords.includes("macedonia"),
+    "region source should keep Macedonia in the maintainable keyword list"
+  );
+  assert.ok(
     !source.regions.find((region) => region.name === "欧洲自动")?.keywords.includes("gb"),
     "region source should avoid GB because it collides with traffic quota units"
   );

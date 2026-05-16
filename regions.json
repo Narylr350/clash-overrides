@@ -125,6 +125,12 @@
         "romania",
         "ua",
         "ukraine",
+        "ru",
+        "russia",
+        "moscow",
+        "mk",
+        "macedonia",
+        "north macedonia",
         "tr",
         "turkey",
         "turkiye",
@@ -150,6 +156,10 @@
         "匈牙利",
         "罗马尼亚",
         "乌克兰",
+        "俄罗斯",
+        "莫斯科",
+        "马其顿",
+        "北马其顿",
         "土耳其",
         "欧洲"
       ]

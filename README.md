@@ -83,6 +83,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 - AI 服务：先调 `AIGC`
 - `TikTok` / `YouTube` / `Pixiv` / `X` 提供独立入口，默认仍跟随 `默认代理`
 - `漏网之鱼` 默认跟随 `默认代理`
+- CDN：默认直连，通过 `cdn` 规则集覆盖 jsdelivr、unpkg、cdnjs、esm.sh 等常见 CDN 域名
 - GitHub / Apple / Google：默认保持脚本分流
 - Apple：默认 `DIRECT` 优先，仍可手动切到代理地区
 - 微软服务：默认 `DIRECT`

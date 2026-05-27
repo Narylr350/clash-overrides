@@ -646,6 +646,14 @@ function main(config) {
     "DOMAIN-SUFFIX,mi.com,国内直连",
     "DOMAIN-SUFFIX,huawei.com,国内直连",
 
+    "DOMAIN-SUFFIX,jsdelivr.net,国内直连",
+    "DOMAIN-SUFFIX,unpkg.com,国内直连",
+    "DOMAIN-SUFFIX,cdnjs.cloudflare.com,国内直连",
+    "DOMAIN-SUFFIX,cdnjs.com,国内直连",
+    "DOMAIN-SUFFIX,gstatic.com,国内直连",
+    "DOMAIN-SUFFIX,esm.sh,国内直连",
+    "DOMAIN-SUFFIX,skypack.dev,国内直连",
+
     "RULE-SET,cdn,国内直连",
     "RULE-SET,adblock,广告拦截",
 

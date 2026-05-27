@@ -628,6 +628,14 @@ function main(config) {
       path: "./ruleset/telegram.list",
       url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/telegram.list",
       interval: 86400
+    },
+    cdn: {
+      type: "http",
+      behavior: "domain",
+      format: "text",
+      path: "./ruleset/cdn.list",
+      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/cdn.list",
+      interval: 86400
     }
   };
 
@@ -638,14 +646,7 @@ function main(config) {
     "DOMAIN-SUFFIX,mi.com,国内直连",
     "DOMAIN-SUFFIX,huawei.com,国内直连",
 
-    "DOMAIN-SUFFIX,jsdelivr.net,国内直连",
-    "DOMAIN-SUFFIX,unpkg.com,国内直连",
-    "DOMAIN-SUFFIX,cdnjs.cloudflare.com,国内直连",
-    "DOMAIN-SUFFIX,cdnjs.com,国内直连",
-    "DOMAIN-SUFFIX,gstatic.com,国内直连",
-    "DOMAIN-SUFFIX,esm.sh,国内直连",
-    "DOMAIN-SUFFIX,skypack.dev,国内直连",
-
+    "RULE-SET,cdn,国内直连",
     "RULE-SET,adblock,广告拦截",
 
     "DOMAIN-SUFFIX,github.com,GitHub",

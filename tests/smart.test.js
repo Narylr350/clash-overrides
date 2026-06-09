@@ -513,6 +513,34 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.deepEqual(
+    getGroup(result, "开发").proxies,
+    [
+      "默认代理",
+      "GitHub",
+      "微软服务",
+      "Google",
+      "游戏服务",
+      "智能选择",
+      "美国自动",
+      "日本自动",
+      "新加坡自动",
+      "香港自动",
+      "澳门自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "Dev should provide more manual choices for development traffic"
+  );
+
+  assert.deepEqual(
     getGroup(result, "TikTok").proxies,
     [
       "默认代理",
@@ -740,6 +768,52 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.ok(
     rules.includes("DOMAIN-SUFFIX,icloud.com,Apple"),
     "Apple should explicitly cover icloud.com"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,jsdelivr.net,开发") &&
+      !rules.includes("DOMAIN-SUFFIX,jsdelivr.net,国内直连"),
+    "common CDN domains should move to Dev"
+  );
+
+  assert.ok(
+    rules.includes("RULE-SET,cdn,开发"),
+    "CDN ruleset should route through Dev"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,minecraft.net,开发"),
+    "Dev should cover Minecraft services"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,libraries.minecraft.net,开发"),
+    "Dev should cover Minecraft libraries"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,modrinth.com,开发"),
+    "Dev should cover Modrinth"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,maven.fabricmc.net,开发"),
+    "Dev should cover Fabric Maven"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,repo.maven.apache.org,开发"),
+    "Dev should cover Maven Central"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,plugins.gradle.org,开发"),
+    "Dev should cover Gradle plugins"
+  );
+
+  assert.ok(
+    rules.indexOf("DOMAIN-SUFFIX,minecraft.net,开发") < rules.indexOf("RULE-SET,games,游戏服务"),
+    "explicit Dev rules should stay ahead of generic game rules"
   );
 
   assert.ok(

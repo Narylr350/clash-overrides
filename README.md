@@ -55,6 +55,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 - `微软服务`
 - `Telegram`
 - `游戏服务`
+- `开发`
 - `广告拦截`
 - `漏网之鱼`
 
@@ -83,7 +84,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 - AI 服务：先调 `AIGC`
 - `TikTok` / `YouTube` / `Pixiv` / `X` 提供独立入口，默认仍跟随 `默认代理`
 - `漏网之鱼` 默认跟随 `默认代理`
-- CDN：默认直连，通过 `cdn` 规则集覆盖 jsdelivr、unpkg、cdnjs、esm.sh 等常见 CDN 域名
+- 开发：覆盖 Minecraft 开发、Mod 平台、Gradle/Maven 仓库和 jsdelivr、unpkg、cdnjs、esm.sh 等常见 CDN，可在 `开发` 组里单独切换
 - GitHub / Apple / Google：默认保持脚本分流
 - Apple：默认 `DIRECT` 优先，仍可手动切到代理地区
 - 微软服务：默认 `DIRECT`
@@ -97,6 +98,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 - `TikTok / YouTube / Pixiv / X` 作为内容/推荐敏感服务提供独立入口，便于按地区单独调优
 - `TikTok` 同时也是地区和环境检测都更敏感的服务，建议单独观察表现
 - `Pixiv` 默认更偏日本地区顺序
+- `开发` 默认跟随 `默认代理`，并提供 GitHub、微软服务、Google、游戏服务、各地区自动组和 `DIRECT` 作为手动选项
 - `smart.yaml` 不是 JS Script Override 的逐行翻译版，而是用 Mihomo 原生 `include-all` / `filter` / `url-test` 能力尽量逼近 `smart.js` 的使用体验
 - `clashmi.yaml` 是 ClashMi iOS 专用轻量版本，不使用远程 `rule-providers` / `RULE-SET` / `PROCESS-NAME`，以降低 VPN 扩展启动失败风险
 - `smart.js` 仍然是能力最完整的主版本；`smart.yaml` 的目标是给 YAML-only 客户端一个尽量接近的替代入口

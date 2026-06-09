@@ -14,8 +14,11 @@ const path = require("node:path");
   assert.doesNotMatch(content, /^\s+- PROCESS-NAME,/m, "ClashMi iOS YAML should not include process rules");
 
   assert.match(content, /- name: 智能选择/, "ClashMi YAML should keep smart selection");
+  assert.match(content, /- name: 开发/, "ClashMi YAML should keep Dev group");
   assert.match(content, /- name: Apple/, "ClashMi YAML should keep Apple group");
   assert.match(content, /DOMAIN-SUFFIX,apple\.com,Apple/, "ClashMi YAML should keep explicit Apple rules");
+  assert.match(content, /DOMAIN-SUFFIX,minecraft\.net,开发/, "ClashMi YAML should keep explicit Dev rules");
+  assert.match(content, /DOMAIN-SUFFIX,jsdelivr\.net,开发/, "ClashMi YAML should route common CDNs through Dev");
   assert.match(content, /GEOIP,CN,国内直连/, "ClashMi YAML should keep lightweight CN fallback");
   assert.ok(content.trimEnd().endsWith("- MATCH,漏网之鱼"), "last rule should stay as 漏网之鱼");
 

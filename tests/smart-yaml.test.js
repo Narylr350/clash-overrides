@@ -35,6 +35,7 @@ assert.ok(getGroupBlock("南美自动"), "南美自动 should exist");
 assert.ok(getGroupBlock("非洲自动"), "非洲自动 should exist");
 assert.ok(getGroupBlock("大洋洲自动"), "大洋洲自动 should exist");
 assert.ok(getGroupBlock("其他自动"), "其他自动 should exist");
+assert.ok(getGroupBlock("开发"), "开发 should exist");
 assert.match(
   getGroupBlock("智能选择"),
   /exclude-filter: '.+剩余流量.+更新订阅/,
@@ -82,6 +83,30 @@ assert.deepEqual(getListValues(getGroupBlock("默认代理"), "proxies"), [
   "DIRECT"
 ]);
 
+assert.deepEqual(getListValues(getGroupBlock("开发"), "proxies"), [
+  "默认代理",
+  "GitHub",
+  "微软服务",
+  "Google",
+  "游戏服务",
+  "智能选择",
+  "美国自动",
+  "日本自动",
+  "新加坡自动",
+  "香港自动",
+  "澳门自动",
+  "韩国自动",
+  "台湾自动",
+  "欧洲自动",
+  "亚洲其他自动",
+  "北美自动",
+  "南美自动",
+  "非洲自动",
+  "大洋洲自动",
+  "其他自动",
+  "DIRECT"
+]);
+
 assert.ok(/adblock:\n/.test(content), "adblock provider should exist");
 assert.ok(/ai:\n/.test(content), "ai provider should exist");
 assert.ok(/google:\n/.test(content), "google provider should exist");
@@ -115,6 +140,15 @@ assert.ok(rules.includes("DOMAIN-SUFFIX,pixiv.net,Pixiv"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,x.com,X"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,apple.com,Apple"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,icloud.com,Apple"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,jsdelivr.net,开发"));
+assert.ok(!rules.includes("DOMAIN-SUFFIX,jsdelivr.net,国内直连"));
+assert.ok(rules.includes("RULE-SET,cdn,开发"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,minecraft.net,开发"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,libraries.minecraft.net,开发"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,modrinth.com,开发"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,maven.fabricmc.net,开发"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,repo.maven.apache.org,开发"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,plugins.gradle.org,开发"));
 
 assert.ok(
   rules.indexOf("PROCESS-NAME,com.openai.chatgpt,OpenAI") < rules.indexOf("RULE-SET,ai,AIGC"),
@@ -143,6 +177,10 @@ assert.ok(
 assert.ok(
   rules.indexOf("DOMAIN-SUFFIX,apple.com,Apple") < rules.indexOf("RULE-SET,apple,Apple"),
   "explicit Apple rules should be ahead of its ruleset"
+);
+assert.ok(
+  rules.indexOf("DOMAIN-SUFFIX,minecraft.net,开发") < rules.indexOf("RULE-SET,games,游戏服务"),
+  "explicit Dev rules should be ahead of generic game rules"
 );
 assert.ok(rules.trimEnd().endsWith("- MATCH,漏网之鱼"), "last rule should be 漏网之鱼");
 

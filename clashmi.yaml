@@ -384,6 +384,32 @@ proxy-groups:
       - 大洋洲自动
       - 其他自动
 
+  - name: 开发
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg
+    proxies:
+      - 默认代理
+      - GitHub
+      - 微软服务
+      - Google
+      - 游戏服务
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 澳门自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 北美自动
+      - 南美自动
+      - 非洲自动
+      - 大洋洲自动
+      - 其他自动
+      - DIRECT
+
   - name: 智能选择
     type: url-test
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png
@@ -540,13 +566,61 @@ rules:
   - DOMAIN-SUFFIX,mi.com,国内直连
   - DOMAIN-SUFFIX,huawei.com,国内直连
 
-  - DOMAIN-SUFFIX,jsdelivr.net,国内直连
-  - DOMAIN-SUFFIX,unpkg.com,国内直连
-  - DOMAIN-SUFFIX,cdnjs.cloudflare.com,国内直连
-  - DOMAIN-SUFFIX,cdnjs.com,国内直连
-  - DOMAIN-SUFFIX,gstatic.com,国内直连
-  - DOMAIN-SUFFIX,esm.sh,国内直连
-  - DOMAIN-SUFFIX,skypack.dev,国内直连
+  - DOMAIN-SUFFIX,jsdelivr.net,开发
+  - DOMAIN-SUFFIX,unpkg.com,开发
+  - DOMAIN-SUFFIX,cdnjs.cloudflare.com,开发
+  - DOMAIN-SUFFIX,cdnjs.com,开发
+  - DOMAIN-SUFFIX,gstatic.com,开发
+  - DOMAIN-SUFFIX,esm.sh,开发
+  - DOMAIN-SUFFIX,skypack.dev,开发
+
+  - DOMAIN-SUFFIX,minecraft.net,开发
+  - DOMAIN-SUFFIX,minecraftservices.com,开发
+  - DOMAIN-SUFFIX,minecraft-services.net,开发
+  - DOMAIN-SUFFIX,mojang.com,开发
+  - DOMAIN-SUFFIX,mojang.net,开发
+  - DOMAIN-SUFFIX,minecraftassets.com,开发
+  - DOMAIN-SUFFIX,download.minecraft.net,开发
+  - DOMAIN-SUFFIX,resources.download.minecraft.net,开发
+  - DOMAIN-SUFFIX,libraries.minecraft.net,开发
+  - DOMAIN-SUFFIX,textures.minecraft.net,开发
+  - DOMAIN-SUFFIX,launcher.mojang.com,开发
+  - DOMAIN-SUFFIX,launchermeta.mojang.com,开发
+  - DOMAIN-SUFFIX,piston-meta.mojang.com,开发
+  - DOMAIN-SUFFIX,piston-data.mojang.com,开发
+  - DOMAIN-SUFFIX,sessionserver.mojang.com,开发
+  - DOMAIN-SUFFIX,api.mojang.com,开发
+  - DOMAIN-SUFFIX,authserver.mojang.com,开发
+  - DOMAIN-SUFFIX,modrinth.com,开发
+  - DOMAIN-SUFFIX,cdn.modrinth.com,开发
+  - DOMAIN-SUFFIX,api.modrinth.com,开发
+  - DOMAIN-SUFFIX,curseforge.com,开发
+  - DOMAIN-SUFFIX,minecraft.curseforge.com,开发
+  - DOMAIN-SUFFIX,mediafilez.forgecdn.net,开发
+  - DOMAIN-SUFFIX,forgecdn.net,开发
+  - DOMAIN-SUFFIX,minecraftforge.net,开发
+  - DOMAIN-SUFFIX,files.minecraftforge.net,开发
+  - DOMAIN-SUFFIX,maven.minecraftforge.net,开发
+  - DOMAIN-SUFFIX,neoforged.net,开发
+  - DOMAIN-SUFFIX,maven.neoforged.net,开发
+  - DOMAIN-SUFFIX,fabricmc.net,开发
+  - DOMAIN-SUFFIX,maven.fabricmc.net,开发
+  - DOMAIN-SUFFIX,meta.fabricmc.net,开发
+  - DOMAIN-SUFFIX,quiltmc.org,开发
+  - DOMAIN-SUFFIX,maven.quiltmc.org,开发
+  - DOMAIN-SUFFIX,papermc.io,开发
+  - DOMAIN-SUFFIX,api.papermc.io,开发
+  - DOMAIN-SUFFIX,repo.papermc.io,开发
+  - DOMAIN-SUFFIX,maven.parchmentmc.org,开发
+  - DOMAIN-SUFFIX,spongepowered.org,开发
+  - DOMAIN-SUFFIX,repo.spongepowered.org,开发
+  - DOMAIN-SUFFIX,repo.maven.apache.org,开发
+  - DOMAIN-SUFFIX,repo1.maven.org,开发
+  - DOMAIN-SUFFIX,plugins.gradle.org,开发
+  - DOMAIN-SUFFIX,services.gradle.org,开发
+  - DOMAIN-SUFFIX,downloads.gradle.org,开发
+  - DOMAIN-SUFFIX,repo.gradle.org,开发
+  - DOMAIN-SUFFIX,jitpack.io,开发
 
 
   - DOMAIN-SUFFIX,github.com,GitHub

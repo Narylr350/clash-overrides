@@ -777,8 +777,8 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.ok(
-    rules.includes("RULE-SET,cdn,开发"),
-    "CDN ruleset should route through Dev"
+    rules.includes("RULE-SET,cdn,国内直连"),
+    "generic CDN ruleset should stay direct for domestic CDN coverage"
   );
 
   assert.ok(

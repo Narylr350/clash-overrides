@@ -142,7 +142,7 @@ assert.ok(rules.includes("DOMAIN-SUFFIX,apple.com,Apple"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,icloud.com,Apple"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,jsdelivr.net,开发"));
 assert.ok(!rules.includes("DOMAIN-SUFFIX,jsdelivr.net,国内直连"));
-assert.ok(rules.includes("RULE-SET,cdn,开发"));
+assert.ok(rules.includes("RULE-SET,cdn,国内直连"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,minecraft.net,开发"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,libraries.minecraft.net,开发"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,modrinth.com,开发"));

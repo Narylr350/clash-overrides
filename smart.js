@@ -725,7 +725,7 @@ function main(config) {
     "DOMAIN-SUFFIX,repo.gradle.org,开发",
     "DOMAIN-SUFFIX,jitpack.io,开发",
 
-    "RULE-SET,cdn,开发",
+    "RULE-SET,cdn,国内直连",
     "RULE-SET,adblock,广告拦截",
 
     "DOMAIN-SUFFIX,github.com,GitHub",

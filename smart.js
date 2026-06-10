@@ -669,11 +669,16 @@ function main(config) {
     "DOMAIN-SUFFIX,mi.com,国内直连",
     "DOMAIN-SUFFIX,huawei.com,国内直连",
 
+    "DOMAIN-SUFFIX,google.com,Google",
+    "DOMAIN-SUFFIX,googleapis.com,Google",
+    "DOMAIN-SUFFIX,googleusercontent.com,Google",
+    "DOMAIN-SUFFIX,gstatic.com,Google",
+    "DOMAIN-SUFFIX,googlezip.net,Google",
+
     "DOMAIN-SUFFIX,jsdelivr.net,开发",
     "DOMAIN-SUFFIX,unpkg.com,开发",
     "DOMAIN-SUFFIX,cdnjs.cloudflare.com,开发",
     "DOMAIN-SUFFIX,cdnjs.com,开发",
-    "DOMAIN-SUFFIX,gstatic.com,开发",
     "DOMAIN-SUFFIX,esm.sh,开发",
     "DOMAIN-SUFFIX,skypack.dev,开发",
 
@@ -725,7 +730,6 @@ function main(config) {
     "DOMAIN-SUFFIX,repo.gradle.org,开发",
     "DOMAIN-SUFFIX,jitpack.io,开发",
 
-    "RULE-SET,cdn,国内直连",
     "RULE-SET,adblock,广告拦截",
 
     "DOMAIN-SUFFIX,github.com,GitHub",
@@ -787,6 +791,7 @@ function main(config) {
     "RULE-SET,microsoft,微软服务",
     "RULE-SET,games-cn,国内直连",
     "RULE-SET,games,游戏服务",
+    "RULE-SET,cdn,国内直连",
     "RULE-SET,cn,国内直连",
     "GEOIP,CN,国内直连",
     "MATCH,漏网之鱼"

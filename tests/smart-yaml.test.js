@@ -140,6 +140,10 @@ assert.ok(rules.includes("DOMAIN-SUFFIX,pixiv.net,Pixiv"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,x.com,X"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,apple.com,Apple"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,icloud.com,Apple"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,googleapis.com,Google"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,google.com,Google"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,gstatic.com,Google"));
+assert.ok(!rules.includes("DOMAIN-SUFFIX,gstatic.com,开发"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,jsdelivr.net,开发"));
 assert.ok(!rules.includes("DOMAIN-SUFFIX,jsdelivr.net,国内直连"));
 assert.ok(rules.includes("RULE-SET,cdn,国内直连"));
@@ -182,6 +186,30 @@ assert.ok(
   rules.indexOf("DOMAIN-SUFFIX,minecraft.net,开发") < rules.indexOf("RULE-SET,games,游戏服务"),
   "explicit Dev rules should be ahead of generic game rules"
 );
+assert.ok(
+  rules.indexOf("DOMAIN-SUFFIX,googleapis.com,Google") <
+    rules.indexOf("RULE-SET,cdn,国内直连"),
+  "explicit Google API rules should be ahead of generic CDN rules"
+);
+for (const specificRule of [
+  "RULE-SET,adblock,广告拦截",
+  "RULE-SET,ai,AIGC",
+  "RULE-SET,google,Google",
+  "RULE-SET,github,GitHub",
+  "RULE-SET,apple,Apple",
+  "RULE-SET,tiktok,TikTok",
+  "RULE-SET,youtube,YouTube",
+  "RULE-SET,pixiv,Pixiv",
+  "RULE-SET,x,X",
+  "RULE-SET,telegram,Telegram",
+  "RULE-SET,microsoft,微软服务",
+  "RULE-SET,games,游戏服务"
+]) {
+  assert.ok(
+    rules.indexOf(specificRule) < rules.indexOf("RULE-SET,cdn,国内直连"),
+    `${specificRule} should be ahead of generic CDN rules`
+  );
+}
 assert.ok(rules.trimEnd().endsWith("- MATCH,漏网之鱼"), "last rule should be 漏网之鱼");
 
 const readmePath = path.join(__dirname, "..", "README.md");

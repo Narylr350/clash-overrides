@@ -771,6 +771,22 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.ok(
+    rules.includes("DOMAIN-SUFFIX,googleapis.com,Google"),
+    "Google APIs should explicitly route through Google before CDN rules"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,google.com,Google"),
+    "Chrome Google service domains should explicitly route through Google before CDN rules"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,gstatic.com,Google") &&
+      !rules.includes("DOMAIN-SUFFIX,gstatic.com,开发"),
+    "Google static assets should route through Google instead of Dev"
+  );
+
+  assert.ok(
     rules.includes("DOMAIN-SUFFIX,jsdelivr.net,开发") &&
       !rules.includes("DOMAIN-SUFFIX,jsdelivr.net,国内直连"),
     "common CDN domains should move to Dev"
@@ -815,6 +831,32 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     rules.indexOf("DOMAIN-SUFFIX,minecraft.net,开发") < rules.indexOf("RULE-SET,games,游戏服务"),
     "explicit Dev rules should stay ahead of generic game rules"
   );
+
+  assert.ok(
+    rules.indexOf("DOMAIN-SUFFIX,googleapis.com,Google") <
+      rules.indexOf("RULE-SET,cdn,国内直连"),
+    "explicit Google API rules should stay ahead of generic CDN direct rules"
+  );
+
+  for (const specificRule of [
+    "RULE-SET,adblock,广告拦截",
+    "RULE-SET,ai,AIGC",
+    "RULE-SET,google,Google",
+    "RULE-SET,github,GitHub",
+    "RULE-SET,apple,Apple",
+    "RULE-SET,tiktok,TikTok",
+    "RULE-SET,youtube,YouTube",
+    "RULE-SET,pixiv,Pixiv",
+    "RULE-SET,x,X",
+    "RULE-SET,telegram,Telegram",
+    "RULE-SET,microsoft,微软服务",
+    "RULE-SET,games,游戏服务"
+  ]) {
+    assert.ok(
+      rules.indexOf(specificRule) < rules.indexOf("RULE-SET,cdn,国内直连"),
+      `${specificRule} should stay ahead of generic CDN direct rules`
+    );
+  }
 
   assert.ok(
     rules.indexOf("DOMAIN-SUFFIX,tiktokv.com,TikTok") < rules.indexOf("RULE-SET,tiktok,TikTok"),

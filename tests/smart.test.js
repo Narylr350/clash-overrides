@@ -776,6 +776,20 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.ok(
+    rules.includes("DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini") &&
+      rules.indexOf("DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini") <
+        rules.indexOf("DOMAIN-SUFFIX,googleapis.com,Google"),
+    "Gemini API should stay ahead of generic Google API rules"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,gemini.google.com,Gemini") &&
+      rules.indexOf("DOMAIN-SUFFIX,gemini.google.com,Gemini") <
+        rules.indexOf("DOMAIN-SUFFIX,google.com,Google"),
+    "Gemini web should stay ahead of generic Google rules"
+  );
+
+  assert.ok(
     rules.includes("DOMAIN-SUFFIX,google.com,Google"),
     "Chrome Google service domains should explicitly route through Google before CDN rules"
   );

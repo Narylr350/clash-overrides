@@ -566,6 +566,10 @@ rules:
   - DOMAIN-SUFFIX,mi.com,国内直连
   - DOMAIN-SUFFIX,huawei.com,国内直连
 
+  - DOMAIN-SUFFIX,gemini.google.com,Gemini
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini
+  - DOMAIN-SUFFIX,ai.google.dev,Gemini
+
   - DOMAIN-SUFFIX,google.com,Google
   - DOMAIN-SUFFIX,googleapis.com,Google
   - DOMAIN-SUFFIX,googleusercontent.com,Google
@@ -653,10 +657,6 @@ rules:
   - DOMAIN-SUFFIX,anthropic.com,Claude
   - DOMAIN-SUFFIX,claude.ai,Claude
   - DOMAIN-SUFFIX,claudeusercontent.com,Claude
-
-  - DOMAIN-SUFFIX,gemini.google.com,Gemini
-  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini
-  - DOMAIN-SUFFIX,ai.google.dev,Gemini
 
   - DOMAIN-SUFFIX,copilot.microsoft.com,Copilot
   - DOMAIN-SUFFIX,sydney.bing.com,Copilot

@@ -140,6 +140,16 @@ assert.ok(rules.includes("DOMAIN-SUFFIX,pixiv.net,Pixiv"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,x.com,X"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,apple.com,Apple"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,icloud.com,Apple"));
+assert.ok(
+  rules.includes("DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini") &&
+    rules.indexOf("DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini") <
+      rules.indexOf("DOMAIN-SUFFIX,googleapis.com,Google")
+);
+assert.ok(
+  rules.includes("DOMAIN-SUFFIX,gemini.google.com,Gemini") &&
+    rules.indexOf("DOMAIN-SUFFIX,gemini.google.com,Gemini") <
+      rules.indexOf("DOMAIN-SUFFIX,google.com,Google")
+);
 assert.ok(rules.includes("DOMAIN-SUFFIX,googleapis.com,Google"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,google.com,Google"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,gstatic.com,Google"));

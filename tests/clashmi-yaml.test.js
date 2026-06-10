@@ -17,6 +17,11 @@ const path = require("node:path");
   assert.match(content, /- name: 开发/, "ClashMi YAML should keep Dev group");
   assert.match(content, /- name: Apple/, "ClashMi YAML should keep Apple group");
   assert.match(content, /DOMAIN-SUFFIX,apple\.com,Apple/, "ClashMi YAML should keep explicit Apple rules");
+  assert.ok(
+    content.indexOf("DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini") <
+      content.indexOf("DOMAIN-SUFFIX,googleapis.com,Google"),
+    "ClashMi YAML should keep Gemini API ahead of generic Google API rules"
+  );
   assert.match(content, /DOMAIN-SUFFIX,googleapis\.com,Google/, "ClashMi YAML should keep explicit Google API rules");
   assert.match(content, /DOMAIN-SUFFIX,google\.com,Google/, "ClashMi YAML should keep explicit Chrome Google service rules");
   assert.match(content, /DOMAIN-SUFFIX,gstatic\.com,Google/, "ClashMi YAML should route Google static assets through Google");

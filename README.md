@@ -87,6 +87,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 - `漏网之鱼` 默认跟随 `默认代理`
 - 国内游戏服务：`games-cn` 规则集固定走 `国内直连`
 - 海外游戏服务：Steam / Epic / Battle.net / Xbox / PlayStation / Nintendo / Riot / Ubisoft / GOG 等平台域名走 `海外游戏平台`，其他海外游戏域名走 `海外游戏`
+- `海外游戏平台` 默认跟随 `默认代理`；`海外游戏` 默认 `DIRECT`，避免和本机/路由器游戏加速器抢路由
 - 开发：覆盖 Minecraft 开发、Mod 平台、Gradle/Maven 仓库和 jsdelivr、unpkg、cdnjs、esm.sh 等明确列出的开发 CDN；泛用 `cdn` 规则集在广告和各服务规则之后兜底直连
 - GitHub / Apple / Google：默认保持脚本分流
 - Apple：默认 `DIRECT` 优先，仍可手动切到代理地区

@@ -517,8 +517,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.deepEqual(
     getGroup(result, "海外游戏").proxies,
     [
-      "默认代理",
-      "智能选择",
+      "DIRECT",
       "香港自动",
       "澳门自动",
       "新加坡自动",
@@ -533,9 +532,10 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "非洲自动",
       "大洋洲自动",
       "其他自动",
-      "DIRECT"
+      "智能选择",
+      "默认代理"
     ],
-    "Overseas game should target non-platform overseas game traffic"
+    "Overseas game should default to DIRECT to avoid fighting game accelerators"
   );
 
   assert.deepEqual(

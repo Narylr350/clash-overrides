@@ -11,7 +11,7 @@ function getGroupBlock(name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const match = content.match(
     new RegExp(
-      `- name: ${escaped}[\\s\\S]*?(?=\\n  - name: |\\nrule-providers:|\\nrules:|$)`
+      `- name: ${escaped}\\n[\\s\\S]*?(?=\\n  - name: |\\nrule-providers:|\\nrules:|$)`
     )
   );
   return match ? match[0] : "";
@@ -105,6 +105,25 @@ assert.deepEqual(getListValues(getGroupBlock("开发"), "proxies"), [
 assert.equal(getGroupBlock("游戏服务"), "", "游戏服务 aggregate should not exist");
 assert.ok(getGroupBlock("海外游戏平台"), "海外游戏平台 should exist");
 assert.ok(getGroupBlock("海外游戏"), "海外游戏 should exist");
+assert.deepEqual(getListValues(getGroupBlock("海外游戏"), "proxies"), [
+  "DIRECT",
+  "香港自动",
+  "澳门自动",
+  "新加坡自动",
+  "日本自动",
+  "韩国自动",
+  "台湾自动",
+  "美国自动",
+  "欧洲自动",
+  "亚洲其他自动",
+  "北美自动",
+  "南美自动",
+  "非洲自动",
+  "大洋洲自动",
+  "其他自动",
+  "智能选择",
+  "默认代理"
+]);
 
 assert.ok(/adblock:\n/.test(content), "adblock provider should exist");
 assert.ok(/ai:\n/.test(content), "ai provider should exist");

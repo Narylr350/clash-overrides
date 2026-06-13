@@ -495,8 +495,7 @@ function main(config) {
   ];
 
   const GAME_BODY_REGION_ORDER = [
-    "默认代理",
-    "智能选择",
+    "DIRECT",
     "香港自动",
     "澳门自动",
     "新加坡自动",
@@ -508,7 +507,8 @@ function main(config) {
     "亚洲其他自动",
     ...LOW_FREQUENCY_REGION_OPTIONS,
     "其他自动",
-    "DIRECT"
+    "智能选择",
+    "默认代理"
   ];
 
   const DEV_REGION_ORDER = [

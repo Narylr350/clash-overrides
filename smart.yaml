@@ -388,8 +388,7 @@ proxy-groups:
     type: select
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Game.png
     proxies:
-      - 默认代理
-      - 智能选择
+      - DIRECT
       - 香港自动
       - 澳门自动
       - 新加坡自动
@@ -404,7 +403,8 @@ proxy-groups:
       - 非洲自动
       - 大洋洲自动
       - 其他自动
-      - DIRECT
+      - 智能选择
+      - 默认代理
 
   - name: 开发
     type: select

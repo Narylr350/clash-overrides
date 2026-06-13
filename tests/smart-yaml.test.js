@@ -85,16 +85,11 @@ assert.deepEqual(getListValues(getGroupBlock("默认代理"), "proxies"), [
 
 assert.deepEqual(getListValues(getGroupBlock("开发"), "proxies"), [
   "默认代理",
-  "GitHub",
-  "微软服务",
-  "Google",
-  "游戏服务",
   "智能选择",
-  "美国自动",
-  "日本自动",
   "新加坡自动",
+  "日本自动",
+  "美国自动",
   "香港自动",
-  "澳门自动",
   "韩国自动",
   "台湾自动",
   "欧洲自动",
@@ -106,6 +101,10 @@ assert.deepEqual(getListValues(getGroupBlock("开发"), "proxies"), [
   "其他自动",
   "DIRECT"
 ]);
+
+assert.equal(getGroupBlock("游戏服务"), "", "游戏服务 aggregate should not exist");
+assert.ok(getGroupBlock("海外游戏平台"), "海外游戏平台 should exist");
+assert.ok(getGroupBlock("海外游戏"), "海外游戏 should exist");
 
 assert.ok(/adblock:\n/.test(content), "adblock provider should exist");
 assert.ok(/ai:\n/.test(content), "ai provider should exist");
@@ -163,6 +162,10 @@ assert.ok(rules.includes("DOMAIN-SUFFIX,modrinth.com,开发"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,maven.fabricmc.net,开发"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,repo.maven.apache.org,开发"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,plugins.gradle.org,开发"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,steampowered.com,海外游戏平台"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,epicgames.com,海外游戏平台"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,battle.net,海外游戏平台"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,xboxlive.com,海外游戏平台"));
 
 assert.ok(
   rules.indexOf("PROCESS-NAME,com.openai.chatgpt,OpenAI") < rules.indexOf("RULE-SET,ai,AIGC"),
@@ -193,9 +196,20 @@ assert.ok(
   "explicit Apple rules should be ahead of its ruleset"
 );
 assert.ok(
-  rules.indexOf("DOMAIN-SUFFIX,minecraft.net,开发") < rules.indexOf("RULE-SET,games,游戏服务"),
+  rules.indexOf("DOMAIN-SUFFIX,minecraft.net,开发") < rules.indexOf("RULE-SET,games,海外游戏"),
   "explicit Dev rules should be ahead of generic game rules"
 );
+assert.ok(
+  rules.indexOf("RULE-SET,games-cn,国内直连") <
+    rules.indexOf("DOMAIN-SUFFIX,steampowered.com,海外游戏平台"),
+  "domestic game rules should be ahead of overseas platform rules"
+);
+assert.ok(
+  rules.indexOf("DOMAIN-SUFFIX,steampowered.com,海外游戏平台") <
+    rules.indexOf("RULE-SET,games,海外游戏"),
+  "game platform rules should be ahead of generic overseas game rules"
+);
+assert.ok(!rules.includes("RULE-SET,games,游戏服务"));
 assert.ok(
   rules.indexOf("DOMAIN-SUFFIX,googleapis.com,Google") <
     rules.indexOf("RULE-SET,cdn,国内直连"),
@@ -213,7 +227,7 @@ for (const specificRule of [
   "RULE-SET,x,X",
   "RULE-SET,telegram,Telegram",
   "RULE-SET,microsoft,微软服务",
-  "RULE-SET,games,游戏服务"
+  "RULE-SET,games,海外游戏"
 ]) {
   assert.ok(
     rules.indexOf(specificRule) < rules.indexOf("RULE-SET,cdn,国内直连"),

@@ -488,38 +488,12 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     "Microsoft should stay direct-first but keep full manual options"
   );
 
-  assert.deepEqual(
-    getGroup(result, "游戏服务").proxies,
-    [
-      "DIRECT",
-      "默认代理",
-      "智能选择",
-      "香港自动",
-      "澳门自动",
-      "新加坡自动",
-      "日本自动",
-      "韩国自动",
-      "台湾自动",
-      "美国自动",
-      "欧洲自动",
-      "亚洲其他自动",
-      "北美自动",
-      "南美自动",
-      "非洲自动",
-      "大洋洲自动",
-      "其他自动"
-    ],
-    "Game should keep direct-first but retain full manual options"
-  );
+  assert.equal(getGroup(result, "游戏服务"), undefined, "Game service aggregate should not exist");
 
   assert.deepEqual(
-    getGroup(result, "开发").proxies,
+    getGroup(result, "海外游戏平台").proxies,
     [
       "默认代理",
-      "GitHub",
-      "微软服务",
-      "Google",
-      "游戏服务",
       "智能选择",
       "美国自动",
       "日本自动",
@@ -537,7 +511,54 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "其他自动",
       "DIRECT"
     ],
-    "Dev should provide more manual choices for development traffic"
+    "Game platform should target overseas platform traffic"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "海外游戏").proxies,
+    [
+      "默认代理",
+      "智能选择",
+      "香港自动",
+      "澳门自动",
+      "新加坡自动",
+      "日本自动",
+      "韩国自动",
+      "台湾自动",
+      "美国自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "Overseas game should target non-platform overseas game traffic"
+  );
+
+  assert.deepEqual(
+    getGroup(result, "开发").proxies,
+    [
+      "默认代理",
+      "智能选择",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "香港自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "Dev should keep a focused AIGC-like manual option list"
   );
 
   assert.deepEqual(
@@ -842,8 +863,45 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.ok(
-    rules.indexOf("DOMAIN-SUFFIX,minecraft.net,开发") < rules.indexOf("RULE-SET,games,游戏服务"),
+    rules.indexOf("DOMAIN-SUFFIX,minecraft.net,开发") < rules.indexOf("RULE-SET,games,海外游戏"),
     "explicit Dev rules should stay ahead of generic game rules"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,steampowered.com,海外游戏平台"),
+    "Steam should route through Game Platform"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,epicgames.com,海外游戏平台"),
+    "Epic Games should route through Game Platform"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,battle.net,海外游戏平台"),
+    "Battle.net should route through Game Platform"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,xboxlive.com,海外游戏平台"),
+    "Xbox Live should route through Game Platform"
+  );
+
+  assert.ok(
+    rules.indexOf("RULE-SET,games-cn,国内直连") <
+      rules.indexOf("DOMAIN-SUFFIX,steampowered.com,海外游戏平台"),
+    "domestic game rules should stay direct before overseas platform rules"
+  );
+
+  assert.ok(
+    rules.indexOf("DOMAIN-SUFFIX,steampowered.com,海外游戏平台") <
+      rules.indexOf("RULE-SET,games,海外游戏"),
+    "game platform rules should stay ahead of generic overseas game rules"
+  );
+
+  assert.ok(
+    !rules.includes("RULE-SET,games,游戏服务"),
+    "generic overseas game rules should not target the legacy aggregate group"
   );
 
   assert.ok(
@@ -864,7 +922,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     "RULE-SET,x,X",
     "RULE-SET,telegram,Telegram",
     "RULE-SET,microsoft,微软服务",
-    "RULE-SET,games,游戏服务"
+    "RULE-SET,games,海外游戏"
   ]) {
     assert.ok(
       rules.indexOf(specificRule) < rules.indexOf("RULE-SET,cdn,国内直连"),

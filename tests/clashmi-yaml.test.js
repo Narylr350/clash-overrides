@@ -15,6 +15,9 @@ const path = require("node:path");
 
   assert.match(content, /- name: 智能选择/, "ClashMi YAML should keep smart selection");
   assert.match(content, /- name: 开发/, "ClashMi YAML should keep Dev group");
+  assert.doesNotMatch(content, /- name: 游戏服务/, "ClashMi YAML should not keep Game Service aggregate group");
+  assert.match(content, /- name: 海外游戏平台/, "ClashMi YAML should keep Overseas Game Platform group");
+  assert.match(content, /- name: 海外游戏/, "ClashMi YAML should keep Overseas Game group");
   assert.match(content, /- name: Apple/, "ClashMi YAML should keep Apple group");
   assert.match(content, /DOMAIN-SUFFIX,apple\.com,Apple/, "ClashMi YAML should keep explicit Apple rules");
   assert.ok(
@@ -26,6 +29,7 @@ const path = require("node:path");
   assert.match(content, /DOMAIN-SUFFIX,google\.com,Google/, "ClashMi YAML should keep explicit Chrome Google service rules");
   assert.match(content, /DOMAIN-SUFFIX,gstatic\.com,Google/, "ClashMi YAML should route Google static assets through Google");
   assert.match(content, /DOMAIN-SUFFIX,minecraft\.net,开发/, "ClashMi YAML should keep explicit Dev rules");
+  assert.match(content, /DOMAIN-SUFFIX,steampowered\.com,海外游戏平台/, "ClashMi YAML should keep explicit game platform rules");
   assert.match(content, /DOMAIN-SUFFIX,jsdelivr\.net,开发/, "ClashMi YAML should route common CDNs through Dev");
   assert.match(content, /GEOIP,CN,国内直连/, "ClashMi YAML should keep lightweight CN fallback");
   assert.ok(content.trimEnd().endsWith("- MATCH,漏网之鱼"), "last rule should stay as 漏网之鱼");

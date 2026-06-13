@@ -144,6 +144,23 @@ assert.ok(!/adblock_plus:\n/.test(content), "adblock_plus should not exist");
 const rulesStart = content.indexOf("rules:\n");
 assert.notEqual(rulesStart, -1, "rules section should exist");
 const rules = content.slice(rulesStart);
+const ruleLines = rules
+  .split("\n")
+  .map((line) => line.trim())
+  .filter((line) => line.startsWith("- "))
+  .map((line) => line.slice(2));
+
+assert.equal(ruleLines[0], "RULE-SET,adblock,广告拦截", "adblock should be the first rule");
+assert.equal(
+  ruleLines[1],
+  "DOMAIN-SUFFIX,bilibili.com,国内直连",
+  "explicit domestic direct rules should follow adblock"
+);
+assert.ok(
+  ruleLines.indexOf("RULE-SET,games-cn,国内直连") <
+    ruleLines.indexOf("DOMAIN-SUFFIX,gemini.google.com,Gemini"),
+  "domestic game rules should be ahead of overseas service rules"
+);
 
 assert.ok(rules.includes("DOMAIN-SUFFIX,ab.chatgpt.com,OpenAI"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,ws.chatgpt.com,OpenAI"));
@@ -233,6 +250,10 @@ assert.ok(
   rules.indexOf("DOMAIN-SUFFIX,googleapis.com,Google") <
     rules.indexOf("RULE-SET,cdn,国内直连"),
   "explicit Google API rules should be ahead of generic CDN rules"
+);
+assert.ok(
+  rules.indexOf("RULE-SET,cn,国内直连") > rules.indexOf("RULE-SET,games,海外游戏"),
+  "generic CN direct rules should be behind specific service rules"
 );
 for (const specificRule of [
   "RULE-SET,adblock,广告拦截",

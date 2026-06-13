@@ -679,6 +679,17 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.ok(providers.x, "should keep x provider");
   assert.equal(providers.adblock_plus, undefined, "should remove duplicate adblock_plus provider");
 
+  assert.equal(rules[0], "RULE-SET,adblock,广告拦截", "adblock should be the first rule");
+  assert.equal(
+    rules[1],
+    "DOMAIN-SUFFIX,bilibili.com,国内直连",
+    "explicit domestic direct rules should follow adblock"
+  );
+  assert.ok(
+    rules.indexOf("RULE-SET,games-cn,国内直连") < rules.indexOf("DOMAIN-SUFFIX,gemini.google.com,Gemini"),
+    "domestic game rules should stay before overseas service rules"
+  );
+
   assert.equal(
     getGroup(result, "Claude").icon,
     "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/robot.svg",
@@ -908,6 +919,11 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     rules.indexOf("DOMAIN-SUFFIX,googleapis.com,Google") <
       rules.indexOf("RULE-SET,cdn,国内直连"),
     "explicit Google API rules should stay ahead of generic CDN direct rules"
+  );
+
+  assert.ok(
+    rules.indexOf("RULE-SET,cn,国内直连") > rules.indexOf("RULE-SET,games,海外游戏"),
+    "generic CN direct rules should stay behind specific service rules"
   );
 
   for (const specificRule of [

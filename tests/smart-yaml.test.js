@@ -150,16 +150,18 @@ const ruleLines = rules
   .filter((line) => line.startsWith("- "))
   .map((line) => line.slice(2));
 
-assert.equal(ruleLines[0], "RULE-SET,adblock,广告拦截", "adblock should be the first rule");
+assert.equal(ruleLines[0], "DOMAIN-SUFFIX,bilibili.com,国内直连", "explicit domestic rules should be first");
 assert.equal(
-  ruleLines[1],
-  "DOMAIN-SUFFIX,bilibili.com,国内直连",
-  "explicit domestic direct rules should follow adblock"
+  ruleLines[5],
+  "RULE-SET,games-cn,国内直连",
+  "domestic game rules should stay with explicit domestic direct rules"
 );
 assert.ok(
   ruleLines.indexOf("RULE-SET,games-cn,国内直连") <
-    ruleLines.indexOf("DOMAIN-SUFFIX,gemini.google.com,Gemini"),
-  "domestic game rules should be ahead of overseas service rules"
+    ruleLines.indexOf("RULE-SET,adblock,广告拦截") &&
+    ruleLines.indexOf("RULE-SET,adblock,广告拦截") <
+      ruleLines.indexOf("DOMAIN-SUFFIX,gemini.google.com,Gemini"),
+  "adblock should be after explicit direct exceptions and before ordinary service rules"
 );
 
 assert.ok(rules.includes("DOMAIN-SUFFIX,ab.chatgpt.com,OpenAI"));

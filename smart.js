@@ -677,14 +677,14 @@ function main(config) {
   };
 
   config.rules = [
-    "RULE-SET,adblock,广告拦截",
-
     "DOMAIN-SUFFIX,bilibili.com,国内直连",
     "DOMAIN-SUFFIX,baidu.com,国内直连",
     "DOMAIN-SUFFIX,qq.com,国内直连",
     "DOMAIN-SUFFIX,mi.com,国内直连",
     "DOMAIN-SUFFIX,huawei.com,国内直连",
     "RULE-SET,games-cn,国内直连",
+
+    "RULE-SET,adblock,广告拦截",
 
     "DOMAIN-SUFFIX,gemini.google.com,Gemini",
     "DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini",

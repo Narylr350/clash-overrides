@@ -679,15 +679,16 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.ok(providers.x, "should keep x provider");
   assert.equal(providers.adblock_plus, undefined, "should remove duplicate adblock_plus provider");
 
-  assert.equal(rules[0], "RULE-SET,adblock,广告拦截", "adblock should be the first rule");
+  assert.equal(rules[0], "DOMAIN-SUFFIX,bilibili.com,国内直连", "explicit domestic rules should be first");
   assert.equal(
-    rules[1],
-    "DOMAIN-SUFFIX,bilibili.com,国内直连",
-    "explicit domestic direct rules should follow adblock"
+    rules[5],
+    "RULE-SET,games-cn,国内直连",
+    "domestic game rules should stay with explicit domestic direct rules"
   );
   assert.ok(
-    rules.indexOf("RULE-SET,games-cn,国内直连") < rules.indexOf("DOMAIN-SUFFIX,gemini.google.com,Gemini"),
-    "domestic game rules should stay before overseas service rules"
+    rules.indexOf("RULE-SET,games-cn,国内直连") < rules.indexOf("RULE-SET,adblock,广告拦截") &&
+      rules.indexOf("RULE-SET,adblock,广告拦截") < rules.indexOf("DOMAIN-SUFFIX,gemini.google.com,Gemini"),
+    "adblock should stay after explicit direct exceptions and before ordinary service rules"
   );
 
   assert.equal(

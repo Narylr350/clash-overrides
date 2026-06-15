@@ -577,12 +577,12 @@ proxy-groups:
 
 
 rules:
-
   - DOMAIN-SUFFIX,bilibili.com,国内直连
   - DOMAIN-SUFFIX,baidu.com,国内直连
   - DOMAIN-SUFFIX,qq.com,国内直连
   - DOMAIN-SUFFIX,mi.com,国内直连
   - DOMAIN-SUFFIX,huawei.com,国内直连
+
 
   - DOMAIN-SUFFIX,gemini.google.com,Gemini
   - DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini

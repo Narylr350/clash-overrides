@@ -45,6 +45,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 
 - `默认代理`
 - `AIGC`
+- `OpenCode`
 - `GitHub`
 - `Apple`
 - `TikTok`
@@ -98,7 +99,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 
 - `智能选择` 会包含所有真实节点，包括未归类节点；订阅源里的流量、到期、官网、更新订阅等说明项会被排除
 - `其他自动` 用来承接没有归入任何已知地区/区域的剩余节点
-- AI 服务使用统一候选逻辑，`OpenAI / Claude / Gemini / Copilot` 只做少量专用偏置
+- AI 服务使用统一候选逻辑，`OpenAI / Claude / Gemini / OpenCode / Copilot` 只做少量专用偏置
 - `TikTok / YouTube / Pixiv / X` 作为内容/推荐敏感服务提供独立入口，便于按地区单独调优
 - `TikTok` 同时也是地区和环境检测都更敏感的服务，建议单独观察表现
 - `Pixiv` 默认更偏日本地区顺序

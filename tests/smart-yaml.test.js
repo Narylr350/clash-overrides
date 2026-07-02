@@ -102,6 +102,27 @@ assert.deepEqual(getListValues(getGroupBlock("开发"), "proxies"), [
   "DIRECT"
 ]);
 
+assert.deepEqual(getListValues(getGroupBlock("OpenCode"), "proxies"), [
+  "AIGC",
+  "默认代理",
+  "智能选择",
+  "新加坡自动",
+  "日本自动",
+  "美国自动",
+  "香港自动",
+  "澳门自动",
+  "韩国自动",
+  "台湾自动",
+  "欧洲自动",
+  "亚洲其他自动",
+  "北美自动",
+  "南美自动",
+  "非洲自动",
+  "大洋洲自动",
+  "其他自动",
+  "DIRECT"
+]);
+
 assert.equal(getGroupBlock("游戏服务"), "", "游戏服务 aggregate should not exist");
 assert.ok(getGroupBlock("海外游戏平台"), "海外游戏平台 should exist");
 assert.ok(getGroupBlock("海外游戏"), "海外游戏 should exist");
@@ -177,6 +198,8 @@ assert.ok(rules.includes("DOMAIN-SUFFIX,pixiv.net,Pixiv"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,x.com,X"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,apple.com,Apple"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,icloud.com,Apple"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,opencode.ai,OpenCode"));
+assert.ok(rules.includes("DOMAIN-SUFFIX,models.dev,OpenCode"));
 assert.ok(
   rules.includes("DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini") &&
     rules.indexOf("DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini") <
@@ -228,6 +251,10 @@ assert.ok(
 assert.ok(
   rules.indexOf("DOMAIN-SUFFIX,github.com,GitHub") < rules.indexOf("RULE-SET,github,GitHub"),
   "explicit GitHub rules should be ahead of its ruleset"
+);
+assert.ok(
+  rules.indexOf("DOMAIN-SUFFIX,opencode.ai,OpenCode") < rules.indexOf("RULE-SET,ai,AIGC"),
+  "explicit OpenCode rules should be ahead of generic AI rules"
 );
 assert.ok(
   rules.indexOf("DOMAIN-SUFFIX,apple.com,Apple") < rules.indexOf("RULE-SET,apple,Apple"),

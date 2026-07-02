@@ -12,6 +12,7 @@ const ICON = {
   ai: icon("AI"),
   openai: icon("ChatGPT"),
   claude: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/robot.svg",
+  opencode: icon("AI"),
   google: icon("Google"),
   gemini: "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/gem.svg",
   microsoft: icon("Microsoft"),
@@ -536,6 +537,7 @@ function main(config) {
     buildSelectGroup("OpenAI", ICON.openai, OPENAI_REGION_ORDER),
     buildSelectGroup("Claude", ICON.claude, OPENAI_REGION_ORDER),
     buildSelectGroup("Gemini", ICON.gemini, OPENAI_REGION_ORDER),
+    buildSelectGroup("OpenCode", ICON.opencode, OPENAI_REGION_ORDER),
     buildSelectGroup("Copilot", ICON.copilot, COPILOT_REGION_ORDER),
     buildSelectGroup("GitHub", ICON.github, GITHUB_REGION_ORDER),
     buildSelectGroup("Apple", ICON.apple, APPLE_REGION_ORDER),
@@ -817,6 +819,9 @@ function main(config) {
 
     "DOMAIN-SUFFIX,copilot.microsoft.com,Copilot",
     "DOMAIN-SUFFIX,sydney.bing.com,Copilot",
+
+    "DOMAIN-SUFFIX,opencode.ai,OpenCode",
+    "DOMAIN-SUFFIX,models.dev,OpenCode",
 
     "DOMAIN-SUFFIX,tiktokv.com,TikTok",
     "DOMAIN-SUFFIX,tiktokcdn.com,TikTok",

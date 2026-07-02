@@ -150,6 +150,29 @@ proxy-groups:
       - 其他自动
       - DIRECT
 
+  - name: OpenCode
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/AI.png
+    proxies:
+      - AIGC
+      - 默认代理
+      - 智能选择
+      - 新加坡自动
+      - 日本自动
+      - 美国自动
+      - 香港自动
+      - 澳门自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 北美自动
+      - 南美自动
+      - 非洲自动
+      - 大洋洲自动
+      - 其他自动
+      - DIRECT
+
   - name: Copilot
     type: select
     icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/compass-drafting.svg
@@ -714,6 +737,9 @@ rules:
 
   - DOMAIN-SUFFIX,copilot.microsoft.com,Copilot
   - DOMAIN-SUFFIX,sydney.bing.com,Copilot
+
+  - DOMAIN-SUFFIX,opencode.ai,OpenCode
+  - DOMAIN-SUFFIX,models.dev,OpenCode
 
   - DOMAIN-SUFFIX,tiktokv.com,TikTok
   - DOMAIN-SUFFIX,tiktokcdn.com,TikTok

@@ -344,6 +344,31 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.deepEqual(
+    getGroup(result, "OpenCode").proxies,
+    [
+      "AIGC",
+      "默认代理",
+      "智能选择",
+      "新加坡自动",
+      "日本自动",
+      "美国自动",
+      "香港自动",
+      "澳门自动",
+      "韩国自动",
+      "台湾自动",
+      "欧洲自动",
+      "亚洲其他自动",
+      "北美自动",
+      "南美自动",
+      "非洲自动",
+      "大洋洲自动",
+      "其他自动",
+      "DIRECT"
+    ],
+    "OpenCode should keep full manual options after AIGC and 默认代理"
+  );
+
+  assert.deepEqual(
     getGroup(result, "Copilot").proxies,
     [
       "AIGC",
@@ -774,6 +799,16 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   );
 
   assert.ok(
+    rules.includes("DOMAIN-SUFFIX,opencode.ai,OpenCode"),
+    "OpenCode should explicitly cover opencode.ai"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,models.dev,OpenCode"),
+    "OpenCode should explicitly cover models.dev"
+  );
+
+  assert.ok(
     rules.includes("DOMAIN-SUFFIX,tiktokv.com,TikTok"),
     "TikTok should explicitly cover tiktokv.com"
   );
@@ -971,6 +1006,12 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     rules.includes("DOMAIN-SUFFIX,claude.ai,Claude") &&
       rules.indexOf("DOMAIN-SUFFIX,claude.ai,Claude") < rules.indexOf("RULE-SET,ai,AIGC"),
     "explicit Claude domains should stay ahead of generic AI rules"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN-SUFFIX,opencode.ai,OpenCode") &&
+      rules.indexOf("DOMAIN-SUFFIX,opencode.ai,OpenCode") < rules.indexOf("RULE-SET,ai,AIGC"),
+    "explicit OpenCode domains should stay ahead of generic AI rules"
   );
 
   assert.ok(

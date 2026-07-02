@@ -68,6 +68,7 @@
 - `cdn` / `cn` / `GEOIP,CN` 属于宽泛国内兜底，默认靠后。
 - `clashmi.yaml` 不依赖远程 `rule-providers`。
 - 旧工作流文件未发现；本项目以 `.ai/PROJECT.md` 作为长期基线，以 Git commit 作为进度和交接事实。
+- 完成任务并通过必要验证后，允许 AI 直接提交并推送到 GitHub；若工作区包含无关改动，必须只提交当前任务相关文件。
 - 执行层 skill 可在 work 中使用：
   - `superpowers:systematic-debugging`：用于误判、客户端异常、测试失败排查。
   - `superpowers:test-driven-development`：用于新增规则行为或 bugfix 时先补回归测试。

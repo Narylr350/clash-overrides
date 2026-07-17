@@ -172,9 +172,9 @@ const ruleLines = rules
   .map((line) => line.slice(2));
 
 assert.equal(ruleLines[0], "DOMAIN-SUFFIX,bilibili.com,国内直连", "explicit domestic rules should be first");
-assert.equal(
-  ruleLines[5],
-  "RULE-SET,games-cn,国内直连",
+assert.ok(
+  ruleLines.indexOf("RULE-SET,games-cn,国内直连") >
+    ruleLines.indexOf("DOMAIN-SUFFIX,huawei.com,国内直连"),
   "domestic game rules should stay with explicit domestic direct rules"
 );
 assert.ok(
@@ -200,6 +200,14 @@ assert.ok(rules.includes("DOMAIN-SUFFIX,apple.com,Apple"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,icloud.com,Apple"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,opencode.ai,OpenCode"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,models.dev,OpenCode"));
+assert.ok(rules.includes("DOMAIN,frontier.snssdk.com,国内直连"));
+assert.ok(
+  rules.indexOf("DOMAIN,frontier.snssdk.com,国内直连") <
+    rules.indexOf("RULE-SET,adblock,广告拦截") &&
+    rules.indexOf("DOMAIN,frontier.snssdk.com,国内直连") <
+      rules.indexOf("RULE-SET,tiktok,TikTok"),
+  "Douyin frontier should be ahead of adblock and generic TikTok rules"
+);
 assert.ok(
   rules.includes("DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini") &&
     rules.indexOf("DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini") <

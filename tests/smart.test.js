@@ -705,9 +705,9 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.equal(providers.adblock_plus, undefined, "should remove duplicate adblock_plus provider");
 
   assert.equal(rules[0], "DOMAIN-SUFFIX,bilibili.com,国内直连", "explicit domestic rules should be first");
-  assert.equal(
-    rules[5],
-    "RULE-SET,games-cn,国内直连",
+  assert.ok(
+    rules.indexOf("RULE-SET,games-cn,国内直连") >
+      rules.indexOf("DOMAIN-SUFFIX,huawei.com,国内直连"),
     "domestic game rules should stay with explicit domestic direct rules"
   );
   assert.ok(
@@ -806,6 +806,19 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.ok(
     rules.includes("DOMAIN-SUFFIX,models.dev,OpenCode"),
     "OpenCode should explicitly cover models.dev"
+  );
+
+  assert.ok(
+    rules.includes("DOMAIN,frontier.snssdk.com,国内直连"),
+    "Douyin frontier should explicitly stay direct"
+  );
+
+  assert.ok(
+    rules.indexOf("DOMAIN,frontier.snssdk.com,国内直连") <
+      rules.indexOf("RULE-SET,adblock,广告拦截") &&
+      rules.indexOf("DOMAIN,frontier.snssdk.com,国内直连") <
+        rules.indexOf("RULE-SET,tiktok,TikTok"),
+    "Douyin frontier should stay ahead of adblock and generic TikTok rules"
   );
 
   assert.ok(

@@ -725,6 +725,7 @@ rules:
   - DOMAIN-SUFFIX,qq.com,国内直连
   - DOMAIN-SUFFIX,mi.com,国内直连
   - DOMAIN-SUFFIX,huawei.com,国内直连
+  - DOMAIN,frontier.snssdk.com,国内直连
   - RULE-SET,games-cn,国内直连
 
   - RULE-SET,adblock,广告拦截

@@ -28,6 +28,10 @@ const path = require("node:path");
     "region source should keep subscription metadata keywords in one maintainable list"
   );
   assert.ok(
+    source.subscriptionInfoKeywords.includes("分割"),
+    "region source should exclude subscription separator nodes"
+  );
+  assert.ok(
     source.regions.find((region) => region.name === "北美自动")?.keywords.includes("canada"),
     "region source should keep Canada in the maintainable keyword list"
   );

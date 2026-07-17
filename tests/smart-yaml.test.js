@@ -38,8 +38,8 @@ assert.ok(getGroupBlock("其他自动"), "其他自动 should exist");
 assert.ok(getGroupBlock("开发"), "开发 should exist");
 assert.match(
   getGroupBlock("智能选择"),
-  /exclude-filter: '.+剩余流量.+更新订阅/,
-  "智能选择 should exclude subscription metadata nodes"
+  /exclude-filter: '.+剩余流量.+更新订阅.+分割/,
+  "智能选择 should exclude subscription metadata and separator nodes"
 );
 assert.match(
   getGroupBlock("欧洲自动"),

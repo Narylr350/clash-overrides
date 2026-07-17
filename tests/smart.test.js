@@ -55,6 +55,7 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
       "澳大利亚",
       "尼日利亚",
       "剩余流量: 766.7 GB",
+      "--------分割--------",
       "MY-01",
       "Plain-Relay"
     ])
@@ -130,7 +131,8 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     "剩余流量: 65.36 GB",
     "套餐到期: 2026-12-31",
     "官网: example.com",
-    "剩余流量: 766.7 GB"
+    "剩余流量: 766.7 GB",
+    "--------分割--------"
   ]) {
     assert.ok(
       !getGroup(result, "智能选择").proxies.includes(subscriptionInfoName),

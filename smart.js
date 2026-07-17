@@ -45,7 +45,7 @@ const ICON = {
 
 const SUBSCRIPTION_INFO_PATTERNS = [
   /(^|[\s._\-\[\]\(\)【】])(?:traffic|quota|expire|expires|expired|expiration|reset|subscription|sub\s*info|homepage|website|official\s*site|update\s*subscription)(?=$|[\s._\-\[\]\(\)【】]|\d)/i,
-  /剩余流量|流量|套餐|到期|过期|有效期|重置|官网|网址|主页|更新订阅|刷新订阅|订阅信息|订阅链接/i
+  /剩余流量|流量|套餐|到期|过期|有效期|重置|官网|网址|主页|更新订阅|刷新订阅|订阅信息|订阅链接|分割/i
 ];
 
 const REGION_DEFS = [

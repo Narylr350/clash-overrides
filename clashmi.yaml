@@ -33,6 +33,16 @@ proxy-groups:
       - DIRECT
       - 默认代理
 
+  - name: JetBrains 下载
+    type: fallback
+    hidden: true
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg
+    url: https://download.jetbrains.com/
+    interval: 300
+    proxies:
+      - DIRECT
+      - 默认代理
+
   - name: 漏网之鱼
     type: select
     icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/fish.svg
@@ -617,6 +627,10 @@ rules:
   - DOMAIN-SUFFIX,googleusercontent.com,Google
   - DOMAIN-SUFFIX,gstatic.com,Google
   - DOMAIN-SUFFIX,googlezip.net,Google
+
+  - DOMAIN-SUFFIX,download.jetbrains.com,JetBrains 下载
+  - DOMAIN-SUFFIX,download-cdn.jetbrains.com,JetBrains 下载
+  - DOMAIN-SUFFIX,download-cdn.clf.jetbrains.com.cn,JetBrains 下载
 
   - DOMAIN-SUFFIX,jsdelivr.net,开发
   - DOMAIN-SUFFIX,unpkg.com,开发

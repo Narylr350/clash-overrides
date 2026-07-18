@@ -90,6 +90,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 - 海外游戏服务：Steam / Epic / Battle.net / Xbox / PlayStation / Nintendo / Riot / Ubisoft / GOG 等平台域名走 `海外游戏平台`，其他海外游戏域名走 `海外游戏`
 - `海外游戏平台` 默认跟随 `默认代理`；`海外游戏` 默认 `DIRECT`，避免和本机/路由器游戏加速器抢路由
 - 开发：覆盖 Minecraft 开发、Mod 平台、Gradle/Maven 仓库和 jsdelivr、unpkg、cdnjs、esm.sh 等明确列出的开发 CDN；泛用 `cdn` 规则集在广告和各服务规则之后兜底直连
+- JetBrains：下载页和产品 API 保持普通分流；安装包下载使用隐藏的内部回退策略，优先直连，失败时自动改走 `默认代理`，不会增加可见代理组
 - GitHub / Apple / Google：默认保持脚本分流
 - Apple：默认 `DIRECT` 优先，仍可手动切到代理地区
 - 微软服务：默认 `DIRECT`

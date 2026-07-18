@@ -531,15 +531,6 @@ function main(config) {
   config["proxy-groups"] = [
     buildSelectGroup("默认代理", ICON.proxy, DEFAULT_REGION_OPTIONS),
     buildSelectGroup("国内直连", ICON.china, ["DIRECT", "默认代理"]),
-    {
-      name: "JetBrains 下载",
-      type: "fallback",
-      hidden: true,
-      icon: ICON.dev,
-      url: "https://download.jetbrains.com/",
-      interval: TEST_INTERVAL,
-      proxies: ["DIRECT", "默认代理"]
-    },
     buildSelectGroup("漏网之鱼", ICON.final, ["默认代理", ...DEFAULT_REGION_OPTIONS]),
     buildSelectGroup("广告拦截", ICON.adblock, ["REJECT", "DIRECT", "默认代理"]),
     buildSelectGroup("AIGC", ICON.ai, AI_REGION_ORDER),
@@ -708,9 +699,9 @@ function main(config) {
     "DOMAIN-SUFFIX,gstatic.com,Google",
     "DOMAIN-SUFFIX,googlezip.net,Google",
 
-    "DOMAIN-SUFFIX,download.jetbrains.com,JetBrains 下载",
-    "DOMAIN-SUFFIX,download-cdn.jetbrains.com,JetBrains 下载",
-    "DOMAIN-SUFFIX,download-cdn.clf.jetbrains.com.cn,JetBrains 下载",
+    "DOMAIN-SUFFIX,download.jetbrains.com,开发",
+    "DOMAIN-SUFFIX,download-cdn.jetbrains.com,开发",
+    "DOMAIN-SUFFIX,download-cdn.clf.jetbrains.com.cn,开发",
 
     "DOMAIN-SUFFIX,jsdelivr.net,开发",
     "DOMAIN-SUFFIX,unpkg.com,开发",

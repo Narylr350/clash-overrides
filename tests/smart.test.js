@@ -689,18 +689,12 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   const result = main(makeConfig(["US-01"]));
   const providers = result["rule-providers"];
   const rules = result.rules;
-  const jetbrainsDownload = getGroup(result, "JetBrains 下载");
 
-  assert.ok(jetbrainsDownload, "JetBrains 下载 should exist");
-  assert.equal(jetbrainsDownload.type, "fallback", "JetBrains downloads should fail over automatically");
-  assert.equal(jetbrainsDownload.hidden, true, "internal JetBrains routing should not add a visible group");
-  assert.deepEqual(
-    jetbrainsDownload.proxies,
-    ["DIRECT", "默认代理"],
-    "JetBrains downloads should prefer direct and fall back to the default proxy"
+  assert.equal(
+    getGroup(result, "JetBrains 下载"),
+    undefined,
+    "JetBrains routing should reuse Dev instead of adding a dedicated group"
   );
-  assert.equal(jetbrainsDownload.url, "https://download.jetbrains.com/");
-  assert.equal(jetbrainsDownload.interval, 300);
 
   assert.ok(providers.adblock, "should keep adblock provider");
   assert.ok(providers.ai, "should keep ai provider");
@@ -906,8 +900,8 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     "download-cdn.jetbrains.com",
     "download-cdn.clf.jetbrains.com.cn"
   ]) {
-    const jetbrainsRule = `DOMAIN-SUFFIX,${domain},JetBrains 下载`;
-    assert.ok(rules.includes(jetbrainsRule), `${domain} should use the JetBrains download fallback`);
+    const jetbrainsRule = `DOMAIN-SUFFIX,${domain},开发`;
+    assert.ok(rules.includes(jetbrainsRule), `${domain} should reuse Dev's proxy-first routing`);
     assert.ok(
       rules.indexOf(jetbrainsRule) < rules.indexOf("RULE-SET,cdn,国内直连"),
       `${domain} should be handled before the generic CDN direct rules`

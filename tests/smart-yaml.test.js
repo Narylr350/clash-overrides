@@ -36,13 +36,11 @@ assert.ok(getGroupBlock("非洲自动"), "非洲自动 should exist");
 assert.ok(getGroupBlock("大洋洲自动"), "大洋洲自动 should exist");
 assert.ok(getGroupBlock("其他自动"), "其他自动 should exist");
 assert.ok(getGroupBlock("开发"), "开发 should exist");
-const jetbrainsDownload = getGroupBlock("JetBrains 下载");
-assert.ok(jetbrainsDownload, "JetBrains 下载 should exist");
-assert.match(jetbrainsDownload, /type: fallback/, "JetBrains downloads should fail over automatically");
-assert.match(jetbrainsDownload, /hidden: true/, "internal JetBrains routing should not add a visible group");
-assert.match(jetbrainsDownload, /url: https:\/\/download\.jetbrains\.com\//);
-assert.match(jetbrainsDownload, /interval: 300/);
-assert.deepEqual(getListValues(jetbrainsDownload, "proxies"), ["DIRECT", "默认代理"]);
+assert.equal(
+  getGroupBlock("JetBrains 下载"),
+  "",
+  "JetBrains routing should reuse Dev instead of adding a dedicated group"
+);
 assert.match(
   getGroupBlock("智能选择"),
   /exclude-filter: '.+剩余流量.+更新订阅.+分割/,
@@ -236,8 +234,8 @@ for (const domain of [
   "download-cdn.jetbrains.com",
   "download-cdn.clf.jetbrains.com.cn"
 ]) {
-  const jetbrainsRule = `DOMAIN-SUFFIX,${domain},JetBrains 下载`;
-  assert.ok(rules.includes(jetbrainsRule), `${domain} should use the JetBrains download fallback`);
+  const jetbrainsRule = `DOMAIN-SUFFIX,${domain},开发`;
+  assert.ok(rules.includes(jetbrainsRule), `${domain} should reuse Dev's proxy-first routing`);
   assert.ok(
     rules.indexOf(jetbrainsRule) < rules.indexOf("RULE-SET,cdn,国内直连"),
     `${domain} should be handled before the generic CDN direct rules`

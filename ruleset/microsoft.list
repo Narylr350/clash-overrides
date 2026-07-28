@@ -64,6 +64,7 @@ vsmarketplacebadge.apphb.com
 +.aztask.cn
 +.azure
 +.azure-api.cn
++.azure-api.net
 +.azure-apihub.cn
 +.azure-apim.net
 +.azure-automation.cn
@@ -88,6 +89,7 @@ vsmarketplacebadge.apphb.com
 +.azure-dns.info
 +.azure-dns.net
 +.azure-dns.org
++.azure-mobile.cn
 +.azure-mobile.net
 +.azure-sphere.com
 +.azure-test.net
@@ -112,6 +114,7 @@ vsmarketplacebadge.apphb.com
 +.azuredns-prd.org
 +.azureedge-test.net
 +.azureedge.net
++.azureedge.us
 +.azurefd.net
 +.azurefd.us
 +.azurehdinsight.cn
@@ -129,6 +132,7 @@ vsmarketplacebadge.apphb.com
 +.azureserviceprofiler.com
 +.azuresmartspaces.net
 +.azurestackvalidation.com
++.azurestaticapps.net
 +.azurewebsites.net
 +.b.akamaiedge.net
 +.b2clogin.cn
@@ -193,6 +197,8 @@ vsmarketplacebadge.apphb.com
 +.cloudapp.net
 +.cloudappsecurity.com
 +.codethemicrobit.com
++.copilot-stg.com
++.copilot.com
 +.cortana.ai
 +.cortanaanalytics.com
 +.cortanaskills.com
@@ -244,10 +250,12 @@ vsmarketplacebadge.apphb.com
 +.gfx.ms
 +.gh.io
 +.ghcr.io
++.ghe.com
 +.gigjam.com
 +.git.io
 +.github.ai
 +.github.blog
++.github.career
 +.github.com
 +.github.community
 +.github.dev
@@ -643,6 +651,10 @@ vsmarketplacebadge.apphb.com
 +.skypeassets.com
 +.skypeassets.net
 +.skypeforbusiness.com
++.sovcloud-mx.cn
++.sovcloud-static.cn
++.sovcloud-usercontent.cn
++.sovcloud.cn
 +.spo-msedge.net
 +.spoprod-a.akamaihd.net
 +.sprinklesapp.com
@@ -697,6 +709,8 @@ vsmarketplacebadge.apphb.com
 +.vscode-unpkg.net
 +.vscode-webview.net
 +.vscode.dev
++.vscodeedu.app
++.vscodeedu.com
 +.wbd.ms
 +.what-fan.net
 +.windows

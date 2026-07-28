@@ -22,6 +22,7 @@ flightsimulator.azureedge.net
 gog-cdn-lumen.secure2.footprint.net
 gog-cdn.akamaized.net
 gog.salesmanago.com
+hb.imgix.net
 img-prod-cms-rt-microsoft-com.akamaized.net
 lazer.ppy.sh
 login.live.com
@@ -41,7 +42,9 @@ spectator.ppy.sh
 st-bak.viv.wanwang.space
 steamcloudsweden.blob.core.windows.net
 steamcommunity-a.akamaihd.net.edgesuite.net
+steamugcquincy.blob.core.windows.net
 store-images.s-microsoft.com
+supercell.zendesk.com
 tlu.dl.delivery.mp.microsoft.com
 trts.baishancdnx.cn
 ubisoft.siteintercept.qualtrics.com
@@ -82,6 +85,7 @@ xz.pphimalayanrt.com
 +.2kweb.online
 +.3dmjiasu.com
 +.3lateral.com
++.573.jp
 +.99jiasu.net
 +.ac-pocketcamp.com
 +.acesofthunder.net
@@ -179,6 +183,7 @@ xz.pphimalayanrt.com
 +.crossout.net
 +.crsed.net
 +.crysis.jp
++.csgo.com.cn
 +.csgo.wmsj.cn
 +.cubicmotion.com
 +.cubicodyssey.game
@@ -210,6 +215,8 @@ xz.pphimalayanrt.com
 +.dodi-repacks.site
 +.donkeykongcountryreturns.com
 +.doom.com
++.dota2.com
++.dota2.com.cn
 +.dota2.wmsj.cn
 +.dragonage.com
 +.dragonagekeep.com
@@ -254,8 +261,6 @@ xz.pphimalayanrt.com
 +.electronicarts.fr
 +.embark-studios.com
 +.embark.games
-+.eneba.com
-+.eneba.games
 +.enlisted.net
 +.epicgames.com
 +.epicgames.dev
@@ -271,6 +276,7 @@ xz.pphimalayanrt.com
 +.faceit.com
 +.fanatical.com
 +.fhyx.com
++.ficgs.com
 +.fifastreet.com
 +.fifastreet3.com
 +.fire-emblem-heroes.com
@@ -298,6 +304,8 @@ xz.pphimalayanrt.com
 +.gamedownloads-rockstargames-com.akamaized.net
 +.gamepass.com
 +.gamesfirsthelsinki.com
++.gamesplanet.com
++.gametap.com
 +.gangwan.com
 +.garena.co.id
 +.garena.co.th
@@ -323,13 +331,16 @@ xz.pphimalayanrt.com
 +.gloryofheracles.com
 +.goblocks.com
 +.goblox.com
++.gog-services.com
 +.gog-statics.com
 +.gog.com
 +.gog.qtlglb.com
++.gogalaxy.com
 +.golink.com
 +.golinkapi.com
 +.golinkcn.com
 +.gooblox.com
++.gpstatic.com
 +.gstore.val.manlaxy.com
 +.guaiku.com
 +.hackyourconsole.com
@@ -362,9 +373,24 @@ xz.pphimalayanrt.com
 +.joinsquad.com
 +.joyjoy.net
 +.juequling.com
++.kgisystems.com
 +.kirbysepicyarn.com
 +.kirbysuperstarultra.com
++.kiwi.jp
 +.kk1.vip
++.konami-igaming.online
++.konami.co.jp
++.konami.com
++.konami.net
++.konami.org
++.konamicrossmedia.com
++.konamigaming.com
++.konamigaming.net
++.konamigaming.online
++.konamionline.com
++.konamiopen.jp
++.konamisportsclub.jp
++.konamistyle.jp
 +.kraftonde.com
 +.kyurem.com
 +.lb-cdn.maj-soul.com
@@ -476,7 +502,9 @@ xz.pphimalayanrt.com
 +.nexon.co.jp
 +.nexon.com
 +.nexon.io
++.nexon.net
 +.nexoncdn.co.kr
++.nexongames.co.kr
 +.nexus-cdn.com
 +.nexusmods.com
 +.nfsworld.com
@@ -619,6 +647,8 @@ xz.pphimalayanrt.com
 +.reachthefinals.com
 +.realityscan.com
 +.renovacionxboxlive.com
++.resella.jp
++.resellablue.com
 +.rgpub.io
 +.riot-games.com
 +.riot.com
@@ -731,6 +761,7 @@ xz.pphimalayanrt.com
 +.steamchina.com
 +.steamcommunity-a.akamaihd.net
 +.steamcommunity.com
++.steamconnecttest.com
 +.steamcontent.com
 +.steamcontent.tnkjmec.com
 +.steamdb.info
@@ -813,6 +844,7 @@ xz.pphimalayanrt.com
 +.uoherald.com
 +.uplay.com
 +.uu.163.com
++.valve.net
 +.valvesoftware.com
 +.videos-rockstargames-com.akamaized.net
 +.vigorgame.com
@@ -895,6 +927,7 @@ xz.pphimalayanrt.com
 +.yostar.net
 +.yostarplat.com
 +.yuelun.com
++.yugioh-card.com
 +.zenlesszonezero.com
 +.zynga.com
 +.zyngaplayersupport.com

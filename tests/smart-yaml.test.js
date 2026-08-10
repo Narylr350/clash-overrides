@@ -7,6 +7,20 @@ assert.ok(fs.existsSync(yamlPath), "smart.yaml should exist");
 
 const content = fs.readFileSync(yamlPath, "utf8").replace(/\r\n/g, "\n");
 
+const LOCAL_DIRECT_RULES = [
+  "DOMAIN,localhost,DIRECT",
+  "DOMAIN-SUFFIX,localhost,DIRECT",
+  "DOMAIN-SUFFIX,local,DIRECT",
+  "IP-CIDR,127.0.0.0/8,DIRECT,no-resolve",
+  "IP-CIDR,10.0.0.0/8,DIRECT,no-resolve",
+  "IP-CIDR,172.16.0.0/12,DIRECT,no-resolve",
+  "IP-CIDR,192.168.0.0/16,DIRECT,no-resolve",
+  "IP-CIDR,169.254.0.0/16,DIRECT,no-resolve",
+  "IP-CIDR6,::1/128,DIRECT,no-resolve",
+  "IP-CIDR6,fc00::/7,DIRECT,no-resolve",
+  "IP-CIDR6,fe80::/10,DIRECT,no-resolve"
+];
+
 function getGroupBlock(name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const match = content.match(
@@ -176,7 +190,24 @@ const ruleLines = rules
   .filter((line) => line.startsWith("- "))
   .map((line) => line.slice(2));
 
-assert.equal(ruleLines[0], "DOMAIN-SUFFIX,bilibili.com,国内直连", "explicit domestic rules should be first");
+assert.deepEqual(
+  ruleLines.slice(0, LOCAL_DIRECT_RULES.length),
+  LOCAL_DIRECT_RULES,
+  "localhost, loopback, and private networks should be direct before all generated service rules"
+);
+assert.ok(
+  ruleLines.indexOf("IP-CIDR,192.168.0.0/16,DIRECT,no-resolve") <
+    ruleLines.indexOf("RULE-SET,adblock,广告拦截"),
+  "LAN direct rules should be evaluated before adblock and proxy rules"
+);
+assert.ok(
+  !ruleLines.includes("PROCESS-NAME,com.termux,DIRECT"),
+  "Termux internet traffic should not be globally forced direct"
+);
+assert.ok(
+  !ruleLines.includes("IP-CIDR,0.0.0.0/8,DIRECT,no-resolve"),
+  "invalid and adblock sinkhole addresses should not be broadly forced direct"
+);
 assert.ok(
   ruleLines.indexOf("RULE-SET,games-cn,国内直连") >
     ruleLines.indexOf("DOMAIN-SUFFIX,huawei.com,国内直连"),

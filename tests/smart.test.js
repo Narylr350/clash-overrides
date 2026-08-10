@@ -1,6 +1,20 @@
 const assert = require("node:assert/strict");
 const { main } = require("../smart.js");
 
+const LOCAL_DIRECT_RULES = [
+  "DOMAIN,localhost,DIRECT",
+  "DOMAIN-SUFFIX,localhost,DIRECT",
+  "DOMAIN-SUFFIX,local,DIRECT",
+  "IP-CIDR,127.0.0.0/8,DIRECT,no-resolve",
+  "IP-CIDR,10.0.0.0/8,DIRECT,no-resolve",
+  "IP-CIDR,172.16.0.0/12,DIRECT,no-resolve",
+  "IP-CIDR,192.168.0.0/16,DIRECT,no-resolve",
+  "IP-CIDR,169.254.0.0/16,DIRECT,no-resolve",
+  "IP-CIDR6,::1/128,DIRECT,no-resolve",
+  "IP-CIDR6,fc00::/7,DIRECT,no-resolve",
+  "IP-CIDR6,fe80::/10,DIRECT,no-resolve"
+];
+
 function makeConfig(proxyNames) {
   return {
     proxies: proxyNames.map((name) => ({ name }))
@@ -690,6 +704,25 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   const providers = result["rule-providers"];
   const rules = result.rules;
 
+  assert.deepEqual(
+    rules.slice(0, LOCAL_DIRECT_RULES.length),
+    LOCAL_DIRECT_RULES,
+    "localhost, loopback, and private networks should always be direct before every service rule"
+  );
+  assert.ok(
+    rules.indexOf("IP-CIDR,192.168.0.0/16,DIRECT,no-resolve") <
+      rules.indexOf("RULE-SET,adblock,广告拦截"),
+    "LAN direct rules should be evaluated before adblock and proxy rules"
+  );
+  assert.ok(
+    !rules.includes("PROCESS-NAME,com.termux,DIRECT"),
+    "Termux internet traffic should not be globally forced direct"
+  );
+  assert.ok(
+    !rules.includes("IP-CIDR,0.0.0.0/8,DIRECT,no-resolve"),
+    "invalid and adblock sinkhole addresses should not be broadly forced direct"
+  );
+
   assert.equal(
     getGroup(result, "JetBrains 下载"),
     undefined,
@@ -712,7 +745,11 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   assert.ok(providers.x, "should keep x provider");
   assert.equal(providers.adblock_plus, undefined, "should remove duplicate adblock_plus provider");
 
-  assert.equal(rules[0], "DOMAIN-SUFFIX,bilibili.com,国内直连", "explicit domestic rules should be first");
+  assert.equal(
+    rules[LOCAL_DIRECT_RULES.length],
+    "DOMAIN-SUFFIX,bilibili.com,国内直连",
+    "explicit domestic rules should follow the local direct rules"
+  );
   assert.ok(
     rules.indexOf("RULE-SET,games-cn,国内直连") >
       rules.indexOf("DOMAIN-SUFFIX,huawei.com,国内直连"),

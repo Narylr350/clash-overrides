@@ -1,6 +1,22 @@
 const TEST_URL = "https://www.gstatic.com/generate_204";
 const TEST_INTERVAL = 300;
 
+// 本机与私网目的地址必须先于广告和代理规则判定，避免 TUN 截获本地 IPC 与局域网连接；
+// 代理监听地址走直连不改变代理程序后续按真实远端目标进行的分流。
+const LOCAL_DIRECT_RULES = [
+  "DOMAIN,localhost,DIRECT",
+  "DOMAIN-SUFFIX,localhost,DIRECT",
+  "DOMAIN-SUFFIX,local,DIRECT",
+  "IP-CIDR,127.0.0.0/8,DIRECT,no-resolve",
+  "IP-CIDR,10.0.0.0/8,DIRECT,no-resolve",
+  "IP-CIDR,172.16.0.0/12,DIRECT,no-resolve",
+  "IP-CIDR,192.168.0.0/16,DIRECT,no-resolve",
+  "IP-CIDR,169.254.0.0/16,DIRECT,no-resolve",
+  "IP-CIDR6,::1/128,DIRECT,no-resolve",
+  "IP-CIDR6,fc00::/7,DIRECT,no-resolve",
+  "IP-CIDR6,fe80::/10,DIRECT,no-resolve"
+];
+
 const icon = (name) =>
   `https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/${name}.png`;
 
@@ -679,6 +695,8 @@ function main(config) {
   };
 
   config.rules = [
+    ...LOCAL_DIRECT_RULES,
+
     "DOMAIN-SUFFIX,bilibili.com,国内直连",
     "DOMAIN-SUFFIX,baidu.com,国内直连",
     "DOMAIN-SUFFIX,qq.com,国内直连",

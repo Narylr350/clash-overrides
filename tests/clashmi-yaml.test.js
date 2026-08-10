@@ -9,6 +9,40 @@ const path = require("node:path");
   assert.ok(fs.existsSync(clashMiPath), "clashmi.yaml should exist");
 
   const content = fs.readFileSync(clashMiPath, "utf8");
+  const localDirectRules = [
+    "DOMAIN,localhost,DIRECT",
+    "DOMAIN-SUFFIX,localhost,DIRECT",
+    "DOMAIN-SUFFIX,local,DIRECT",
+    "IP-CIDR,127.0.0.0/8,DIRECT,no-resolve",
+    "IP-CIDR,10.0.0.0/8,DIRECT,no-resolve",
+    "IP-CIDR,172.16.0.0/12,DIRECT,no-resolve",
+    "IP-CIDR,192.168.0.0/16,DIRECT,no-resolve",
+    "IP-CIDR,169.254.0.0/16,DIRECT,no-resolve",
+    "IP-CIDR6,::1/128,DIRECT,no-resolve",
+    "IP-CIDR6,fc00::/7,DIRECT,no-resolve",
+    "IP-CIDR6,fe80::/10,DIRECT,no-resolve"
+  ];
+  const ruleLines = content
+    .slice(content.indexOf("rules:\n"))
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith("- "))
+    .map((line) => line.slice(2));
+
+  assert.deepEqual(
+    ruleLines.slice(0, localDirectRules.length),
+    localDirectRules,
+    "ClashMi should preserve localhost, loopback, and private-network direct rules first"
+  );
+  assert.ok(
+    !ruleLines.includes("PROCESS-NAME,com.termux,DIRECT"),
+    "ClashMi should not force all Termux internet traffic direct"
+  );
+  assert.ok(
+    !ruleLines.includes("IP-CIDR,0.0.0.0/8,DIRECT,no-resolve"),
+    "ClashMi should not bypass invalid and adblock sinkhole addresses"
+  );
+
   assert.doesNotMatch(content, /\nrule-providers:\n/, "ClashMi YAML should not use remote rule providers");
   assert.doesNotMatch(content, /^\s+- RULE-SET,/m, "ClashMi YAML should not depend on RULE-SET entries");
   assert.doesNotMatch(content, /^\s+- PROCESS-NAME,/m, "ClashMi iOS YAML should not include process rules");

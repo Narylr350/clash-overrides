@@ -1,3 +1,4 @@
+7h15.ru1353t.1s.m4d3.by.5ukk4w.skk.moe
 ai.google.dev
 alkalicore-pa.clients6.google.com
 alkalimakersuite-pa.clients6.google.com
@@ -21,6 +22,8 @@ copilot-workspace.githubnext.com
 copilotprodattachments.blob.core.windows.net
 cp4.cloudflare.com
 daily-cloudcode-pa.googleapis.com
+geminiweb-pa.clients.google.com
+geminiweb-pa.clients6.google.com
 gspe1-ssl.ls.apple.com
 guzzoni.apple.com
 imagine.meta.com
@@ -67,6 +70,7 @@ www.bing.com
 +.clau.de
 +.claude.ai
 +.claude.com
++.claude.dev
 +.claudemcpclient.com
 +.claudemcpcontent.com
 +.claudeusercontent.com
@@ -96,11 +100,14 @@ www.bing.com
 +.cursorapi.com
 +.deepmind.com
 +.deepmind.google
++.deepwiki.com
++.deepwiki.org
 +.devin.ai
 +.diabrowser.com
 +.diabrowser.engineering
 +.dify.ai
 +.dola.com
++.dreamgen.com
 +.duck.ai
 +.elevenlabs.com
 +.elevenlabs.io
@@ -110,6 +117,7 @@ www.bing.com
 +.events.statsigapi.net
 +.featuregates.org
 +.flow.google
++.flow.google.com
 +.g.ai
 +.gateway.ai.cloudflare.com
 +.gateway.icloud.com
@@ -124,6 +132,7 @@ www.bing.com
 +.grazie.aws.intellij.net
 +.grok.com
 +.grok.x.com
++.grokipedia.com
 +.groq.com
 +.h2o.ai
 +.hf.co
@@ -136,9 +145,11 @@ www.bing.com
 +.jetbrains.ai
 +.jules.google
 +.jules.google.com
++.kimi.ai
 +.kiro.dev
 +.labs.google
 +.labs.google.com
++.labstailwind.pa.googleapis.com
 +.langchain.com
 +.livekit.cloud
 +.liveperson.net
@@ -150,12 +161,19 @@ www.bing.com
 +.manuscdn.com
 +.marscode.com
 +.meta.ai
++.metaaivm.com
 +.midjourney.com
 +.minimax.io
 +.mistral.ai
++.moonshot.ai
 +.mozilla.ai
++.muse.ai
++.notebook.google
++.notebook.google.com
 +.notebooklm.google
 +.notebooklm.google.com
++.notegpt.io
++.novelai.net
 +.oaistatic.com
 +.oaistatsig.com
 +.oaiusercontent.com
@@ -167,6 +185,7 @@ www.bing.com
 +.openaiapi-site.azureedge.net
 +.openart.ai
 +.openclaw.ai
++.opencode.ai
 +.openrouter.ai
 +.openspec.dev
 +.oystermercury.top
@@ -184,6 +203,7 @@ www.bing.com
 +.sora.com
 +.spicywriter.com
 +.stitch.withgoogle.com
++.talkai.info
 +.tapnow.ai
 +.themeforest.net
 +.trae.ai

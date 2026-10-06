@@ -26,12 +26,14 @@ proxy-groups:
       - 其他自动
       - DIRECT
 
-  - name: 国内直连
-    type: select
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China.png
-    proxies:
-      - DIRECT
-      - 默认代理
+  - name: 智能选择
+    type: url-test
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png
+    include-all: true
+    exclude-type: direct
+    exclude-filter: '(?i)(?:(^|[\s._\-\[\]\(\)【】])(?:traffic|quota|expire|expires|expired|expiration|reset|subscription|sub\s*info|homepage|website|official\s*site|update\s*subscription)(?=$|[\s._\-\[\]\(\)【】]|\d)|(?:剩余流量|流量|套餐|到期|过期|有效期|重置|官网|网址|主页|更新订阅|刷新订阅|订阅信息|订阅链接|分割))'
+    url: https://www.gstatic.com/generate_204
+    interval: 300
 
   - name: 漏网之鱼
     type: select
@@ -54,14 +56,6 @@ proxy-groups:
       - 大洋洲自动
       - 其他自动
       - DIRECT
-
-  - name: 广告拦截
-    type: select
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Advertising.png
-    proxies:
-      - REJECT
-      - DIRECT
-      - 默认代理
 
   - name: AIGC
     type: select
@@ -195,115 +189,30 @@ proxy-groups:
       - 大洋洲自动
       - 其他自动
 
+  - name: 开发
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 新加坡自动
+      - 日本自动
+      - 美国自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 北美自动
+      - 南美自动
+      - 非洲自动
+      - 大洋洲自动
+      - 其他自动
+      - DIRECT
+
   - name: GitHub
     type: select
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/GitHub.png
-    proxies:
-      - 默认代理
-      - 智能选择
-      - 美国自动
-      - 日本自动
-      - 新加坡自动
-      - 香港自动
-      - 韩国自动
-      - 台湾自动
-      - 欧洲自动
-      - 亚洲其他自动
-      - 北美自动
-      - 南美自动
-      - 非洲自动
-      - 大洋洲自动
-      - 其他自动
-      - DIRECT
-
-  - name: Apple
-    type: select
-    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/apple.svg
-    proxies:
-      - DIRECT
-      - 默认代理
-      - 智能选择
-      - 美国自动
-      - 日本自动
-      - 新加坡自动
-      - 香港自动
-      - 澳门自动
-      - 韩国自动
-      - 台湾自动
-      - 欧洲自动
-      - 亚洲其他自动
-      - 北美自动
-      - 南美自动
-      - 非洲自动
-      - 大洋洲自动
-      - 其他自动
-
-  - name: TikTok
-    type: select
-    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/tiktok.svg
-    proxies:
-      - 默认代理
-      - 智能选择
-      - 美国自动
-      - 日本自动
-      - 新加坡自动
-      - 香港自动
-      - 韩国自动
-      - 台湾自动
-      - 欧洲自动
-      - 亚洲其他自动
-      - 北美自动
-      - 南美自动
-      - 非洲自动
-      - 大洋洲自动
-      - 其他自动
-      - DIRECT
-
-  - name: YouTube
-    type: select
-    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/youtube.svg
-    proxies:
-      - 默认代理
-      - 智能选择
-      - 美国自动
-      - 日本自动
-      - 新加坡自动
-      - 香港自动
-      - 韩国自动
-      - 台湾自动
-      - 欧洲自动
-      - 亚洲其他自动
-      - 北美自动
-      - 南美自动
-      - 非洲自动
-      - 大洋洲自动
-      - 其他自动
-      - DIRECT
-
-  - name: Pixiv
-    type: select
-    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/pixiv.svg
-    proxies:
-      - 默认代理
-      - 智能选择
-      - 日本自动
-      - 新加坡自动
-      - 香港自动
-      - 美国自动
-      - 韩国自动
-      - 台湾自动
-      - 欧洲自动
-      - 亚洲其他自动
-      - 北美自动
-      - 南美自动
-      - 非洲自动
-      - 大洋洲自动
-      - 其他自动
-      - DIRECT
-
-  - name: X
-    type: select
-    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/x-twitter.svg
     proxies:
       - 默认代理
       - 智能选择
@@ -343,11 +252,10 @@ proxy-groups:
       - 其他自动
       - DIRECT
 
-  - name: 微软服务
+  - name: YouTube
     type: select
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Microsoft.png
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/youtube.svg
     proxies:
-      - DIRECT
       - 默认代理
       - 智能选择
       - 美国自动
@@ -363,6 +271,28 @@ proxy-groups:
       - 非洲自动
       - 大洋洲自动
       - 其他自动
+      - DIRECT
+
+  - name: TikTok
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/tiktok.svg
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 北美自动
+      - 南美自动
+      - 非洲自动
+      - 大洋洲自动
+      - 其他自动
+      - DIRECT
 
   - name: Telegram
     type: select
@@ -376,6 +306,48 @@ proxy-groups:
       - 韩国自动
       - 台湾自动
       - 美国自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 北美自动
+      - 南美自动
+      - 非洲自动
+      - 大洋洲自动
+      - 其他自动
+      - DIRECT
+
+  - name: X
+    type: select
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/x-twitter.svg
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 北美自动
+      - 南美自动
+      - 非洲自动
+      - 大洋洲自动
+      - 其他自动
+      - DIRECT
+
+  - name: Pixiv
+    type: select
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/pixiv.svg
+    proxies:
+      - 默认代理
+      - 智能选择
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 美国自动
+      - 韩国自动
+      - 台湾自动
       - 欧洲自动
       - 亚洲其他自动
       - 北美自动
@@ -429,15 +401,38 @@ proxy-groups:
       - 智能选择
       - 默认代理
 
-  - name: 开发
+  - name: Apple
     type: select
-    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg
+    icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/brands/apple.svg
     proxies:
+      - DIRECT
       - 默认代理
       - 智能选择
-      - 新加坡自动
-      - 日本自动
       - 美国自动
+      - 日本自动
+      - 新加坡自动
+      - 香港自动
+      - 澳门自动
+      - 韩国自动
+      - 台湾自动
+      - 欧洲自动
+      - 亚洲其他自动
+      - 北美自动
+      - 南美自动
+      - 非洲自动
+      - 大洋洲自动
+      - 其他自动
+
+  - name: 微软服务
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Microsoft.png
+    proxies:
+      - DIRECT
+      - 默认代理
+      - 智能选择
+      - 美国自动
+      - 日本自动
+      - 新加坡自动
       - 香港自动
       - 韩国自动
       - 台湾自动
@@ -448,19 +443,26 @@ proxy-groups:
       - 非洲自动
       - 大洋洲自动
       - 其他自动
-      - DIRECT
 
-  - name: 智能选择
-    type: url-test
-    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png
-    include-all: true
-    exclude-type: direct
-    exclude-filter: '(?i)(?:(^|[\s._\-\[\]\(\)【】])(?:traffic|quota|expire|expires|expired|expiration|reset|subscription|sub\s*info|homepage|website|official\s*site|update\s*subscription)(?=$|[\s._\-\[\]\(\)【】]|\d)|(?:剩余流量|流量|套餐|到期|过期|有效期|重置|官网|网址|主页|更新订阅|刷新订阅|订阅信息|订阅链接|分割))'
-    url: https://www.gstatic.com/generate_204
-    interval: 300
+  - name: 广告拦截
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Advertising.png
+    proxies:
+      - REJECT
+      - DIRECT
+      - 默认代理
+
+  - name: 国内直连
+    type: select
+    hidden: true
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/China.png
+    proxies:
+      - DIRECT
+      - 默认代理
 
   - name: 香港自动
     type: url-test
+    hidden: true
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
     include-all: true
     exclude-type: direct
@@ -471,6 +473,7 @@ proxy-groups:
 
   - name: 澳门自动
     type: url-test
+    hidden: true
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
     include-all: true
     exclude-type: direct
@@ -481,6 +484,7 @@ proxy-groups:
 
   - name: 新加坡自动
     type: url-test
+    hidden: true
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png
     include-all: true
     exclude-type: direct
@@ -491,6 +495,7 @@ proxy-groups:
 
   - name: 日本自动
     type: url-test
+    hidden: true
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png
     include-all: true
     exclude-type: direct
@@ -501,6 +506,7 @@ proxy-groups:
 
   - name: 韩国自动
     type: url-test
+    hidden: true
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Korea.png
     include-all: true
     exclude-type: direct
@@ -511,6 +517,7 @@ proxy-groups:
 
   - name: 美国自动
     type: url-test
+    hidden: true
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png
     include-all: true
     exclude-type: direct
@@ -521,6 +528,7 @@ proxy-groups:
 
   - name: 台湾自动
     type: url-test
+    hidden: true
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Taiwan.png
     include-all: true
     exclude-type: direct
@@ -531,6 +539,7 @@ proxy-groups:
 
   - name: 欧洲自动
     type: url-test
+    hidden: true
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Global.png
     include-all: true
     exclude-type: direct
@@ -541,6 +550,7 @@ proxy-groups:
 
   - name: 亚洲其他自动
     type: url-test
+    hidden: true
     icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-asia.svg
     include-all: true
     exclude-type: direct
@@ -551,6 +561,7 @@ proxy-groups:
 
   - name: 北美自动
     type: url-test
+    hidden: true
     icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-americas.svg
     include-all: true
     exclude-type: direct
@@ -561,6 +572,7 @@ proxy-groups:
 
   - name: 南美自动
     type: url-test
+    hidden: true
     icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-americas.svg
     include-all: true
     exclude-type: direct
@@ -571,6 +583,7 @@ proxy-groups:
 
   - name: 非洲自动
     type: url-test
+    hidden: true
     icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-africa.svg
     include-all: true
     exclude-type: direct
@@ -581,6 +594,7 @@ proxy-groups:
 
   - name: 大洋洲自动
     type: url-test
+    hidden: true
     icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/earth-oceania.svg
     include-all: true
     exclude-type: direct
@@ -591,6 +605,7 @@ proxy-groups:
 
   - name: 其他自动
     type: url-test
+    hidden: true
     icon: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/shuffle.svg
     include-all: true
     exclude-type: direct

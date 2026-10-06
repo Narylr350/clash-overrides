@@ -285,7 +285,8 @@ function main(config) {
   const proxies = Array.isArray(config.proxies) ? config.proxies : [];
   const nodes = collectNodeBuckets(proxies);
   const regionGroups = REGION_DEFS.map((def) =>
-    buildUrlTestGroup(def.group, def.icon, nodes[def.key] || [])
+    // 地区组保留为服务组候选，仅隐藏独立入口。
+    ({ ...buildUrlTestGroup(def.group, def.icon, nodes[def.key] || []), hidden: true })
   );
 
   const AI_REGION_ORDER = [
@@ -546,28 +547,28 @@ function main(config) {
 
   config["proxy-groups"] = [
     buildSelectGroup("默认代理", ICON.proxy, DEFAULT_REGION_OPTIONS),
-    buildSelectGroup("国内直连", ICON.china, ["DIRECT", "默认代理"]),
+    buildUrlTestGroup("智能选择", ICON.auto, nodes.all),
     buildSelectGroup("漏网之鱼", ICON.final, ["默认代理", ...DEFAULT_REGION_OPTIONS]),
-    buildSelectGroup("广告拦截", ICON.adblock, ["REJECT", "DIRECT", "默认代理"]),
     buildSelectGroup("AIGC", ICON.ai, AI_REGION_ORDER),
     buildSelectGroup("OpenAI", ICON.openai, OPENAI_REGION_ORDER),
     buildSelectGroup("Claude", ICON.claude, OPENAI_REGION_ORDER),
     buildSelectGroup("Gemini", ICON.gemini, OPENAI_REGION_ORDER),
     buildSelectGroup("OpenCode", ICON.opencode, OPENAI_REGION_ORDER),
     buildSelectGroup("Copilot", ICON.copilot, COPILOT_REGION_ORDER),
+    buildSelectGroup("开发", ICON.dev, DEV_REGION_ORDER),
     buildSelectGroup("GitHub", ICON.github, GITHUB_REGION_ORDER),
-    buildSelectGroup("Apple", ICON.apple, APPLE_REGION_ORDER),
-    buildSelectGroup("TikTok", ICON.tiktok, TIKTOK_REGION_ORDER),
-    buildSelectGroup("YouTube", ICON.youtube, YOUTUBE_REGION_ORDER),
-    buildSelectGroup("Pixiv", ICON.pixiv, PIXIV_REGION_ORDER),
-    buildSelectGroup("X", ICON.x, X_REGION_ORDER),
     buildSelectGroup("Google", ICON.google, GOOGLE_REGION_ORDER),
-    buildSelectGroup("微软服务", ICON.microsoft, MICROSOFT_REGION_ORDER),
+    buildSelectGroup("YouTube", ICON.youtube, YOUTUBE_REGION_ORDER),
+    buildSelectGroup("TikTok", ICON.tiktok, TIKTOK_REGION_ORDER),
     buildSelectGroup("Telegram", ICON.telegram, TELEGRAM_REGION_ORDER),
+    buildSelectGroup("X", ICON.x, X_REGION_ORDER),
+    buildSelectGroup("Pixiv", ICON.pixiv, PIXIV_REGION_ORDER),
     buildSelectGroup("海外游戏平台", ICON.gamePlatform, GAME_PLATFORM_REGION_ORDER),
     buildSelectGroup("海外游戏", ICON.game, GAME_BODY_REGION_ORDER),
-    buildSelectGroup("开发", ICON.dev, DEV_REGION_ORDER),
-    buildUrlTestGroup("智能选择", ICON.auto, nodes.all),
+    buildSelectGroup("Apple", ICON.apple, APPLE_REGION_ORDER),
+    buildSelectGroup("微软服务", ICON.microsoft, MICROSOFT_REGION_ORDER),
+    buildSelectGroup("广告拦截", ICON.adblock, ["REJECT", "DIRECT", "默认代理"]),
+    { ...buildSelectGroup("国内直连", ICON.china, ["DIRECT", "默认代理"]), hidden: true },
     ...regionGroups
   ];
 

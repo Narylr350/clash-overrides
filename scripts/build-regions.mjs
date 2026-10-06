@@ -119,6 +119,7 @@ function buildYamlGroup(region, source) {
   return [
     `  - name: ${region.name}`,
     "    type: url-test",
+    "    hidden: true",
     `    icon: ${ICON_URLS[region.icon]}`,
     "    include-all: true",
     "    exclude-type: direct",
@@ -150,6 +151,7 @@ function buildYamlOtherGroup(source) {
   return [
     `  - name: ${source.other.name}`,
     "    type: url-test",
+    "    hidden: true",
     `    icon: ${ICON_URLS[source.other.icon]}`,
     "    include-all: true",
     "    exclude-type: direct",
@@ -188,7 +190,7 @@ function extractSmartYamlRegionBlock(content) {
 }
 
 function extractSmartYamlSmartGroup(content) {
-  const match = content.match(/  - name: 智能选择[\s\S]*?    interval: 300(?=\n\n  - name: 香港自动)/);
+  const match = content.match(/  - name: 智能选择[\s\S]*?    interval: 300(?=\n\n  - name: )/);
   if (!match) throw new Error("Could not find 智能选择 proxy-group block in smart.yaml");
   return match[0];
 }

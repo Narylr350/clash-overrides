@@ -44,24 +44,31 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 ### 日常常用入口
 
 - `默认代理`
+- `智能选择`
+- `漏网之鱼`
 - `AIGC`
+- `OpenAI`
+- `Claude`
+- `Gemini`
 - `OpenCode`
+- `Copilot`
+- `开发`
 - `GitHub`
-- `Apple`
-- `TikTok`
-- `YouTube`
-- `Pixiv`
-- `X`
 - `Google`
-- `微软服务`
+- `YouTube`
+- `TikTok`
 - `Telegram`
+- `X`
+- `Pixiv`
 - `海外游戏平台`
 - `海外游戏`
-- `开发`
+- `Apple`
+- `微软服务`
 - `广告拦截`
-- `漏网之鱼`
 
 ### 支撑型自动组
+
+地区自动组与 `国内直连` 默认设置 `hidden: true`，只隐藏独立入口，不删除分流目标或服务组中的地区选项。支持隐藏组的客户端默认显示 22 个覆写入口（不含客户端的 `GLOBAL`）；需要检查地区节点时可开启显示隐藏组。不支持隐藏组的客户端仍会显示完整列表。
 
 - `智能选择`：覆盖所有真实节点，并排除订阅说明项
 - `香港自动`

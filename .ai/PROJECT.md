@@ -65,7 +65,8 @@
 - 修改 `smart.yaml` 后必须运行 `node scripts\build-clashmi-yaml.mjs` 或 `--check` 确认派生文件一致。
 - 修改地区关键词或订阅说明排除关键词后必须运行 `node scripts\build-regions.mjs` 或 `--check`。
 - 规则顺序要优先避免宽泛规则抢走明确服务规则。
-- `cdn` / `cn` / `GEOIP,CN` 属于宽泛国内兜底，默认靠后。
+- `cn` / `GEOIP,CN` 属于宽泛国内兜底，默认靠后；通用 `cdn` 清单包含海外服务，不得用它强制国内直连。
+- 已发布的 `ruleset/cdn.list` 保留为静态快照，供仍引用它的旧覆写使用，避免客户端刷新时返回 404；新配置和同步来源不再使用它。
 - `clashmi.yaml` 不依赖远程 `rule-providers`。
 - 旧工作流文件未发现；本项目以 `.ai/PROJECT.md` 作为长期基线，以 Git commit 作为进度和交接事实。
 - 完成任务并通过必要验证后，允许 AI 直接提交并推送到 GitHub；若工作区包含无关改动，必须只提交当前任务相关文件。
@@ -101,4 +102,4 @@ git diff --check
 1. 收尾当前未提交的 `OpenCode` AI 分组变更：确认规则、测试和 README 后提交。
 2. 给常见服务新增或修复分流时，优先补显式域名规则和顺序测试。
 3. 继续观察 ClashMi 兼容问题，必要时增强 `build-clashmi-yaml.mjs` 的裁剪规则和测试。
-4. 对规则误判案例建立最小回归测试，防止 `cdn` / `cn` / 广告规则再次抢走明确服务。
+4. 对规则误判案例建立最小回归测试，防止宽泛国内兜底和广告规则再次抢走明确服务。

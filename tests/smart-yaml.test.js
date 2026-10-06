@@ -190,6 +190,14 @@ const ruleLines = rules
   .filter((line) => line.startsWith("- "))
   .map((line) => line.slice(2));
 
+assert.ok(!/\n  cdn:\n/.test(content), "the global CDN provider should not be used for domestic routing");
+assert.ok(!ruleLines.some((rule) => rule.startsWith("RULE-SET,cdn,")));
+for (const domain of ["pypi.org", "pythonhosted.org"]) {
+  const rule = `DOMAIN-SUFFIX,${domain},开发`;
+  assert.ok(ruleLines.includes(rule), `${domain} should reuse Dev's proxy-first routing`);
+  assert.ok(ruleLines.indexOf(rule) < ruleLines.indexOf("RULE-SET,cn,国内直连"));
+}
+
 assert.deepEqual(
   ruleLines.slice(0, LOCAL_DIRECT_RULES.length),
   LOCAL_DIRECT_RULES,
@@ -268,11 +276,11 @@ for (const domain of [
   const jetbrainsRule = `DOMAIN-SUFFIX,${domain},开发`;
   assert.ok(rules.includes(jetbrainsRule), `${domain} should reuse Dev's proxy-first routing`);
   assert.ok(
-    rules.indexOf(jetbrainsRule) < rules.indexOf("RULE-SET,cdn,国内直连"),
-    `${domain} should be handled before the generic CDN direct rules`
+    rules.indexOf(jetbrainsRule) < rules.indexOf("RULE-SET,cn,国内直连"),
+    `${domain} should be handled before the generic CN direct rules`
   );
 }
-assert.ok(rules.includes("RULE-SET,cdn,国内直连"));
+assert.ok(rules.includes("RULE-SET,cn,国内直连") && rules.includes("GEOIP,CN,国内直连"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,minecraft.net,开发"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,libraries.minecraft.net,开发"));
 assert.ok(rules.includes("DOMAIN-SUFFIX,modrinth.com,开发"));
@@ -333,8 +341,8 @@ assert.ok(
 assert.ok(!rules.includes("RULE-SET,games,游戏服务"));
 assert.ok(
   rules.indexOf("DOMAIN-SUFFIX,googleapis.com,Google") <
-    rules.indexOf("RULE-SET,cdn,国内直连"),
-  "explicit Google API rules should be ahead of generic CDN rules"
+    rules.indexOf("RULE-SET,cn,国内直连"),
+  "explicit Google API rules should be ahead of generic CN direct rules"
 );
 assert.ok(
   rules.indexOf("RULE-SET,cn,国内直连") > rules.indexOf("RULE-SET,games,海外游戏"),
@@ -355,8 +363,8 @@ for (const specificRule of [
   "RULE-SET,games,海外游戏"
 ]) {
   assert.ok(
-    rules.indexOf(specificRule) < rules.indexOf("RULE-SET,cdn,国内直连"),
-    `${specificRule} should be ahead of generic CDN rules`
+    rules.indexOf(specificRule) < rules.indexOf("RULE-SET,cn,国内直连"),
+    `${specificRule} should be ahead of generic CN direct rules`
   );
 }
 assert.ok(rules.trimEnd().endsWith("- MATCH,漏网之鱼"), "last rule should be 漏网之鱼");

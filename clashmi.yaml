@@ -640,6 +640,9 @@ rules:
   - DOMAIN-SUFFIX,esm.sh,开发
   - DOMAIN-SUFFIX,skypack.dev,开发
 
+  - DOMAIN-SUFFIX,pypi.org,开发
+  - DOMAIN-SUFFIX,pythonhosted.org,开发
+
   - DOMAIN-SUFFIX,minecraft.net,开发
   - DOMAIN-SUFFIX,minecraftservices.com,开发
   - DOMAIN-SUFFIX,minecraft-services.net,开发

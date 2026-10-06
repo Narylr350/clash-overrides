@@ -89,7 +89,8 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 - 国内游戏服务：`games-cn` 规则集固定走 `国内直连`
 - 海外游戏服务：Steam / Epic / Battle.net / Xbox / PlayStation / Nintendo / Riot / Ubisoft / GOG 等平台域名走 `海外游戏平台`，其他海外游戏域名走 `海外游戏`
 - `海外游戏平台` 默认跟随 `默认代理`；`海外游戏` 默认 `DIRECT`，避免和本机/路由器游戏加速器抢路由
-- 开发：覆盖 Minecraft 开发、Mod 平台、Gradle/Maven 仓库和 jsdelivr、unpkg、cdnjs、esm.sh 等明确列出的开发 CDN；泛用 `cdn` 规则集在广告和各服务规则之后兜底直连
+- 开发：覆盖 Minecraft 开发、Mod 平台、Gradle/Maven 仓库、PyPI 软件源及 Python 包下载，以及 jsdelivr、unpkg、cdnjs、esm.sh 等明确列出的开发 CDN
+- 国内兜底：服务规则之后使用 `cn` 域名规则和 `GEOIP,CN` 直连，其余流量走 `漏网之鱼`；通用 CDN 清单包含海外服务，不作为国内直连依据
 - JetBrains：安装包下载域名复用 `开发` 组，默认走代理以绕开中国 CDN 对浏览器请求返回 404 HTML 的兼容问题；不增加专用代理组
 - GitHub / Apple / Google：默认保持脚本分流
 - Apple：默认 `DIRECT` 优先，仍可手动切到代理地区
@@ -114,6 +115,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 - `clashmi.yaml` 由 `smart.yaml` 生成；修改 `smart.yaml` 后运行 `node scripts/build-clashmi-yaml.mjs`
 - `ruleset/` 保存 `smart.yaml` 里 `rule-providers` 的上游规则快照，客户端规则集合 URL 指向本仓库的快照地址
 - `ruleset/sources.json` 保存真正的上游来源，GitHub Actions 会定时运行 `scripts/sync-rules.mjs`，发现快照变化时创建同步 PR，由人工确认后合并
+- `ruleset/cdn.list` 仅保留为旧覆写的静态兼容快照，避免已下载的旧脚本刷新规则时返回 404；新覆写不再引用或自动同步它
 - GeoIP / GeoSite / MMDB / ASN 外部数据库通过 `geodata-latest` Release 镜像，由 `scripts/sync-geodata.mjs` 定时更新 Release 资产
 - 该脚本是单文件个人覆写脚本，不做复杂的原配置增量合并
 

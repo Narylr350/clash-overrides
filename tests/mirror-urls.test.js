@@ -20,8 +20,7 @@ const expectedProviders = [
   "youtube",
   "pixiv",
   "x",
-  "telegram",
-  "cdn"
+  "telegram"
 ];
 
 const config = main({ proxies: [{ name: "HK-01" }] });

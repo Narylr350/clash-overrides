@@ -683,14 +683,6 @@ function main(config) {
       path: "./ruleset/telegram.list",
       url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/telegram.list",
       interval: 86400
-    },
-    cdn: {
-      type: "http",
-      behavior: "domain",
-      format: "text",
-      path: "./ruleset/cdn.list",
-      url: "https://raw.githubusercontent.com/Narylr350/clash-overrides/main/ruleset/cdn.list",
-      interval: 86400
     }
   };
 
@@ -727,6 +719,9 @@ function main(config) {
     "DOMAIN-SUFFIX,cdnjs.com,开发",
     "DOMAIN-SUFFIX,esm.sh,开发",
     "DOMAIN-SUFFIX,skypack.dev,开发",
+
+    "DOMAIN-SUFFIX,pypi.org,开发",
+    "DOMAIN-SUFFIX,pythonhosted.org,开发",
 
     "DOMAIN-SUFFIX,minecraft.net,开发",
     "DOMAIN-SUFFIX,minecraftservices.com,开发",
@@ -870,7 +865,6 @@ function main(config) {
     "RULE-SET,telegram,Telegram",
     "RULE-SET,microsoft,微软服务",
     "RULE-SET,games,海外游戏",
-    "RULE-SET,cdn,国内直连",
     "RULE-SET,cn,国内直连",
     "GEOIP,CN,国内直连",
     "MATCH,漏网之鱼"

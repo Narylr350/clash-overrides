@@ -704,6 +704,20 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
   const providers = result["rule-providers"];
   const rules = result.rules;
 
+  assert.ok(!providers.cdn, "the global CDN list must not classify overseas services as domestic");
+  assert.ok(
+    !rules.some((rule) => rule.startsWith("RULE-SET,cdn,")),
+    "unclassified CDN traffic should use CN/IP routing and the normal fallback"
+  );
+  for (const domain of ["pypi.org", "pythonhosted.org"]) {
+    const rule = `DOMAIN-SUFFIX,${domain},开发`;
+    assert.ok(rules.includes(rule), `${domain} should reuse Dev's proxy-first routing`);
+    assert.ok(
+      rules.indexOf(rule) < rules.indexOf("RULE-SET,cn,国内直连"),
+      `${domain} should be handled before domestic fallback rules`
+    );
+  }
+
   assert.deepEqual(
     rules.slice(0, LOCAL_DIRECT_RULES.length),
     LOCAL_DIRECT_RULES,
@@ -940,14 +954,14 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     const jetbrainsRule = `DOMAIN-SUFFIX,${domain},开发`;
     assert.ok(rules.includes(jetbrainsRule), `${domain} should reuse Dev's proxy-first routing`);
     assert.ok(
-      rules.indexOf(jetbrainsRule) < rules.indexOf("RULE-SET,cdn,国内直连"),
-      `${domain} should be handled before the generic CDN direct rules`
+      rules.indexOf(jetbrainsRule) < rules.indexOf("RULE-SET,cn,国内直连"),
+      `${domain} should be handled before the generic CN direct rules`
     );
   }
 
   assert.ok(
-    rules.includes("RULE-SET,cdn,国内直连"),
-    "generic CDN ruleset should stay direct for domestic CDN coverage"
+    rules.includes("RULE-SET,cn,国内直连") && rules.includes("GEOIP,CN,国内直连"),
+    "domestic domains and IPs should retain direct routing without the global CDN list"
   );
 
   assert.ok(
@@ -1024,8 +1038,8 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
 
   assert.ok(
     rules.indexOf("DOMAIN-SUFFIX,googleapis.com,Google") <
-      rules.indexOf("RULE-SET,cdn,国内直连"),
-    "explicit Google API rules should stay ahead of generic CDN direct rules"
+      rules.indexOf("RULE-SET,cn,国内直连"),
+    "explicit Google API rules should stay ahead of generic CN direct rules"
   );
 
   assert.ok(
@@ -1048,8 +1062,8 @@ assert.equal(typeof main, "function", "smart.js should export main for local tes
     "RULE-SET,games,海外游戏"
   ]) {
     assert.ok(
-      rules.indexOf(specificRule) < rules.indexOf("RULE-SET,cdn,国内直连"),
-      `${specificRule} should stay ahead of generic CDN direct rules`
+      rules.indexOf(specificRule) < rules.indexOf("RULE-SET,cn,国内直连"),
+      `${specificRule} should stay ahead of generic CN direct rules`
     );
   }
 

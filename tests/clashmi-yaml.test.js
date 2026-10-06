@@ -65,6 +65,11 @@ const path = require("node:path");
   assert.match(content, /DOMAIN-SUFFIX,minecraft\.net,开发/, "ClashMi YAML should keep explicit Dev rules");
   assert.match(content, /DOMAIN-SUFFIX,steampowered\.com,海外游戏平台/, "ClashMi YAML should keep explicit game platform rules");
   assert.match(content, /DOMAIN-SUFFIX,jsdelivr\.net,开发/, "ClashMi YAML should route common CDNs through Dev");
+  for (const domain of ["pypi.org", "pythonhosted.org"]) {
+    const rule = `DOMAIN-SUFFIX,${domain},开发`;
+    assert.ok(ruleLines.includes(rule), `${domain} should keep explicit Dev routing in ClashMi`);
+    assert.ok(ruleLines.indexOf(rule) < ruleLines.indexOf("GEOIP,CN,国内直连"));
+  }
   assert.match(content, /GEOIP,CN,国内直连/, "ClashMi YAML should keep lightweight CN fallback");
   assert.ok(content.trimEnd().endsWith("- MATCH,漏网之鱼"), "last rule should stay as 漏网之鱼");
 

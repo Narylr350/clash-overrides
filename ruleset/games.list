@@ -11,14 +11,16 @@ blzdist-wow.necdn.leihuo.netease.com
 c.ppy.sh
 client.hikarifield.co.jp
 d1unuk07s6td74.cloudfront.net
+d348twzf7a8p5.cloudfront.net
 datarouter.apps.netherrealm.com
+devforum-uploads.s3.dualstack.us-east-2.amazonaws.com
 dl.delivery.mp.microsoft.com
 dlgarenanow-a.akamaihd.net
 download.hikarifield.co.jp
+doy2mn9upadnk.cloudfront.net
 eaasserts-a.akamaihd.net
 epicgames-download1-1251447533.file.myqcloud.com
 epicgames-download1.akamaized.net
-flightsimulator.azureedge.net
 gog-cdn-lumen.secure2.footprint.net
 gog-cdn.akamaized.net
 gog.salesmanago.com
@@ -104,7 +106,6 @@ xz.pphimalayanrt.com
 +.artstation.com
 +.artstationmedia.com
 +.artstorm.com
-+.asobostudio.com
 +.avatargarenanow-a.akamaihd.net
 +.awayoutgame.com
 +.ayudanintendo.com
@@ -299,7 +300,6 @@ xz.pphimalayanrt.com
 +.fireemblemawakening.com
 +.firesidegatherings.com
 +.fitgirl-repacks.site
-+.flightsimulator.com
 +.flipnotestudio.com
 +.fnjiasu.com
 +.forgecdn.net
@@ -317,6 +317,7 @@ xz.pphimalayanrt.com
 +.gaijinent.com
 +.game-repack.site
 +.game.maj-soul.com
++.gamebanana.com
 +.gamedownloads-rockstargames-com.akamaized.net
 +.gamepass.com
 +.gamesfirsthelsinki.com
@@ -652,6 +653,7 @@ xz.pphimalayanrt.com
 +.quiltmc.org
 +.quixel.com
 +.quixel.se
++.r2modman.com
 +.radgametools.com
 +.ravensoftware.com
 +.rayark.download
@@ -796,6 +798,7 @@ xz.pphimalayanrt.com
 +.steamgames.com
 +.steaminventoryhelper.com
 +.steammobile.akamaized.net
++.steamos.cloud
 +.steampipe-kr.akamaized.net
 +.steampipe-partner.akamaized.net
 +.steampipe.akamaized.net
@@ -847,6 +850,8 @@ xz.pphimalayanrt.com
 +.thesims4.com
 +.thesimssocial.com
 +.thewonderful101.com
++.thunderstore.io
++.thunderstore.org
 +.tiberiumalliances.com
 +.tiburon.com
 +.titanfall.com
@@ -909,12 +914,14 @@ xz.pphimalayanrt.com
 +.worldoftanks.eu
 +.worldofwarcraft.com
 +.worldofwarplanes.com
++.worldofwarships.asia
 +.worldofwarships.com
 +.worldseriesofwarzone.com
 +.wotblitz.com
 +.wow.nosdn.127.net
 +.wowchina.com
 +.wowsblitz.com
++.wplace.live
 +.wtmobile.com
 +.xbox
 +.xbox.co

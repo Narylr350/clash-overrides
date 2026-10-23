@@ -30,6 +30,7 @@ imagine.meta.com
 notebooklm-pa.googleapis.com
 notebooklm.googleapis.com
 o33249.ingest.sentry.io
+o33249.ingest.us.sentry.io
 openai.qualtrics.com
 openaiassets.blob.core.windows.net
 openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
@@ -50,9 +51,12 @@ www.bing.com
 +.aida.googleapis.com
 +.aisandbox-pa.googleapis.com
 +.aistudio.google.com
++.ant.dev
 +.anthropic.com
++.anthropic.team
 +.antigravity-unleash.goog
 +.antigravity.google
++.antspace.dev
 +.anythingllm.com
 +.apps.mzstatic.com
 +.arena.ai
@@ -61,6 +65,7 @@ www.bing.com
 +.byteoversea.com
 +.cerebras.ai
 +.chat.com
++.chatbotclaude.com
 +.chatgpt.com
 +.chatgpt.site
 +.chutes.ai
@@ -69,10 +74,16 @@ www.bing.com
 +.ciciaicdn.com
 +.clau.de
 +.claude.ai
++.claude.app
 +.claude.com
 +.claude.dev
++.claude.new
++.claude.site
++.claudeacademy.com
 +.claudemcpclient.com
 +.claudemcpcontent.com
++.claudepages.dev
++.claudestudio.com
 +.claudeusercontent.com
 +.clawhub.ai
 +.client-api.arkoselabs.com
@@ -98,6 +109,7 @@ www.bing.com
 +.cursor.com
 +.cursor.sh
 +.cursorapi.com
++.cursorvm.com
 +.deepmind.com
 +.deepmind.google
 +.deepwiki.com
@@ -156,6 +168,7 @@ www.bing.com
 +.lmstudio.ai
 +.lovart.ai
 +.lpsnmedia.net
++.magnific.com
 +.makersuite.google.com
 +.manus.im
 +.manuscdn.com
@@ -182,6 +195,7 @@ www.bing.com
 +.opal.google.com
 +.openai.com
 +.openai.com.cdn.cloudflare.net
++.openai.org
 +.openaiapi-site.azureedge.net
 +.openart.ai
 +.openclaw.ai
@@ -203,11 +217,13 @@ www.bing.com
 +.sora.com
 +.spicywriter.com
 +.stitch.withgoogle.com
++.syntx.ai
 +.talkai.info
 +.tapnow.ai
 +.themeforest.net
 +.trae.ai
 +.tripo3d.ai
++.typesafe.ai
 +.windsurf.build
 +.windsurf.com
 +.x.ai

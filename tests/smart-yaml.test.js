@@ -190,6 +190,15 @@ const ruleLines = rules
   .filter((line) => line.startsWith("- "))
   .map((line) => line.slice(2));
 
+for (const domain of ["todust.cc", "qinyues4.cc"]) {
+  const rule = `DOMAIN-SUFFIX,${domain},DIRECT`;
+  assert.ok(ruleLines.includes(rule), `${domain} subscription downloads should stay direct in YAML`);
+  assert.ok(ruleLines.indexOf(rule) > ruleLines.indexOf("RULE-SET,adblock,广告拦截"));
+  assert.ok(ruleLines.indexOf(rule) < ruleLines.indexOf("RULE-SET,cn,国内直连"));
+  assert.ok(ruleLines.indexOf(rule) < ruleLines.indexOf("MATCH,漏网之鱼"));
+}
+assert.ok(!ruleLines.includes("DOMAIN-SUFFIX,bygcloud.com,DIRECT"));
+
 assert.ok(!/\n  cdn:\n/.test(content), "the global CDN provider should not be used for domestic routing");
 assert.ok(!ruleLines.some((rule) => rule.startsWith("RULE-SET,cdn,")));
 for (const domain of ["pypi.org", "pythonhosted.org"]) {

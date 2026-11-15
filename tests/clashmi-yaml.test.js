@@ -43,6 +43,14 @@ const path = require("node:path");
     "ClashMi should not bypass invalid and adblock sinkhole addresses"
   );
 
+  for (const domain of ["todust.cc", "qinyues4.cc"]) {
+    const rule = `DOMAIN-SUFFIX,${domain},DIRECT`;
+    assert.ok(ruleLines.includes(rule), `${domain} subscription downloads should stay direct in ClashMi`);
+    assert.ok(ruleLines.indexOf(rule) < ruleLines.indexOf("GEOIP,CN,国内直连"));
+    assert.ok(ruleLines.indexOf(rule) < ruleLines.indexOf("MATCH,漏网之鱼"));
+  }
+  assert.ok(!ruleLines.includes("DOMAIN-SUFFIX,bygcloud.com,DIRECT"));
+
   assert.doesNotMatch(content, /\nrule-providers:\n/, "ClashMi YAML should not use remote rule providers");
   assert.doesNotMatch(content, /^\s+- RULE-SET,/m, "ClashMi YAML should not depend on RULE-SET entries");
   assert.doesNotMatch(content, /^\s+- PROCESS-NAME,/m, "ClashMi iOS YAML should not include process rules");

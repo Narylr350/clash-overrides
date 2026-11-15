@@ -36,8 +36,19 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 
 - 把 `smart.js` 当普通 YAML 直接导入的客户端
 
-这个仓库提供的是 **JS 覆写脚本**，不是普通 YAML 配置。
-如果客户端会把 `smart.js` 当 YAML 直接读取，就会出现类似 `yaml: line 8: mapping values are not allowed in this context` 的报错，不能直接导入。
+机场私有订阅链接填在客户端的**订阅 / 配置导入**入口，本仓库的公共文件填在**覆写**入口，两者不能互相替代。
+`smart.js` 是 JS 覆写脚本，不能在普通 YAML 订阅入口直接导入，否则可能出现 `yaml: line 8: mapping values are not allowed in this context`。
+
+### 手机等新设备导入白月光
+
+1. 在官网重新复制当前密钥对应的订阅链接，选择与客户端匹配的 Clash / Mihomo 格式。重置密钥后，其他设备保存的旧链接也要更新。
+2. 首次导入优先使用手机蜂窝数据直连，避免连接正在代理的电脑热点；暂时关闭 VPN，并关闭客户端的“通过代理下载 / 更新订阅”。先在客户端的原生订阅入口添加机场链接，不经过第三方订阅转换。
+3. 添加并选用本仓库的覆写：支持 Script Override 的客户端使用 `smart.js`；YAML-only 客户端使用 `smart.yaml`；ClashMi iOS 优先使用轻量 `clashmi.yaml`。新版 ClashMi 也支持 JS 覆写，但必须在覆写入口明确选择 JS 类型。
+4. 启用 VPN 并使用规则模式。已有设备应先刷新并选用最新覆写，再更新机场订阅；客户端若独立提供订阅下载代理开关，仍保持关闭。
+
+三个覆写入口均将已确认的订阅下载域名 `todust.cc` / `qinyues4.cc` 及其子域名设为 `DIRECT`，覆盖轮换的下载主机名；官网面板 `bygcloud.com` 不强制直连。这里不保存任何私有订阅链接，也不增加代理组或改写 DNS 服务器。
+
+覆写只会在配置已经加载、请求确实经过内核且使用规则模式时影响订阅下载，不能解决首次尚未导入、全局模式或客户端自行指定代理下载的问题。白月光提示同设备、同软件 10 分钟内只能成功获取一次订阅；遇到 HTTP 429 应等待至少 10 分钟再试，不要连续点击导入。
 
 ## 分组结构
 
@@ -139,7 +150,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 ## 常见坑
 
 - `smart.js` 是 JS 覆写脚本，不是普通 YAML 配置；只吃 YAML 的客户端不能直接导入
-- ClashMi 会把 `smart.js` 当 YAML 读，不会执行 `function main(config)`，因此不兼容这类 Script Override 写法
+- 新版 ClashMi 支持 JS 覆写，但普通 YAML 订阅入口不会执行 JS；需要在覆写入口选择 JS 类型。iOS 默认仍建议使用轻量 `clashmi.yaml`
 - 网页端能用，不代表手机客户端一定没问题；手机客户端启动阶段常常会多打一批辅助请求
 - ChatGPT Android 客户端除了主业务域名，还会访问一些启动探测 / 环境探测 / 订阅状态 / 远程配置链路
 - 目前已专项收口到 `OpenAI` 组的 Android 相关域名包括：

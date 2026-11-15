@@ -28,6 +28,18 @@ function getGroup(result, name) {
 assert.equal(typeof main, "function", "smart.js should export main for local tests");
 
 {
+  const { rules } = main(makeConfig(["HK-01"]));
+  for (const domain of ["todust.cc", "qinyues4.cc"]) {
+    const rule = `DOMAIN-SUFFIX,${domain},DIRECT`;
+    assert.ok(rules.includes(rule), `${domain} subscription downloads must not use airport proxies`);
+    assert.ok(rules.indexOf(rule) > rules.indexOf("RULE-SET,adblock,广告拦截"));
+    assert.ok(rules.indexOf(rule) < rules.indexOf("RULE-SET,cn,国内直连"));
+    assert.ok(rules.indexOf(rule) < rules.indexOf("MATCH,漏网之鱼"));
+  }
+  assert.ok(!rules.includes("DOMAIN-SUFFIX,bygcloud.com,DIRECT"));
+}
+
+{
   const dnsProviders = {
     "Domestic DNS": { type: "inline", behavior: "domain", payload: ["+.example.cn"] },
     "Overseas DNS": { type: "inline", behavior: "domain", payload: ["+.example.com"] },

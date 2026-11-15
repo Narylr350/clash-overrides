@@ -748,6 +748,10 @@ rules:
 
   - RULE-SET,adblock,广告拦截
 
+  # 白月光的订阅下载要求直连；官网面板仍按正常规则分流。
+  - DOMAIN-SUFFIX,todust.cc,DIRECT
+  - DOMAIN-SUFFIX,qinyues4.cc,DIRECT
+
   - DOMAIN-SUFFIX,gemini.google.com,Gemini
   - DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini
   - DOMAIN-SUFFIX,ai.google.dev,Gemini

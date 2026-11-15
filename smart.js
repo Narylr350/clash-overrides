@@ -715,6 +715,10 @@ function main(config) {
 
     "RULE-SET,adblock,广告拦截",
 
+    // 白月光的订阅下载要求直连；只匹配下载域名，不改变官网面板的访问方式。
+    "DOMAIN-SUFFIX,todust.cc,DIRECT",
+    "DOMAIN-SUFFIX,qinyues4.cc,DIRECT",
+
     "DOMAIN-SUFFIX,gemini.google.com,Gemini",
     "DOMAIN-SUFFIX,generativelanguage.googleapis.com,Gemini",
     "DOMAIN-SUFFIX,ai.google.dev,Gemini",

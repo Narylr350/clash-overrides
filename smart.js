@@ -572,7 +572,22 @@ function main(config) {
     ...regionGroups
   ];
 
+  // 订阅的 DNS 策略可能引用独立规则集；替换流量规则时不能删除这些依赖。
+  const subscriptionRuleProviders = config["rule-providers"] || {};
+  const dnsRuleProviders = Object.create(null);
+  const nameserverPolicy = (config.dns && config.dns["nameserver-policy"]) || {};
+  for (const policy of Object.keys(nameserverPolicy)) {
+    if (!policy.startsWith("rule-set:")) continue;
+    for (const value of policy.slice("rule-set:".length).split(",")) {
+      const name = value.trim();
+      if (Object.prototype.hasOwnProperty.call(subscriptionRuleProviders, name)) {
+        dnsRuleProviders[name] = subscriptionRuleProviders[name];
+      }
+    }
+  }
+
   config["rule-providers"] = {
+    ...dnsRuleProviders,
     adblock: {
       type: "http",
       behavior: "classical",

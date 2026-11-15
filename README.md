@@ -118,6 +118,7 @@ https://raw.githubusercontent.com/Narylr350/clash-overrides/main/clashmi.yaml
 - `clashmi.yaml` 是 ClashMi iOS 专用轻量版本，不使用远程 `rule-providers` / `RULE-SET` / `PROCESS-NAME`，以降低 VPN 扩展启动失败风险
 - `allow-lan` 只控制其他设备能否连接本机的代理监听端口，不决定设备自身能否访问局域网；本地监听地址直连后，代理程序发往互联网的连接仍按实际目标域名或 IP 分流
 - `smart.js` 仍然是能力最完整的主版本；`smart.yaml` 的目标是给 YAML-only 客户端一个尽量接近的替代入口
+- `smart.js` 替换订阅的流量规则时，会保留 DNS `nameserver-policy` 实际引用的 `rule-set`，避免出现 `not found rule-set`；不会恢复上游代理组或改写 DNS 服务器
 - 地区节点名关键词和订阅说明排除关键词维护在 `regions.json`；修改后运行 `node scripts/build-regions.mjs` 生成 `smart.js` / `smart.yaml` 的匹配块
 - `clashmi.yaml` 由 `smart.yaml` 生成；修改 `smart.yaml` 后运行 `node scripts/build-clashmi-yaml.mjs`
 - `ruleset/` 保存 `smart.yaml` 里 `rule-providers` 的上游规则快照，客户端规则集合 URL 指向本仓库的快照地址

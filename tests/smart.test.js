@@ -28,6 +28,48 @@ function getGroup(result, name) {
 assert.equal(typeof main, "function", "smart.js should export main for local tests");
 
 {
+  const dnsProviders = {
+    "Domestic DNS": { type: "inline", behavior: "domain", payload: ["+.example.cn"] },
+    "Overseas DNS": { type: "inline", behavior: "domain", payload: ["+.example.com"] },
+    "Second DNS": { type: "inline", behavior: "domain", payload: ["+.example.net"] }
+  };
+  const dns = {
+    nameserver: ["https://dns.google/dns-query"],
+    "proxy-server-nameserver": ["223.5.5.5"],
+    "nameserver-policy": {
+      "rule-set:Domestic DNS": ["223.5.5.5"],
+      "rule-set:Overseas DNS, Second DNS": ["https://dns.google/dns-query"],
+      "geosite:cn": ["119.29.29.29"],
+      "+.example.org": ["1.1.1.1"]
+    }
+  };
+  const originalDns = structuredClone(dns);
+  const baseline = main(makeConfig(["HK-01"]));
+  const result = main({
+    ...makeConfig(["HK-01"]),
+    dns,
+    "rule-providers": {
+      ...dnsProviders,
+      "Unused Service": { type: "inline", behavior: "domain", payload: ["+.unused.test"] },
+      cn: { type: "inline", behavior: "domain", payload: ["+.old.test"] }
+    }
+  });
+
+  for (const [name, provider] of Object.entries(dnsProviders)) {
+    assert.deepEqual(
+      result["rule-providers"][name],
+      provider,
+      `DNS rule-set reference ${name} must still resolve after replacing subscription rules`
+    );
+  }
+  assert.equal(result["rule-providers"]["Unused Service"], undefined);
+  assert.deepEqual(result["rule-providers"].cn, baseline["rule-providers"].cn);
+  assert.deepEqual(result.dns, originalDns, "preserving DNS dependencies must not rewrite DNS routing");
+  assert.deepEqual(result["proxy-groups"], baseline["proxy-groups"]);
+  assert.deepEqual(result.rules, baseline.rules);
+}
+
+{
   const result = main(makeConfig(["HK-01", "US-01", "Plain-Relay"]));
   assert.deepEqual(
     getGroup(result, "智能选择").proxies,

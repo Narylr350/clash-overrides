@@ -33,7 +33,6 @@ vsmarketplacebadge.apphb.com
 +.applicationinsights.net
 +.appserviceenvironment.cn
 +.aria.ms
-+.asobostudio.com
 +.asp.net
 +.aspnetcdn.com
 +.assets-yammer.com
@@ -167,6 +166,7 @@ vsmarketplacebadge.apphb.com
 +.bingpk.com
 +.bings.com
 +.bingsandbox.com
++.bingstatic.com
 +.bingtoolbar.com
 +.bingtranslator.com
 +.bingvisualsearch.com
@@ -231,7 +231,6 @@ vsmarketplacebadge.apphb.com
 +.fabric.io
 +.fasttrackreadysupport.com
 +.femalefounderscomp.com
-+.flightsimulator.com
 +.flipwithsurface.com
 +.fluidpreview.com
 +.footprintdns.com
@@ -507,6 +506,7 @@ vsmarketplacebadge.apphb.com
 +.msftidentity.com
 +.msftncsi.com
 +.msftnet.org
++.msftstatic.com
 +.msgamesresearch.com
 +.msgamestudios.com
 +.mshome.net
